@@ -8,6 +8,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -20,7 +22,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
     private List<Member> members = new ArrayList<>();
 
-
+    private  Bitmap bmp;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,11 +47,19 @@ public class MainActivity extends AppCompatActivity {
                                         data.getStringExtra("firstName"),
                                         data.getStringExtra("lastName"),
                                         data.getStringExtra("password")));
+                                Bundle extras = data.getExtras();
+                                byte[] byteArray = extras.getByteArray("picture");
+                                String date = data.getStringExtra("date");
+                                bmp = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
+
                             }
                         }
                     }
                 });
+
+
         logIn.setOnClickListener(v -> {
+            ///add feed screen activity
             Intent i = new Intent();
             Member member = null;
             for (Member m : members) {
@@ -64,6 +74,9 @@ public class MainActivity extends AppCompatActivity {
                 } else {
                     wrongPassword.setVisibility(View.INVISIBLE);
                     invalidEmail.setVisibility(View.INVISIBLE);
+                    i.putExtra("firstName", member.getFirstName());
+                    i.putExtra("lastName", member.getLastName());
+                    i.putExtra("picture",bmp);
                 }
             } else {
                 username.setText("");

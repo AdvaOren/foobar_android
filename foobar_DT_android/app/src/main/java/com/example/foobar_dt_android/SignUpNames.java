@@ -37,7 +37,7 @@ public class SignUpNames extends AppCompatActivity {
                                 back.putExtra("firstName",firstNameField.getText().toString());
                                 back.putExtra("lastName",lastNameField.getText().toString());
                                 back.putExtra("password",data.getStringExtra("password"));
-                                setResult(Activity.RESULT_OK,back);
+                                setResult(3,back);
                                 finish();
                             }
                         }
