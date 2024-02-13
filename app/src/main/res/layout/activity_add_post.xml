@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="feed_content.add_post.AddPost"
+    android:background="#FFF1DD">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/titleAddPost"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="serif"
+            android:text="@string/add_new_post"
+            android:textAlignment="center"
+            android:textColor="#0023D4"
+            android:textSize="40sp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"/>
+
+        <TextView
+            android:id="@+id/invalidAddPost"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/all_the_fields_require"
+            android:textAlignment="center"
+            android:textColor="#FF0000"
+            android:textSize="25sp"
+            android:layout_marginBottom="20dp"
+            android:visibility="invisible"/>
+
+        <LinearLayout
+            android:id="@+id/linearLayout3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginBottom="20dp">
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">>
+
+                <LinearLayout
+                    android:id="@+id/linearLayout2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <EditText
+                        android:id="@+id/addTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:hint="@string/post_title"
+                        android:inputType="text"
+                        android:text="" />
+
+                    <EditText
+                        android:id="@+id/addContent"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:hint="@string/content_for_your_post"
+                        android:inputType="textMultiLine" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:orientation="horizontal">
+
+                        <ImageButton
+                            android:id="@+id/btnCamera"
+                            android:layout_width="63dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginEnd="20dp"
+                            android:background="#4DC7FF"
+                            app:srcCompat="@drawable/ic_camera" />
+
+                        <ImageButton
+                            android:id="@+id/btnAddImage"
+                            android:layout_width="70dp"
+                            android:layout_height="53dp"
+                            android:background="#4DC7FF"
+                            app:srcCompat="@drawable/ic_gallery" />
+                    </LinearLayout>
+
+
+                    <ImageView
+                        android:id="@+id/addImage"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="10dp"
+                        android:adjustViewBounds="true"
+                        android:maxHeight="300dp" />
+
+                    <Button
+                        android:id="@+id/btnAddPost"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:backgroundTint="#4DC7FF"
+                        android:text="@string/share"
+                        android:textColor="#002AFD"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent" />
+                </LinearLayout>
+            </ScrollView>
+        </LinearLayout>
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
