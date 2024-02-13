@@ -1,0 +1,63 @@
+package com.example.foobar_dt_android;
+
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+public class SignUpPasswords extends AppCompatActivity {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_sign_up_passwords);
+        Button createNewUSer = findViewById(R.id.createNewUserB);
+        EditText password = findViewById(R.id.newPWfield1);
+        EditText verPW = findViewById(R.id.newPWfield2);
+        TextView invalidPW = findViewById(R.id.passwordInvalidMSG);
+        TextView dontMatch = findViewById(R.id.passwordDosentMatchMSG);
+        createNewUSer.setOnClickListener(v -> {
+            if (isValidPassword(password.getText().toString())) {
+                if (verPW.getText().toString().equals(password.getText().toString())) {
+                    invalidPW.setVisibility(View.INVISIBLE);
+                    dontMatch.setVisibility(View.INVISIBLE);
+                    Intent back = new Intent();
+                    back.putExtra("password",password.getText().toString());
+                    setResult(Activity.RESULT_OK,back);
+                    finish();
+                }
+                else {
+                    invalidPW.setVisibility(View.INVISIBLE);
+                    dontMatch.setVisibility(View.VISIBLE);
+                }
+            }
+            else {
+                invalidPW.setVisibility(View.VISIBLE);
+            }
+        });
+    }
+
+    public boolean isValidPassword(final String password) {
+
+        Pattern pattern;
+        Matcher matcher;
+
+        final String PASSWORD_PATTERN = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$";
+
+        pattern = Pattern.compile(PASSWORD_PATTERN);
+        matcher = pattern.matcher(password);
+
+        return matcher.matches();
+    }
+}

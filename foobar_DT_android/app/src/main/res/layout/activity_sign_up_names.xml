@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFF1DD"
+    tools:context=".SignUpNames">
+
+    <TextView
+        android:id="@+id/appNameInNames"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/foobar_dt"
+        android:textColor="#216EF3"
+        android:textSize="35sp"
+        app:layout_constraintBottom_toTopOf="@+id/LLforNames"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tell us your name"
+        app:layout_constraintBottom_toTopOf="@+id/LLforNames"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appNameInNames">
+    </TextView>
+    <LinearLayout
+        android:id="@+id/LLforNames"
+        android:layout_width="412dp"
+        android:layout_height="227dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="-1dp">
+
+        <EditText
+            android:id="@+id/firstNameField"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@color/white"
+            android:ems="10"
+            android:hint="Enter first name"
+            android:inputType="text"
+            android:padding="10dp" />
+
+        <EditText
+            android:id="@+id/lastNameField"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:ems="10"
+            android:hint="Enter last name"
+            android:inputType="text"
+            android:padding="10dp"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="115dp" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/emptyNamesMSG"
+            android:layout_marginTop="5dp"
+            android:gravity="center"
+            android:text="Fields should not be empty"
+            android:textColor="#F44336"
+            android:visibility="invisible"/>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/continueNames"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#214EF3"
+        android:text="continue"
+        app:layout_constraintBottom_toBottomOf="parent"
+
+        app:layout_constraintTop_toBottomOf="@+id/LLforNames"
+        app:layout_constraintVertical_bias="0.505"
+        tools:layout_editor_absoluteX="29dp" />
+</androidx.constraintlayout.widget.ConstraintLayout>

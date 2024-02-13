@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFF1DD"
+    tools:context=".MainActivity">
+
+
+    <TextView
+        android:id="@+id/appName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/foobar_dt"
+        android:textSize="35sp"
+        android:textColor="#216EF3"
+        app:layout_constraintBottom_toTopOf="@+id/LLforMain"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/LLforMain"
+        android:layout_width="408dp"
+        android:layout_height="238dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.84000003"
+        tools:layout_editor_absoluteX="3dp"
+        tools:ignore="MissingConstraints">
+
+        <EditText
+            android:id="@+id/usernameField"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:padding="10dp"
+            android:layout_marginBottom="10dp"
+            android:ems="10"
+            android:inputType="text"
+            android:hint="@string/enter_username" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/invalidEmail"
+            android:layout_marginBottom="5dp"
+            android:textColor="#F44336"
+            android:gravity="center"
+            android:text="Email not found!"
+            android:visibility="invisible">
+
+        </TextView>
+
+        <EditText
+            android:id="@+id/passwordField"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:background="@color/white"
+            android:layout_marginBottom="10dp"
+            android:ems="10"
+            android:inputType="textPassword"
+            android:hint="@string/enter_password" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/wrongPassword"
+            android:textColor="#F44336"
+            android:layout_marginBottom="5dp"
+            android:gravity="center"
+            android:text="Wrong password"
+            android:visibility="invisible">
+
+        </TextView>
+
+        <Button
+            android:id="@+id/logInB"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#214EF3"
+            android:layout_gravity="center"
+            android:layout_marginBottom="10dp"
+            android:text="@string/log_in" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/forgot_password"
+            android:layout_gravity="center"
+            />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/signUpB"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:backgroundTint="#214EF3"
+        android:text="@string/sign_up"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/LLforMain"
+        tools:layout_editor_absoluteX="158dp" />
+</androidx.constraintlayout.widget.ConstraintLayout>

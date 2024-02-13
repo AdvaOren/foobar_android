@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">foobar_DT_android</string>
+    <string name="enter_username">Enter username</string>
+    <string name="log_in">log in</string>
+    <string name="enter_password">Enter password</string>
+    <string name="sign_up">sign up</string>
+    <string name="foobar_dt">foobar_DT</string>
+    <string name="forgot_password">forgot password?</string>
+    <string name="create_new_user">create new user</string>
+</resources>
