@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Foobar_DT_ad</string>
+    <string name="log_in">Log in</string>
+    <string name="title_activity_signup_screen">SignupScreen</string>
+    <string name="create_new_account">Create new account</string>
+    <string name="all_digits"><![CDATA[abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!@#$%^*()_+-=~`:<>\\n /.,\'[]{}|]]></string>
+    <string name="add_new_post">Add new post</string>
+    <string name="all_the_fields_require">All the fields require!</string>
+    <string name="post_title">Post title</string>
+    <string name="content_for_your_post">content for your post...</string>
+    <string name="share">share</string>
+    <string name="search_in_foobar_dt">Search in foobar_DT</string>
+</resources>

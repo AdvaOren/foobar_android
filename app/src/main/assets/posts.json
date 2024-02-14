@@ -1,0 +1,112 @@
+[
+  {
+    "title": "amazing what i saw",
+    "content": "wooow! a baby tiger",
+    "img": "baby_tiger.jpg",
+    "date": "12/02/2024",
+    "firstN": "Daniel",
+    "lastN": "Kfir",
+    "avatar": "world.jpeg",
+    "likes": 100,
+    "comments": []
+  },
+  {
+    "title": "The King!!",
+    "content": "It 'Kfir' like me :).",
+    "img": "lion.jpeg",
+    "date": "12/02/2024",
+    "firstN": "Daniel",
+    "lastN": "Kfir",
+    "avatar": "world.jpeg",
+    "likes": 1,
+    "comments": []
+  },
+  {
+    "title": "lazy tiger",
+    "content": "this tiger is just looking around all day",
+    "img": "Siberischer_tiger.jpg",
+    "date": "12/02/2024",
+    "firstN": "Tzuriel",
+    "lastN": "Luzzon",
+    "avatar": "water.jpeg",
+    "likes": 0,
+    "comments": []
+  },
+  {
+    "title": "Hungey!!!",
+    "content": "THis tiger is eating don't disturb",
+    "img": "tiger_eat.jpeg",
+    "date": "11/02/2024",
+    "firstN": "Daniel",
+    "lastN": "Kfir",
+    "avatar": "world.jpeg",
+    "likes": 20,
+    "comments": []
+  },
+  {
+    "title": "watch",
+    "content": "this tiger is watch and waiting",
+    "img": "tiger_grass.jpg",
+    "date": "10/02/2024",
+    "firstN": "Tzuriel",
+    "lastN": "Luzzon",
+    "avatar": "world.jpeg",
+    "likes": 10,
+    "comments": []
+  },
+  {
+    "title": "Brrrr",
+    "content": "It in the snow and it's doesn't bother him",
+    "img": "tiger_snow.jpg",
+    "date": "10/02/2024",
+    "firstN": "Tzuriel",
+    "lastN": "Luzzon",
+    "avatar": "water.jpeg",
+    "likes": 53,
+    "comments": []
+  },
+  {
+    "title": "Splash!",
+    "content": "This tiger is running in the water and splash everywhere",
+    "img": "tiger_run_in_water.jpg",
+    "date": "09/02/2024",
+    "firstN": "Daniel",
+    "lastN": "Kfir",
+    "avatar": "world.jpeg",
+    "likes": 95,
+    "comments": []
+  },
+  {
+    "title": "It's just me",
+    "content": "ok I will go away..",
+    "img": "tiger_stand.jpg",
+    "date": "08/02/2024",
+    "firstN": "Tzuriel",
+    "lastN": "Luzzon",
+    "avatar": "water.jpeg",
+    "likes": 0,
+    "comments": []
+  },
+  {
+    "title": "A sleeping tiger",
+    "content": "shhhhhhhh....",
+    "img": "tiger_sleep.jpeg",
+    "date": "08/02/2024",
+    "firstN": "Daniel",
+    "lastN": "Kfir",
+    "avatar": "world.jpeg",
+    "likes": 1,
+    "comments": []
+  },
+  {
+    "title": "The las one",
+    "content": "The tiger also watch forward",
+    "img": "pic1.jpeg",
+    "date": "07/02/2024",
+    "firstN": "Tzuriel",
+    "lastN": "Luzzon",
+    "avatar": "water.jpeg",
+    "likes": 14,
+    "comments": []
+  }
+]
