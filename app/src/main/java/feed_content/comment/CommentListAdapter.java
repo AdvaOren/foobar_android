@@ -2,6 +2,7 @@ package feed_content.comment;
 
 
 import android.content.Context;
+import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.view.LayoutInflater;
@@ -11,8 +12,8 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -107,6 +108,19 @@ public class CommentListAdapter extends ArrayAdapter<Comment> {
             commentModel.remove(comment.getId());
             notifyDataSetChanged();
         });
+
+        // Determine the current night mode
+        LinearLayout commentLayout = convertView.findViewById(R.id.commentLayout);
+        int currentNightMode = context.getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
+        if (currentNightMode == Configuration.UI_MODE_NIGHT_NO) {
+            // Light mode
+            text.setTextColor(context.getResources().getColor(R.color.darkC));
+            commentLayout.setBackgroundColor(context.getResources().getColor(R.color.dayC));
+        } else {
+            // Dark mode
+            text.setTextColor(context.getResources().getColor(R.color.dayC));
+            commentLayout.setBackgroundColor(context.getResources().getColor(R.color.lightDark));
+        }
 
         return convertView;
     }

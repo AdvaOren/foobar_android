@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">Foobar_DT_ad</string>
-    <string name="log_in">Log in</string>
     <string name="title_activity_signup_screen">SignupScreen</string>
     <string name="create_new_account">Create new account</string>
     <string name="all_digits"><![CDATA[abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!@#$%^*()_+-=~`:<>\\n /.,\'[]{}|]]></string>
@@ -10,4 +9,23 @@
     <string name="content_for_your_post">content for your post...</string>
     <string name="share">share</string>
     <string name="search_in_foobar_dt">Search in foobar_DT</string>
+    <string name="enter_username">Enter username</string>
+    <string name="log_in">log in</string>
+    <string name="enter_password">Enter password</string>
+    <string name="sign_up">sign up</string>
+    <string name="foobar_dt">foobar_DT</string>
+    <string name="forgot_password">forgot password?</string>
+    <string name="create_new_user">create new user</string>
+    <string name="take_your_photo">Take your photo!</string>
+    <string name="password_must_be_at_least_8_characters_long">password must be at least 8 characters long</string>
+    <string name="password_must_contain_at_least_one_upper_case_and_lower_case_character">password must contain at least one upper case and lower case character</string>
+    <string name="password_must_contain_at_least_one_special_character">password must contain at least one special character</string>
+    <string name="create_your_password">create your password</string>
+    <string name="password_dosen_t_match_criteria">password dosen\'t match criteria</string>
+    <string name="password_verification">password verification</string>
+    <string name="passwords_don_t_match">passwords don\'t match</string>
+    <string name="join_foobar_dt">Join foobar_DT!</string>
+    <string name="continuee">continue</string>
+    <string name="enter_email">Enter email</string>
+    <string name="email_should_not_be_empty">Email should not be empty</string>
 </resources>

@@ -4,16 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFF1DD"
-    tools:context=".SignUpScreen">
+    tools:context=".signupScreens.SignUpScreen">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="Join foobar_DT!"
+        android:text="@string/join_foobar_dt"
         android:textColor="#214EF3"
-        android:textSize="30dp"
+        android:textSize="30sp"
         app:layout_constraintBottom_toTopOf="@+id/mainLLInEmail"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -22,7 +21,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:backgroundTint="#214EF3"
-        android:text="continue"
+        android:text="@string/continuee"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/mainLLInEmail"
         app:layout_constraintVertical_bias="0.505"
@@ -45,7 +44,7 @@
             android:layout_height="wrap_content"
             android:background="@color/white"
             android:ems="10"
-            android:hint="Enter email"
+            android:hint="@string/enter_email"
             android:inputType="text"
             android:padding="10dp" />
 
@@ -55,7 +54,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
             android:gravity="center"
-            android:text="Email should not be empty"
+            android:text="@string/email_should_not_be_empty"
             android:textColor="#F44336"
             android:visibility="invisible">
 
@@ -65,12 +64,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="Take your photo!"></TextView>
+            android:text="@string/take_your_photo"/>
 
         <ImageButton
             android:id="@+id/cameraBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:layout_gravity="center"
             android:layout_marginTop="20dp"
             android:background="#FFF1DD"
@@ -78,10 +77,11 @@
 
         <ImageButton
             android:id="@+id/galleryBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:layout_gravity="center"
             android:background="#FFF1DD"
+            android:layout_marginBottom="10dp"
             app:srcCompat="@android:drawable/ic_menu_gallery" />
 
         <ImageView
@@ -94,5 +94,4 @@
             android:maxHeight="300dp" />
 
     </LinearLayout>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

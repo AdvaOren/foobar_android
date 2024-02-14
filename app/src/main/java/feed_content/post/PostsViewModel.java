@@ -55,5 +55,4 @@ public class PostsViewModel extends ViewModel {
         postRepo.updateComments(id,comments);
     }
 
-    public void reload() {}
 }

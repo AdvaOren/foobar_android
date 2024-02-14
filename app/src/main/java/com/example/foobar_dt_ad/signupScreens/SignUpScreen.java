@@ -1,13 +1,15 @@
-package com.example.foobar_dt_android;
+package com.example.foobar_dt_ad.signupScreens;
 
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
@@ -19,6 +21,8 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.foobar_dt_ad.R;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
@@ -42,7 +46,6 @@ public class SignUpScreen extends AppCompatActivity {
         ImageButton cameraBtn = findViewById(R.id.cameraBtn);
         ImageButton galleryBtn = findViewById(R.id.galleryBtn);
         ImageView profileImage = findViewById(R.id.profileImage);
-        emails.add("a");
         ActivityResultLauncher<Intent> someActivityResultLauncher = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
                 new ActivityResultCallback<ActivityResult>() {
@@ -58,11 +61,11 @@ public class SignUpScreen extends AppCompatActivity {
                                 back.putExtra("lastName", data.getStringExtra("lastName"));
                                 back.putExtra("password", data.getStringExtra("password"));
                                 BitmapDrawable bitmapDrawable = ((BitmapDrawable) profileImage.getDrawable());
-                                Bitmap bitmap = bitmapDrawable .getBitmap();
+                                Bitmap bitmap = bitmapDrawable.getBitmap();
                                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
                                 bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
                                 byte[] imageInByte = stream.toByteArray();
-                                back.putExtra("picture",imageInByte);
+                                back.putExtra("picture", imageInByte);
                                 setResult(Activity.RESULT_OK, back);
                                 finish();
                             }
@@ -81,6 +84,8 @@ public class SignUpScreen extends AppCompatActivity {
                         }
                     }
                 });
+
+
         createNewUser.setOnClickListener(v -> {
                     Intent i = new Intent(this, SignUpNames.class);
                     if (!emails.contains(emailField.getText().toString())) {
@@ -107,8 +112,8 @@ public class SignUpScreen extends AppCompatActivity {
                     }
                 }
         );
-        galleryBtn.setOnClickListener(v ->
 
+        galleryBtn.setOnClickListener(v ->
         {
             Intent iGallery = new Intent(Intent.ACTION_PICK);
             iGallery.setData(MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
@@ -117,7 +122,6 @@ public class SignUpScreen extends AppCompatActivity {
         });
 
         cameraBtn.setOnClickListener(v ->
-
         {
             Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
             flag = CAMERA;

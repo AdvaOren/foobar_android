@@ -1,4 +1,4 @@
-package com.example.foobar_dt_android;
+package com.example.foobar_dt_ad;
 
 import androidx.annotation.Nullable;
 

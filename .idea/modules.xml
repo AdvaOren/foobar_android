@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/foobar_DT_android.iml" filepath="$PROJECT_DIR$/.idea/foobar_DT_android.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/Foobar_DT_ad.app.main.iml" filepath="$PROJECT_DIR$/.idea/modules/app/Foobar_DT_ad.app.main.iml" />
     </modules>
   </component>
 </project>
