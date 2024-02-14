@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFF1DD"
-    tools:context=".SignUpNames">
+    tools:context=".signupScreens.SignUpNames">
 
     <TextView
         android:id="@+id/appNameInNames"
@@ -82,4 +81,17 @@
         app:layout_constraintTop_toBottomOf="@+id/LLforNames"
         app:layout_constraintVertical_bias="0.505"
         tools:layout_editor_absoluteX="29dp" />
+
+    <ImageButton
+        android:id="@+id/btnDark"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="5dp"
+        android:background="#018BFA"
+        android:src="@drawable/ic_dark_mode"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

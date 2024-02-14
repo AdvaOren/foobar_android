@@ -1,23 +1,30 @@
-package com.example.foobar_dt_android;
+package com.example.foobar_dt_ad;
 
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.example.foobar_dt_ad.signupScreens.SignUpScreen;
+
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.List;
+
 
 public class MainActivity extends AppCompatActivity {
     private List<Member> members = new ArrayList<>();
@@ -28,7 +35,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        members.add(new Member("a", ",", "", "a"));
         Button signUp = findViewById(R.id.signUpB);
         Button logIn = findViewById(R.id.logInB);
         EditText username = findViewById(R.id.usernameField);
@@ -57,10 +63,22 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
 
+        TextView forgotPass = findViewById(R.id.forgotPass);
+        ImageButton btnDark = findViewById(R.id.btnDark);
+        int currentNightMode = getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
+        if (currentNightMode == Configuration.UI_MODE_NIGHT_NO) {
+            // In dark mode
+            btnDark.setImageResource(R.drawable.ic_dark_mode);
+            forgotPass.setTextColor(getResources().getColor(R.color.darkC));
+        } else {
+            // In light mode
+            btnDark.setImageResource(R.drawable.ic_light_mode);
+            forgotPass.setTextColor(getResources().getColor(R.color.dayC));
+
+        }
 
         logIn.setOnClickListener(v -> {
-            ///add feed screen activity
-            Intent i = new Intent();
+            Intent i = new Intent(this, FeedScreen.class);
             Member member = null;
             for (Member m : members) {
                 if (m.equals(new Member(username.getText().toString(), ",", "", ""))) {
@@ -76,7 +94,12 @@ public class MainActivity extends AppCompatActivity {
                     invalidEmail.setVisibility(View.INVISIBLE);
                     i.putExtra("firstName", member.getFirstName());
                     i.putExtra("lastName", member.getLastName());
-                    i.putExtra("picture",bmp);
+
+                    ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                    bmp.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+                    byte[] imageInByte = stream.toByteArray();
+                    i.putExtra("picture", imageInByte);
+                    startActivity(i);
                 }
             } else {
                 username.setText("");
@@ -90,6 +113,19 @@ public class MainActivity extends AppCompatActivity {
                     someActivityResultLauncher.launch(i);
                 }
         );
+
+        btnDark.setOnClickListener(v -> {
+            if (currentNightMode == Configuration.UI_MODE_NIGHT_NO) {
+                // Switch to dark mode
+                btnDark.setImageResource(R.drawable.ic_light_mode);
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+            } else {
+                // Switch to light mode
+                btnDark.setImageResource(R.drawable.ic_dark_mode);
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+            }
+            recreate(); // Recreate the activity to apply the new theme
+        });
 
     }
 }

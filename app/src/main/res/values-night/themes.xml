@@ -3,5 +3,9 @@
     <style name="Base.Theme.Foobar_DT_ad" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your dark theme here. -->
         <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+        <item name="background">@color/darkC</item>
+        <item name="backgroundTint">@color/darkC</item>
+        <item name="android:textColorHint">@color/dayC</item>
+        <item name="android:textColor">@color/colorPrimary</item>
     </style>
 </resources>

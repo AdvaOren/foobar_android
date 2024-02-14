@@ -5,6 +5,7 @@ import static feed_content.comment.CommentsScreen.BACK_FROM_COMMENT;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
@@ -22,6 +23,7 @@ import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -57,6 +59,7 @@ public class PostListAdapter extends RecyclerView.Adapter<PostListAdapter.PostVi
         private final ImageButton edit;
         private final ImageButton link;
         private final ImageButton email;
+        private final ConstraintLayout postLayout;
 
         /**
          * This function is a constructor
@@ -81,6 +84,7 @@ public class PostListAdapter extends RecyclerView.Adapter<PostListAdapter.PostVi
             edit = itemView.findViewById(R.id.btnPostEdit);
             link = itemView.findViewById(R.id.shareLink);
             email = itemView.findViewById(R.id.shareEmail);
+            postLayout = itemView.findViewById(R.id.postLayout);
             }
     }
 
@@ -209,6 +213,31 @@ public class PostListAdapter extends RecyclerView.Adapter<PostListAdapter.PostVi
             holder.likes.setOnClickListener(v -> {
                 likePost(current,holder);
             });
+
+            int currentNightMode = mInflater.getContext().getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
+            if (currentNightMode == Configuration.UI_MODE_NIGHT_NO) {
+                // Light mode
+                holder.postLayout.setBackgroundResource(R.color.dayC);
+                holder.title.setTextColor(mInflater.getContext().getResources().getColor(R.color.darkC));
+                holder.content.setTextColor(mInflater.getContext().getResources().getColor(R.color.darkC));
+                holder.firstName.setTextColor(mInflater.getContext().getResources().getColor(R.color.darkC));
+                holder.lastName.setTextColor(mInflater.getContext().getResources().getColor(R.color.darkC));
+                holder.date.setTextColor(mInflater.getContext().getResources().getColor(R.color.darkC));
+                holder.likes.setBackgroundColor(mInflater.getContext().getResources().getColor(R.color.buttonLight));
+                holder.share.setBackgroundColor(mInflater.getContext().getResources().getColor(R.color.buttonLight));
+                holder.comments.setBackgroundColor(mInflater.getContext().getResources().getColor(R.color.buttonLight));
+            } else {
+                // Dark mode
+                holder.postLayout.setBackgroundResource(R.color.darkC);
+                holder.title.setTextColor(mInflater.getContext().getResources().getColor(R.color.dayC));
+                holder.content.setTextColor(mInflater.getContext().getResources().getColor(R.color.dayC));
+                holder.firstName.setTextColor(mInflater.getContext().getResources().getColor(R.color.dayC));
+                holder.lastName.setTextColor(mInflater.getContext().getResources().getColor(R.color.dayC));
+                holder.date.setTextColor(mInflater.getContext().getResources().getColor(R.color.dayC));
+                holder.likes.setBackgroundColor(mInflater.getContext().getResources().getColor(R.color.buttonDark));
+                holder.share.setBackgroundColor(mInflater.getContext().getResources().getColor(R.color.buttonDark));
+                holder.comments.setBackgroundColor(mInflater.getContext().getResources().getColor(R.color.buttonDark));
+            }
         }
     }
 

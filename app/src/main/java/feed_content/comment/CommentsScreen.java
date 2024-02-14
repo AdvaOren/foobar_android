@@ -3,8 +3,10 @@ package feed_content.comment;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -49,7 +51,7 @@ public class CommentsScreen extends AppCompatActivity {
 
         //create list view
         listView = findViewById(R.id.list_view);
-        adapter = new CommentListAdapter(getApplicationContext(), commentModel,img);
+        adapter = new CommentListAdapter(this, commentModel,img);
         listView.setAdapter(adapter);
 
         //add title to the screen
@@ -85,6 +87,27 @@ public class CommentsScreen extends AppCompatActivity {
         };
         // Add the callback to the back button dispatcher
         getOnBackPressedDispatcher().addCallback(this, callback);
+
+        ImageButton btnDark = findViewById(R.id.btnDark);
+        int currentNightMode = getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
+        if (currentNightMode == Configuration.UI_MODE_NIGHT_NO) {
+            // In dark mode
+            btnDark.setImageResource(R.drawable.ic_dark_mode);
+        } else {
+            // In light mode
+            btnDark.setImageResource(R.drawable.ic_light_mode);
+        }
+
+        btnDark.setOnClickListener(v -> {
+            if (currentNightMode == Configuration.UI_MODE_NIGHT_NO) {
+                // Switch to dark mode
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+            } else {
+                // Switch to light mode
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+            }
+            recreate(); // Recreate the activity to apply the new theme
+        });
 
     }
 }

@@ -7,17 +7,20 @@ import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 
 import java.io.IOException;
@@ -47,8 +50,8 @@ public class FeedScreen extends AppCompatActivity {
         lastName = fromLoginI.getStringExtra("lastName");
         Bundle extras = fromLoginI.getExtras();
         byte[] byteArray = extras.getByteArray("picture");
-        userPic = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);*/
-        firstName = "temp";
+        userPic = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
+        */firstName = "temp";
         lastName = "temp2";
         try {
             InputStream inputStream = this.getAssets().open("water.jpeg");
@@ -104,6 +107,36 @@ public class FeedScreen extends AppCompatActivity {
         SwipeRefreshLayout refreshLayout = findViewById(R.id.refreshLayout);
         refreshLayout.setOnRefreshListener(() -> {
             refreshLayout.setRefreshing(false);
+        });
+
+        ImageButton btnDark = findViewById(R.id.btnDark);
+        LinearLayout menu = findViewById(R.id.menu);
+        int currentNightMode = getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
+        if (currentNightMode == Configuration.UI_MODE_NIGHT_NO) {
+            // In light mode
+            btnDark.setImageResource(R.drawable.ic_dark_mode);
+            menu.setBackgroundColor(getResources().getColor(R.color.menuLight));
+        } else {
+            // In dark mode
+            btnDark.setImageResource(R.drawable.ic_light_mode);
+            menu.setBackgroundColor(getResources().getColor(R.color.menuDark));
+        }
+
+        btnDark.setOnClickListener(v -> {
+            if (currentNightMode == Configuration.UI_MODE_NIGHT_NO) {
+                // Switch to dark mode
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+            } else {
+                // Switch to light mode
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+            }
+            recreate(); // Recreate the activity to apply the new theme
+        });
+
+        ImageButton btnLogout = findViewById(R.id.btnLogout);
+        btnLogout.setOnClickListener(v -> {
+            Intent i = new Intent();
+            finish();
         });
     }
 }
