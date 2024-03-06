@@ -26,6 +26,7 @@ public class Post {
     private int comments;
     private boolean liked;
     private boolean shareClicked;
+    private String owner;
 
     // Constructor
     public Post(String content, Bitmap img, String date, String userId) {
@@ -38,19 +39,29 @@ public class Post {
         setImg(img);
         liked = false;
         shareClicked = false;
-
+        owner = "";
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         img.compress(Bitmap.CompressFormat.PNG, 100, stream);
     }
 
-    public Post(@NonNull String _id, String userId, String content, String date, String img) {
+    public Post(@NonNull String _id, String userId, String content, String date, String img, String owner) {
         this._id = _id;
         this.userId = userId;
         this.content = content;
         this.date = date;
         this.img = img;
+        this.owner = owner;
+        shareClicked = false;
     }
 // Getters and setters for various fields
+
+    public String getOwner() {
+        return owner;
+    }
+
+    public void setOwner(String owner) {
+        this.owner = owner;
+    }
 
     public int getComments() {
         return comments;
@@ -93,8 +104,7 @@ public class Post {
         ByteArrayOutputStream baos=new  ByteArrayOutputStream();
         img.compress(Bitmap.CompressFormat.PNG,100, baos);
         byte [] b=baos.toByteArray();
-        String temp= Base64.encodeToString(b, Base64.DEFAULT);
-        this.img = temp;
+        this.img = Base64.encodeToString(b, Base64.DEFAULT);
     }
 
     public Bitmap getImgBitmap() {

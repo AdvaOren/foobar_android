@@ -10,18 +10,18 @@ import java.util.LinkedList;
 import java.util.List;
 
 import api.PostAPI;
+import entities.Member;
 import entities.PostInfo;
 import entities.Post;
 import viewmodels.MemberViewModel;
 
 public class PostRepo {
-    /*private List<Post> postList;
-    private static int nextId = 0;*/
-    private PostDao postDao;
-    private PostInfoDao postInfoDao;
-    private PostListData posts;
-    private PostAPI postAPI;
-    private MemberViewModel memberVm;
+
+    private final PostDao postDao;
+    private final PostInfoDao postInfoDao;
+    private final PostListData posts;
+    private final PostAPI postAPI;
+    private final MemberViewModel memberVm;
 
 
     /**
@@ -51,7 +51,9 @@ public class PostRepo {
             super.onActive();
 
             new Thread(() -> {
-                posts.postValue(postDao.getAll());
+                Member member = memberVm.getCurrentMember().getValue();
+                if (member != null)
+                    posts.postValue(postDao.getAll(member.get_id()));
             });
         }
     }
@@ -67,7 +69,6 @@ public class PostRepo {
 
     public void reload(String userId) {
         postAPI.getLastPosts(userId, postInfoDao,memberVm);
-        memberVm.updateUsers(postDao.getUserIds());
     }
 
     public void delete(String userId, String postId) {

@@ -259,7 +259,7 @@ public class PostListAdapter extends RecyclerView.Adapter<PostListAdapter.PostVi
 
     public void initHolder(PostViewHolder holder, Post current) {
 
-        Member currentM = memberVM.getMemberQuick(current.getUserId());//memberVM.getMember(current.getUserId());
+        Member currentM = memberVM.getMemberQuick(current.getUserId());
         //set the elements that in the screen with the post
         //holder.title.setText(current.getTitle());
         holder.content.setText(current.getContent());

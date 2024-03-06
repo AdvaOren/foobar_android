@@ -63,13 +63,13 @@ public class FeedScreen extends AppCompatActivity {
         postVM.initializePostViewModel(this, jwt,memberVM,id);
 
         // Initialize RecyclerView
-        //final PostListAdapter adapter = new PostListAdapter(this,this, postVM,userPic,firstName,lastName);
         final PostListAdapter adapter = new PostListAdapter(this,this, postVM,currentMember,memberVM);
         lstPosts.setAdapter(adapter);
         lstPosts.setLayoutManager(new LinearLayoutManager(this));
         postVM.getAll().observe(this, posts -> {
             adapter.setPosts(posts);
-            refreshLayout.setRefreshing(false);
+            if (posts.size() > 0)
+                refreshLayout.setRefreshing(false);
             adapter.notifyDataSetChanged();
         });
 
@@ -78,7 +78,6 @@ public class FeedScreen extends AppCompatActivity {
         if (currentMember != null) {
             avatar.setImageBitmap(currentMember.getImgBitmap());
             adapter.setMember(currentMember);
-            //adapter.notifyDataSetChanged();
         }
 
 
@@ -118,7 +117,6 @@ public class FeedScreen extends AppCompatActivity {
         // refreshing the posts
         refreshLayout.setOnRefreshListener(() -> {
             postVM.reload(currentMember.get_id());
-            refreshLayout.setRefreshing(false);
         });
 
         ImageButton btnLogout = findViewById(R.id.btnLogout);

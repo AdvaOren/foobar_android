@@ -92,10 +92,11 @@ public class PostAPI {
                         for (Triple<Post, Member, PostInfo> triple : newData) {
                             PostInfo postInfo = triple.getThird();
                             Post post = triple.getFirst();
+                            post.setOwner(userId);
 
-                            //dao.insert(post);
-                            //mVM.saveMember(triple.getSecond());
-                            //postInfoDao.insert(postInfo);
+                            dao.insert(post);
+                            mVM.saveMember(triple.getSecond());
+                            postInfoDao.insert(postInfo);
                             //set post info
                             setPostByInfo(post, postInfo);
                             posts.add(post);
@@ -114,7 +115,8 @@ public class PostAPI {
 
             @Override
             public void onFailure(Call<List<Triple<Post, Member, PostInfo>>> call, Throwable t) {
-                t.printStackTrace();
+                //we get less than 20 posts
+                postListData.postValue(posts);
             }
         });
     }
@@ -122,7 +124,7 @@ public class PostAPI {
     public void getLastPosts(String userId, PostInfoDao postInfoDao, MemberViewModel mVM) {
         new Thread(() -> {
             //get posts from local db
-            List<Post> posts = dao.getAll();
+            List<Post> posts = dao.getAll(userId);
             for (Post post : posts) {
                 PostInfo postInfo = postInfoDao.getPostInfo(userId, post.get_id());
                 setPostByInfo(post,postInfo);
@@ -130,7 +132,7 @@ public class PostAPI {
             postListData.postValue(posts);
 
             //get posts from server
-            dao.clear();
+            dao.clear(userId);
             postInfoDao.clear(userId);
             List<Post> posts2 = new ArrayList<>();
             getPosts(userId, 1, posts2, mVM, postInfoDao);
@@ -164,14 +166,14 @@ public class PostAPI {
     public void addPost(String userId, Post post) {
         webServicesAPI.createPost(userId, post);
         dao.insert(post);
-        postListData.postValue(dao.getAll());
+        postListData.postValue(dao.getAll(userId));
 
     }
 
     public void updateAllThePost(String userId, Post post) {
         webServicesAPI.updatePostAll(userId, post.get_id(), post);
         dao.update(post);
-        postListData.postValue(dao.getAll());
+        postListData.postValue(dao.getAll(userId));
     }
 
     public void updatePost(String userId, Post post) {
@@ -182,13 +184,13 @@ public class PostAPI {
         if (post.getImg() != null)
             temp.setImg(post.getImgBitmap());
         dao.update(temp);
-        postListData.postValue(dao.getAll());
+        postListData.postValue(dao.getAll(userId));
     }
 
     public void deletePost(String userId, String postId) {
         webServicesAPI.deletePost(userId, postId);
         dao.deletePostById(postId);
-        postListData.postValue(dao.getAll());
+        postListData.postValue(dao.getAll(userId));
     }
 
     public void addLike(String userId, String postId) {

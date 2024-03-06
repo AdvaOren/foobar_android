@@ -8,7 +8,7 @@ import entities.PostInfo;
 import entities.Member;
 import entities.Post;
 
-@Database(entities = {Post.class, Member.class, PostInfo.class}, version = 6)
+@Database(entities = {Post.class, Member.class, PostInfo.class}, version = 7)
 @TypeConverters({Converters.class})
 public abstract class AppDB extends RoomDatabase {
     public abstract PostDao postDao();

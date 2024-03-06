@@ -67,14 +67,6 @@ public class MainActivity extends AppCompatActivity {
                                         data.getStringExtra("password"),
                                         image);
                                 memberVM.addMember(member);
-
-                                /*members.add(new Member(data.getStringExtra("email"),
-                                        data.getStringExtra("firstName"),
-                                        data.getStringExtra("lastName"),
-                                        data.getStringExtra("password")));
-                                Bundle extras = data.getExtras();
-                                byte[] byteArray = extras.getByteArray("picture");
-                                bmp = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);*/
                             }
                         }
                     }

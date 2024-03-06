@@ -12,8 +12,8 @@ import entities.Post;
 
 @Dao
 public interface PostDao {
-    @Query("SELECT * FROM post")
-    List<Post> getAll();
+    @Query("SELECT * FROM post WHERE owner = :owner")
+    List<Post> getAll(String owner);
 
     @Query("SELECT * FROM post WHERE _id = :id")
     Post getPost(String id);
@@ -41,8 +41,8 @@ public interface PostDao {
     @Query("DELETE FROM post WHERE _id = :id")
     void deletePostById(String id);
 
-    @Query("DELETE FROM post")
-    void clear();
+    @Query("DELETE FROM post WHERE owner = :userId")
+    void clear(String userId);
 
 
 }

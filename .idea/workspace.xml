@@ -62,38 +62,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9ba0b45a-247e-48d0-8105-f9864560f4b1" name="Changes" comment="add login,sign and present 25 post">
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/api/PostAPI.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/api/UserAPI.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/api/WebServicesAPI.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/entities/PostInfo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/repositories/AppDB.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/repositories/Converters.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/repositories/MemberDao.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/repositories/MemberRepo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/repositories/PostDao.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/repositories/PostInfoDao.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/viewmodels/MemberViewModel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/xml/network_security_config.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/deploymentTargetDropDown.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/adapters/PostListAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/adapters/PostListAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/api/PostAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/api/PostAPI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/foobar_dt_ad/FeedScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/foobar_dt_ad/FeedScreen.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/foobar_dt_ad/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/foobar_dt_ad/MainActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/foobar_dt_ad/Member.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/entities/Member.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/feed_content/add_post/AddPost.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/foobar_dt_ad/AddPostScreen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/feed_content/comment/Comment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/entities/Comment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/feed_content/comment/CommentListAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/adapters/CommentListAdapter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/feed_content/comment/CommentModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/viewmodels/CommentViewModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/feed_content/comment/CommentRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/repositories/CommentRepo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/feed_content/comment/CommentsScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/foobar_dt_ad/CommentsScreen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/feed_content/post/Post.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/entities/Post.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/feed_content/post/PostListAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/adapters/PostListAdapter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/feed_content/post/PostRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/repositories/PostRepo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/feed_content/post/PostsViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/viewmodels/PostsViewModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_add_post.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_add_post.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_comments_screen.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_comments_screen.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/entities/Post.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/entities/Post.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/repositories/AppDB.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/repositories/AppDB.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/repositories/PostDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/repositories/PostDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/repositories/PostRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/repositories/PostRepo.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -314,7 +291,15 @@
       <option name="project" value="LOCAL‎" />
       <updated>1707864943264</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL‎-00002" summary="add login,sign and present 25 post">
+      <option name="closed" value="true" />
+      <created>1709749143859</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL‎-00002" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1709749143859</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -347,11 +332,6 @@
           <option name="timeStamp" value="89" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/foobar_dt_ad/MainActivity.java</url>
-          <line>63</line>
-          <option name="timeStamp" value="120" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/api/UserAPI.java</url>
           <line>101</line>
           <option name="timeStamp" value="126" />
@@ -360,16 +340,6 @@
           <url>file://$PROJECT_DIR$/app/src/main/java/api/UserAPI.java</url>
           <line>79</line>
           <option name="timeStamp" value="134" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/api/UserAPI.java</url>
-          <line>52</line>
-          <option name="timeStamp" value="142" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/api/UserAPI.java</url>
-          <line>48</line>
-          <option name="timeStamp" value="143" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/api/UserAPI.java</url>
@@ -397,9 +367,34 @@
           <option name="timeStamp" value="170" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/foobar_dt_ad/MainActivity.java</url>
+          <line>68</line>
+          <option name="timeStamp" value="199" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/api/PostAPI.java</url>
-          <line>116</line>
-          <option name="timeStamp" value="177" />
+          <line>118</line>
+          <option name="timeStamp" value="208" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/api/PostAPI.java</url>
+          <line>55</line>
+          <option name="timeStamp" value="213" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/api/PostAPI.java</url>
+          <line>100</line>
+          <option name="timeStamp" value="216" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/api/PostAPI.java</url>
+          <line>129</line>
+          <option name="timeStamp" value="217" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/foobar_dt_ad/FeedScreen.java</url>
+          <line>70</line>
+          <option name="timeStamp" value="218" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
