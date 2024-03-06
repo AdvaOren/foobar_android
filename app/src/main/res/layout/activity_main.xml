@@ -7,6 +7,15 @@
     android:theme="@style/Theme.Foobar_DT_ad"
     tools:context=".MainActivity">
 
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@+id/btnDark"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/appName"
@@ -40,6 +49,7 @@
             android:layout_marginBottom="10dp"
             android:ems="10"
             android:inputType="text"
+            android:text="zzz"
 
             android:hint="@string/enter_username" />
         <TextView
@@ -63,6 +73,7 @@
             android:layout_marginBottom="10dp"
             android:ems="10"
             android:inputType="textPassword"
+            android:text="zz"
             android:hint="@string/enter_password" />
         <TextView
             android:layout_width="match_parent"
@@ -71,7 +82,7 @@
             android:textColor="#F44336"
             android:layout_marginBottom="5dp"
             android:gravity="center"
-            android:text="Wrong password"
+            android:text="Email or password incorrect"
             android:visibility="invisible">
 
         </TextView>

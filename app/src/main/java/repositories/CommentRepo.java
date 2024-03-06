@@ -1,7 +1,8 @@
-package feed_content.comment;
+package repositories;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+
+import entities.Comment;
 
 // This class is the database of the comments
 public class CommentRepo {

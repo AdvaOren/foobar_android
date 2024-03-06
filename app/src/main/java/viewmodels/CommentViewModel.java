@@ -1,15 +1,18 @@
-package feed_content.comment;
+package viewmodels;
 
 import java.util.ArrayList;
 
+import entities.Comment;
+import repositories.CommentRepo;
+
 //This class is the model layer it's get data from the comment repo
-public class CommentModel {
+public class CommentViewModel {
     private final CommentRepo commentRepo;
 
     /**
      * This is a constructor
      */
-    public CommentModel() {
+    public CommentViewModel() {
         ArrayList<Comment> c = new ArrayList<>();
         commentRepo = new CommentRepo(c);
     }

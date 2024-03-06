@@ -1,4 +1,4 @@
-package feed_content.add_post;
+package com.example.foobar_dt_ad;
 
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
@@ -27,7 +27,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 //This is the activity of the adding of new post. it's also used fro edit post
-public class AddPost extends AppCompatActivity {
+public class AddPostScreen extends AppCompatActivity {
     public static final int EDIT = 1;
     public static final int ADD = 2;
     private static final int GALLERY = 14;

@@ -1,9 +1,5 @@
-package feed_content.comment;
+package com.example.foobar_dt_ad;
 
-
-import androidx.activity.OnBackPressedCallback;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
 
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -15,15 +11,21 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.example.foobar_dt_ad.R;
+import androidx.activity.OnBackPressedCallback;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import java.util.ArrayList;
+
+import adapters.CommentListAdapter;
+import entities.Comment;
+import viewmodels.CommentViewModel;
 
 //This is the screen of the comments
 public class CommentsScreen extends AppCompatActivity {
 
     private ListView listView;
-    private CommentModel commentModel;
+    private CommentViewModel commentViewModel;
     private CommentListAdapter adapter;
     private String firstName;
     private String lastName;
@@ -35,12 +37,12 @@ public class CommentsScreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_comments_screen);
-        commentModel = new CommentModel();
+        commentViewModel = new CommentViewModel();
 
         //create comment model
         Intent intent = getIntent();
         ArrayList<Comment> comments= intent.getParcelableArrayListExtra("comments");
-        commentModel.setComments(comments);
+        commentViewModel.setComments(comments);
 
         //get user data from intent
         firstName = intent.getStringExtra("firstName").toString();
@@ -51,7 +53,7 @@ public class CommentsScreen extends AppCompatActivity {
 
         //create list view
         listView = findViewById(R.id.list_view);
-        adapter = new CommentListAdapter(this, commentModel,img);
+        adapter = new CommentListAdapter(this, commentViewModel,img);
         listView.setAdapter(adapter);
 
         //add title to the screen
@@ -65,7 +67,7 @@ public class CommentsScreen extends AppCompatActivity {
             String text = newCom.getText().toString();
             if (text.equals(""))
                 return;
-            commentModel.add(text,firstName,lastName);
+            commentViewModel.add(text,firstName,lastName);
             newCom.setText("");
             adapter.notifyDataSetChanged();
         });
@@ -76,8 +78,8 @@ public class CommentsScreen extends AppCompatActivity {
             @Override
             public void handleOnBackPressed() {
                 Intent intent = new Intent();
-                intent.putParcelableArrayListExtra("comments",commentModel.get());
-                intent.putExtra("numComments",String.valueOf(commentModel.get().size()));
+                intent.putParcelableArrayListExtra("comments", commentViewModel.get());
+                intent.putExtra("numComments",String.valueOf(commentViewModel.get().size()));
                 intent.putExtra("id",getIntent().getIntExtra("id",-1));
                 intent.putExtra("key", "value"); // Add your data here
                 setResult(BACK_FROM_COMMENT, intent);

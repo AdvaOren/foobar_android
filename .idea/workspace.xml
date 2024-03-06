@@ -50,75 +50,51 @@
           <theme>@style/Theme.Foobar_DT_ad</theme>
         </config>
       </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/xml/network_security_config.xml">
+        <config>
+          <theme>@style/Theme.Foobar_DT_ad</theme>
+        </config>
+      </layout>
     </layouts>
   </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9ba0b45a-247e-48d0-8105-f9864560f4b1" name="Changes" comment="add the feed screen">
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/foobar_dt_ad/MainActivity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/foobar_dt_ad/Member.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/foobar_dt_ad/signupScreens/SignUpNames.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/foobar_dt_ad/signupScreens/SignUpPasswords.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/foobar_dt_ad/signupScreens/SignUpScreen.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable-anydpi/ic_dark_mode.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable-anydpi/ic_light_mode.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable-anydpi/ic_logout.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/ic_dark_mode.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/ic_light_mode.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/ic_logout.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable-mdpi/ic_dark_mode.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable-mdpi/ic_light_mode.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable-mdpi/ic_logout.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/ic_dark_mode.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/ic_light_mode.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/ic_logout.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/ic_dark_mode.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/ic_light_mode.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/ic_logout.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_sign_up_names.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_sign_up_passwords.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_sign_up_screen.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+    <list default="true" id="9ba0b45a-247e-48d0-8105-f9864560f4b1" name="Changes" comment="add login,sign and present 25 post">
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/api/PostAPI.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/api/UserAPI.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/api/WebServicesAPI.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/entities/PostInfo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/repositories/AppDB.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/repositories/Converters.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/repositories/MemberDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/repositories/MemberRepo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/repositories/PostDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/repositories/PostInfoDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/viewmodels/MemberViewModel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/xml/network_security_config.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/deploymentTargetDropDown.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle.kts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/foobar_dt_ad/FeedScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/foobar_dt_ad/FeedScreen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/feed_content/comment/CommentListAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/feed_content/comment/CommentListAdapter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/feed_content/comment/CommentsScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/feed_content/comment/CommentsScreen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/feed_content/post/PostListAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/feed_content/post/PostListAdapter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/feed_content/post/PostsViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/feed_content/post/PostsViewModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/foobar_dt_ad/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/foobar_dt_ad/MainActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/foobar_dt_ad/Member.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/entities/Member.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/feed_content/add_post/AddPost.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/foobar_dt_ad/AddPostScreen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/feed_content/comment/Comment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/entities/Comment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/feed_content/comment/CommentListAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/adapters/CommentListAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/feed_content/comment/CommentModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/viewmodels/CommentViewModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/feed_content/comment/CommentRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/repositories/CommentRepo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/feed_content/comment/CommentsScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/foobar_dt_ad/CommentsScreen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/feed_content/post/Post.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/entities/Post.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/feed_content/post/PostListAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/adapters/PostListAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/feed_content/post/PostRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/repositories/PostRepo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/feed_content/post/PostsViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/viewmodels/PostsViewModel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_add_post.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_add_post.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_comments_screen.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_comments_screen.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_feed_screen.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_feed_screen.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/comment_list_item.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/comment_list_item.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/post_layout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/post_layout.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/values-night/themes.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values-night/themes.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/colors.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/colors.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/themes.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/themes.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/foobar_DT_android/app/src/main/java/com/example/foobar_dt_android/MainActivity.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/foobar_DT_android/app/src/main/java/com/example/foobar_dt_android/Member.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/foobar_DT_android/app/src/main/java/com/example/foobar_dt_android/SignUpNames.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/foobar_DT_android/app/src/main/java/com/example/foobar_dt_android/SignUpPasswords.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/foobar_DT_android/app/src/main/java/com/example/foobar_dt_android/SignUpScreen.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/foobar_DT_android/app/src/main/res/layout/activity_main.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/foobar_DT_android/app/src/main/res/layout/activity_sign_up_names.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/foobar_DT_android/app/src/main/res/layout/activity_sign_up_passwords.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/foobar_DT_android/app/src/main/res/layout/activity_sign_up_screen.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/foobar_DT_android/app/src/main/res/values/colors.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/foobar_DT_android/app/src/main/res/values/strings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/foobar_DT_android2/.idea/compiler.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/foobar_DT_android2/.idea/deploymentTargetDropDown.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/foobar_DT_android2/.idea/gradle.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/foobar_DT_android2/.idea/migrations.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/foobar_DT_android2/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/foobar_DT_android2/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/foobar_DT_android2/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -127,6 +103,9 @@
   </component>
   <component name="ClangdSettings">
     <option name="formatViaClangd" value="false" />
+  </component>
+  <component name="CodeInsightWorkspaceSettings">
+    <option name="optimizeImportsOnTheFly" value="true" />
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[C:\Users\eluzz\.android\avd\Copy_of_Pixel_2_API_30.avd]" />
   <component name="ExternalProjectsData">
@@ -175,15 +154,17 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="layoutResourceFile" />
+        <option value="Interface" />
         <option value="Class" />
+        <option value="resourceFile" />
+        <option value="layoutResourceFile" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="feed_screen" />
+        <entry key="$PROJECT_DIR$" value="production" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -202,16 +183,27 @@
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
+    &quot;PROJECT_TRUSTED_KEY&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;android-custom-viewC:/Users/eluzz/.gradle/caches/modules-2/files-2.1/androidx.appcompat/appcompat/1.6.1/ace9a78b961165396147e8691faa18c1b0e48e20/appcompat-1.6.1-sources.jar!/androidx/appcompat/widget/AppCompatEditText.java_SELECTED&quot;: &quot;AppCompatEditText&quot;,
     &quot;android-custom-viewC:/Users/eluzz/.gradle/caches/modules-2/files-2.1/androidx.appcompat/appcompat/1.6.1/ace9a78b961165396147e8691faa18c1b0e48e20/appcompat-1.6.1-sources.jar!/androidx/appcompat/widget/AppCompatTextView.java_SELECTED&quot;: &quot;AppCompatTextView&quot;,
     &quot;android-custom-viewC:/Users/eluzz/.gradle/caches/modules-2/files-2.1/androidx.recyclerview/recyclerview/1.1.0/f2bdf79e1977939817f54a9d3e2f6bc52b63bdd0/recyclerview-1.1.0-sources.jar!/androidx/recyclerview/widget/RecyclerView.java_SELECTED&quot;: &quot;RecyclerView&quot;,
     &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
     &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;db&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_directory_selection&quot;: &quot;C:/Users/eluzz/Documents/tzuriel/CS/advanced/foobar_DT_android/app/src/main/res/values&quot;
+    &quot;last_directory_selection&quot;: &quot;C:/Users/eluzz/Documents/tzuriel/CS/advanced/foobar_DT_android/app/src/main/java&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/eluzz/Documents/tzuriel/CS/advanced/foobar_DT_android&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;editor.preferences.import&quot;
+  },
+  &quot;keyToStringList&quot;: {
+    &quot;com.android.tools.idea.sqlite.queryhistory&quot;: [
+      &quot;DELETE FROM members  where email = \&quot;a\&quot; or email = \&quot;as\&quot;&quot;,
+      &quot;DELETE FROM members&quot;,
+      &quot;SELECT * FROM members WHERE email = 'zzz'&quot;
+    ]
   }
 }</component>
   <component name="RecentsManager">
@@ -231,6 +223,9 @@
     <key name="android.template.311769115">
       <recent name="com.example.foobar_dt_ad.signupScreens" />
       <recent name="com.example.foobar_dt_ad" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="repositories" />
     </key>
   </component>
   <component name="RunManager">
@@ -335,32 +330,78 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="add the feed screen" />
-    <option name="LAST_COMMIT_MESSAGE" value="add the feed screen" />
+    <MESSAGE value="add login,sign and present 25 post" />
+    <option name="LAST_COMMIT_MESSAGE" value="add login,sign and present 25 post" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/feed_content/add_post/AddPost.java</url>
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/foobar_dt_ad/AddPostScreen.java</url>
           <line>66</line>
           <option name="timeStamp" value="29" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/foobar_dt_ad/FeedScreen.java</url>
-          <line>48</line>
-          <option name="timeStamp" value="50" />
+          <url>file://$PROJECT_DIR$/app/src/main/java/api/UserAPI.java</url>
+          <line>132</line>
+          <option name="timeStamp" value="89" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/example/foobar_dt_ad/MainActivity.java</url>
-          <line>94</line>
-          <option name="timeStamp" value="51" />
+          <line>63</line>
+          <option name="timeStamp" value="120" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/api/UserAPI.java</url>
+          <line>101</line>
+          <option name="timeStamp" value="126" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/api/UserAPI.java</url>
+          <line>79</line>
+          <option name="timeStamp" value="134" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/api/UserAPI.java</url>
+          <line>52</line>
+          <option name="timeStamp" value="142" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/api/UserAPI.java</url>
+          <line>48</line>
+          <option name="timeStamp" value="143" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/api/UserAPI.java</url>
+          <line>58</line>
+          <option name="timeStamp" value="145" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/api/UserAPI.java</url>
+          <line>96</line>
+          <option name="timeStamp" value="148" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/api/UserAPI.java</url>
+          <line>88</line>
+          <option name="timeStamp" value="160" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/api/PostAPI.java</url>
+          <line>81</line>
+          <option name="timeStamp" value="167" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/api/PostAPI.java</url>
+          <line>58</line>
+          <option name="timeStamp" value="170" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/api/PostAPI.java</url>
+          <line>116</line>
+          <option name="timeStamp" value="177" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
-    <watches-manager>
-      <configuration name="AndroidRunConfigurationType">
-        <watch expression="posts.get(position)" language="JAVA" />
-      </configuration>
-    </watches-manager>
   </component>
 </project>

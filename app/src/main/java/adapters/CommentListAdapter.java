@@ -1,4 +1,4 @@
-package feed_content.comment;
+package adapters;
 
 
 import android.content.Context;
@@ -20,11 +20,14 @@ import androidx.annotation.Nullable;
 
 import com.example.foobar_dt_ad.R;
 
+import entities.Comment;
+import viewmodels.CommentViewModel;
+
 //This class is adapter to a simple list
 public class CommentListAdapter extends ArrayAdapter<Comment> {
     private LayoutInflater inflater;
     private Context context;
-    private CommentModel commentModel;
+    private CommentViewModel commentViewModel;
     private Bitmap userImg;
 
     /**
@@ -33,11 +36,11 @@ public class CommentListAdapter extends ArrayAdapter<Comment> {
      * @param cm comment model to handle data
      * @param userImg user img
      */
-    public CommentListAdapter(@NonNull Context context, CommentModel cm,Bitmap userImg) {
+    public CommentListAdapter(@NonNull Context context, CommentViewModel cm, Bitmap userImg) {
         super(context, R.layout.comment_list_item,cm.get());
         this.inflater = LayoutInflater.from(context);
         this.context = context;
-        this.commentModel = cm;
+        this.commentViewModel = cm;
         this.userImg = userImg;
     }
 
@@ -89,7 +92,7 @@ public class CommentListAdapter extends ArrayAdapter<Comment> {
             else {
                 //check that there is a content to the comment
                 if (text.getText().toString().equals("")) {
-                    commentModel.remove(comment.getId());
+                    commentViewModel.remove(comment.getId());
                     notifyDataSetChanged();
                     return;
                 }
@@ -98,14 +101,14 @@ public class CommentListAdapter extends ArrayAdapter<Comment> {
                 edit.setImageResource(R.drawable.ic_edit);
                 text.setFocusable(false);
                 text.setBackgroundColor(Color.parseColor("#FFF1DD"));
-                commentModel.edit(comment.getId(),text.getText().toString());
+                commentViewModel.edit(comment.getId(),text.getText().toString());
                 notifyDataSetChanged();
             }
         });
 
         //handle the delete button clicked
         del.setOnClickListener(v -> {
-            commentModel.remove(comment.getId());
+            commentViewModel.remove(comment.getId());
             notifyDataSetChanged();
         });
 

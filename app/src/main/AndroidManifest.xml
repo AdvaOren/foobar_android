@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-feature android:name="android.hardware.camera" />
-
+    <uses-permission android:name="android.permission.INTERNET"/>
+    
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -13,7 +14,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Foobar_DT_ad"
-        tools:targetApi="31">
+        tools:targetApi="31"
+        android:usesCleartextTraffic="true"
+        >
         <activity
             android:name=".signupScreens.SignUpScreen"
             android:exported="false" />
@@ -33,10 +36,10 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="feed_content.comment.CommentsScreen"
+            android:name=".CommentsScreen"
             android:exported="false" />
         <activity
-            android:name="feed_content.add_post.AddPost"
+            android:name=".AddPostScreen"
             android:exported="false" />
         <activity
             android:name=".FeedScreen"
