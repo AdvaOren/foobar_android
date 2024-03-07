@@ -57,14 +57,37 @@ public class PostRepo {
             });
         }
 
-        //לתקן את זה שלא רואים תמונה
         //לסדר את התאריך
-        //לסדר את זה שלא מופיעים כפתור עריכה ומחיקה
-        //לבדוק למה זה קרס
         public void addPost(Post newPost) {
             List<Post> posts1 = getValue();
+            if (posts1 == null)
+                return;
             posts1.add(0,newPost);
             posts.postValue(posts1);
+        }
+
+        public void removePost(Post post) {
+            List<Post> posts1 = getValue();
+            if (posts1 == null)
+                return;
+            posts1.remove(post);
+            posts.postValue(posts1);
+        }
+
+        public void updatePost(Post post) {
+            List<Post> posts1 = getValue();
+            if (posts1 == null)
+                return;
+            String postId = post.get_id();
+            for (Post curr : posts1) {
+                if (curr.get_id().equals(postId)) {
+                    curr.setImg(post.getImg());
+                    curr.setContent(post.getContent());
+                    posts.postValue(posts1);
+                    break;
+                }
+            }
+
         }
     }
 
@@ -81,12 +104,14 @@ public class PostRepo {
         postAPI.getLastPosts(userId, memberVm);
     }
 
-    public void delete(String userId, String postId) {
-        postAPI.deletePost(userId, postId);
+    public void delete(String userId, Post post) {
+        postAPI.deletePost(userId, post);
     }
 
     public void update(String userId, Post post) {
-        if (post.getContent().equals("") || post.getImg() == null)
+        if (post.getContent().equals("") && post.getImg().equals(""))
+            return;
+        if (post.getContent().equals("") || post.getImg().equals(""))
             postAPI.updatePost(userId, post);
         else
             postAPI.updateAllThePost(userId, post);

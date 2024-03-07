@@ -95,13 +95,10 @@ public class PostListAdapter extends RecyclerView.Adapter<PostListAdapter.PostVi
 
     private final LayoutInflater mInflater;
     private List<Post> posts;
-    private PostsViewModel postVM;
-    private MemberViewModel memberVM;
-    private FragmentActivity activity;
-    private ActivityResultLauncher<Intent> intentLauncher;
-    /*private String firstName;
-    private String lastName;
-    private Bitmap userPic;*/
+    private final PostsViewModel postVM;
+    private final MemberViewModel memberVM;
+    private final FragmentActivity activity;
+    private final ActivityResultLauncher<Intent> intentLauncher;
     private Member member;
 
     //This is a constructor for the class
@@ -112,9 +109,6 @@ public class PostListAdapter extends RecyclerView.Adapter<PostListAdapter.PostVi
         this.memberVM = memberVM;
         this.activity = activity;
         this.member = member;
-        /*this.firstName = firstName;
-        this.lastName = lastName;
-        this.userPic = userPic;*/
 
         //get result from another activity
         intentLauncher = activity.registerForActivityResult(
@@ -126,16 +120,22 @@ public class PostListAdapter extends RecyclerView.Adapter<PostListAdapter.PostVi
                         if (result.getResultCode() == EDIT) {
                             Intent data = result.getData();
                             if (data != null) {
-                                //String title = data.getStringExtra("title");
                                 String content = data.getStringExtra("content");
                                 Bundle extras = data.getExtras();
                                 byte[] byteArray = extras.getByteArray("picture");
                                 String date = data.getStringExtra("date");
-                                Bitmap bmp = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
-                                postVM.update(member.get_id(), new Post(content, bmp, date, member.get_id()));
-                                /*int id = Integer.parseInt(data.getStringExtra("id").toString());
-                                viewModel.edit(id,title,content,date,bmp);
-                                notifyDataSetChanged();*/
+                                String userId = data.getStringExtra("userId");
+                                String postId = data.getStringExtra("postId");
+                                if (byteArray != null) {
+                                    Bitmap bmp = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
+                                    Post temp =  new Post(content, bmp, date,userId);
+                                    temp.set_id(postId);
+                                    postVM.update(userId,temp);
+                                }
+                                else {
+                                    postVM.update(userId, new Post(postId,userId,content, date,"","" ));
+                                }
+                                notifyDataSetChanged();
                             }
                         }
                         //get the data from the comments screen
@@ -183,15 +183,13 @@ public class PostListAdapter extends RecyclerView.Adapter<PostListAdapter.PostVi
 
         //handle the case the user delete post
         holder.delete.setOnClickListener(v -> {
-            //viewModel.delete(Integer.parseInt(holder.id.getText().toString()));
-            //setPosts(viewModel.get());
-            postVM.delete(member.get_id(), current.get_id());
-            //notifyDataSetChanged();
+            postVM.delete(member.get_id(), current);
+            notifyItemRemoved(position);
         });
 
         //handle the case the user edit post
         holder.edit.setOnClickListener(v -> {
-            editPost(holder);
+            editPost(holder,current);
         });
 
         //transfer the user to the comment screen
@@ -332,18 +330,19 @@ public class PostListAdapter extends RecyclerView.Adapter<PostListAdapter.PostVi
         notifyItemChanged(position);
     }
 
-    public void editPost(PostViewHolder holder) {
+    public void editPost(PostViewHolder holder, Post current) {
         Intent intent = new Intent(activity, AddPostScreen.class);
         BitmapDrawable bitmapDrawable = ((BitmapDrawable) holder.postPic.getDrawable());
         Bitmap bitmap = bitmapDrawable.getBitmap();
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
         byte[] imageInByte = stream.toByteArray();
-        //intent.putExtra("title", holder.title.getText().toString());
-        intent.putExtra("content", holder.content.getText().toString());
+
+        intent.putExtra("content", current.getContent());
         intent.putExtra("picture", imageInByte);
         intent.putExtra("type", String.valueOf(EDIT));
-        //intent.putExtra("id",holder.id.getText().toString());
+        intent.putExtra("postId",current.get_id());
+        intent.putExtra("userId",member.get_id());
         intentLauncher.launch(intent);
     }
 

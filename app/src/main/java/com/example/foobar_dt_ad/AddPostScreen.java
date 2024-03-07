@@ -37,6 +37,7 @@ public class AddPostScreen extends AppCompatActivity {
     private EditText contentEditor;
     private TextView invalid;
     private int flag = 0;
+    private boolean imageChang = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,7 +68,7 @@ public class AddPostScreen extends AppCompatActivity {
                                 //the case we take the image from gallery
                                 if (flag == GALLERY)
                                     imageGallery.setImageURI(data.getData());
-                                //the case we take the image from camera
+                                    //the case we take the image from camera
                                 else if (flag == CAMERA) {
                                     Bitmap photo = (Bitmap) data.getExtras().get("data");
                                     imageGallery.setImageBitmap(photo);
@@ -85,14 +86,16 @@ public class AddPostScreen extends AppCompatActivity {
             Intent iGallery = new Intent(Intent.ACTION_PICK);
             iGallery.setData(MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
             flag = GALLERY;
+            imageChang = true;
             someActivityResultLauncher.launch(iGallery);
         });
 
         //take image from camera
         ImageButton btnCamera = findViewById(R.id.btnCamera);
-        btnCamera.setOnClickListener(v ->{
+        btnCamera.setOnClickListener(v -> {
             Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
             flag = CAMERA;
+            imageChang = true;
             someActivityResultLauncher.launch(cameraIntent);
         });
 
@@ -102,39 +105,72 @@ public class AddPostScreen extends AppCompatActivity {
             if (!fillAll())
                 return;
 
-            Intent intent = intentToRetrieve();
-            if (Objects.equals(getIntent().getStringExtra("type"), String.valueOf(EDIT)))
+            Intent intent;
+            if (Objects.equals(getIntent().getStringExtra("type"), String.valueOf(EDIT))) {
+                intent = intentToRetrieveEdit();
                 setResult(EDIT, intent);
-            else
-                setResult(ADD,intent);
+            } else {
+                intent = intentToRetrieveAdd();
+                setResult(ADD, intent);
+            }
             finish();
         });
     }
 
     /**
      * The function make an intent that contain all the data of the post
+     *
      * @return the intent
      */
-    private Intent intentToRetrieve() {
+    private Intent intentToRetrieveEdit() {
         Intent intent = new Intent();
-        String content = contentEditor.getText().toString();
+        if (imageChang) {
+            BitmapDrawable bitmapDrawable = ((BitmapDrawable) imageGallery.getDrawable());
+            Bitmap bitmap = bitmapDrawable.getBitmap();
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+            byte[] imageInByte = stream.toByteArray();
+            intent.putExtra("picture", imageInByte);
+        } else {
+            intent.putExtra("picture", "");
+        }
+        if (!getIntent().getStringExtra("content").equals(contentEditor.getText().toString())) {
+            String content = contentEditor.getText().toString();
+            intent.putExtra("content", content);
+        } else {
+            intent.putExtra("content", "");
+        }
+        intent.putExtra("postId",getIntent().getStringExtra("postId"));
+        intent.putExtra("userId",getIntent().getStringExtra("userId"));
+        intent.putExtra("date", getTodayDate());
+        return intent;
+    }
+
+    /**
+     * The function make an intent that contain all the data of the post
+     *
+     * @return the intent
+     */
+    private Intent intentToRetrieveAdd() {
+        Intent intent = new Intent();
         BitmapDrawable bitmapDrawable = ((BitmapDrawable) imageGallery.getDrawable());
-        Bitmap bitmap = bitmapDrawable .getBitmap();
+        Bitmap bitmap = bitmapDrawable.getBitmap();
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
         byte[] imageInByte = stream.toByteArray();
-
-        intent.putExtra("content", content);
         intent.putExtra("picture", imageInByte);
+        String content = contentEditor.getText().toString();
+        intent.putExtra("content", content);
         intent.putExtra("date", getTodayDate());
         return intent;
     }
 
     /**
      * The function check if all the fields of the post are filled
+     *
      * @return if fill all or not
      */
-    private boolean fillAll(){
+    private boolean fillAll() {
         String content = contentEditor.getText().toString();
         if (!uploadedImage || content.equals("")) {
             invalid.setVisibility(View.VISIBLE);
@@ -142,10 +178,11 @@ public class AddPostScreen extends AppCompatActivity {
         }
         return true;
     }
+
     /**
      * This function change the screen to fit to edit situation
      */
-    private void handleGraphicEdit(){
+    private void handleGraphicEdit() {
         //get the data of the post we edit and present it on the screen
         Intent i = getIntent();
         contentEditor.setText(i.getStringExtra("content"));
@@ -160,6 +197,7 @@ public class AddPostScreen extends AppCompatActivity {
 
     /**
      * This function return a string of today date
+     *
      * @return the date
      */
     private String getTodayDate() {

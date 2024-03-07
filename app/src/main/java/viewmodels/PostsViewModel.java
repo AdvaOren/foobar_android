@@ -34,8 +34,8 @@ public class PostsViewModel extends ViewModel {
         postRepo.reload(userId);
     }
 
-    public void delete(String userId, String postId) {
-        postRepo.delete(userId, postId);
+    public void delete(String userId, Post post) {
+        postRepo.delete(userId, post);
     }
 
     public void update(String userId, Post post) {

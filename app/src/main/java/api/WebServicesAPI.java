@@ -55,7 +55,7 @@ public interface WebServicesAPI {
     @PUT("users/{id}/posts/{pid}")
     Call<Void> updatePostAll(@Path("id") String id,@Path("pid") String pid,@Body Post post);
 
-    @PATCH("users/{id}/posts/{pid}")
+    @PUT("users/{id}/posts/{pid}")
     Call<Void> updatePost(@Path("id") String id,@Path("pid") String pid,@Body Post post);
 
     @DELETE("users/{id}/posts/{pid}")

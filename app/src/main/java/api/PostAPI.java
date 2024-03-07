@@ -55,33 +55,6 @@ public class PostAPI {
 
     public void getPosts(String userId, int currentPage, List<Post> posts, MemberViewModel mVM) {
         Call<List<Triple<Post, Member, PostInfo>>> call = webServicesAPI.getLastPosts(userId, currentPage);
-        /*try {
-            Response<List<Triple<Post, Member, PostInfo>>> response = call.execute();
-            List<Triple<Post, Member, PostInfo>> newData = response.body();
-
-            // Check if there are more pages
-            if (newData != null && !newData.isEmpty()) {
-                List<Post> posts = new ArrayList<>();
-                for (Triple<Post, Member, PostInfo> triple : newData) {
-                    PostInfo postInfo = triple.getThird();
-                    Post post = triple.getFirst();
-
-                    dao.insert(post);
-                    mVM.saveMember(triple.getSecond());
-                    postInfoDao.insert(postInfo);
-                    //set post info
-                    setPostByInfo(post,postInfo);
-                    posts.add(post);
-                }
-                newData.clear();
-            }
-            if (currentPage == 5)
-                return;
-            // Increment the page number and fetch the next page
-            getPosts(userId, currentPage + 1, mVM,postInfoDao);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }*/
         call.enqueue(new Callback<List<Triple<Post, Member, PostInfo>>>() {
             @Override
             public void onResponse(Call<List<Triple<Post, Member, PostInfo>>> call, Response<List<Triple<Post, Member, PostInfo>>> response) {
@@ -177,7 +150,7 @@ public class PostAPI {
                     Post newPost = response.body();
                     if (newPost == null)
                         return;
-                    PostInfo postInfo = new PostInfo(userId, post.get_id(), 0, false, 0);
+                    PostInfo postInfo = new PostInfo(userId, newPost.get_id(), 0, false, 0);
                     newPost.setOwner(userId);
                     dao.insert(newPost);
                     infoDao.insert(postInfo);
@@ -196,26 +169,66 @@ public class PostAPI {
     }
 
     public void updateAllThePost(String userId, Post post) {
-        webServicesAPI.updatePostAll(userId, post.get_id(), post);
-        dao.update(post);
-        postListData.postValue(dao.getAll(userId));
+        Call<Void> call = webServicesAPI.updatePostAll(userId, post.get_id(), post);
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                new Thread(() -> {
+                    dao.update(post);
+                    postListData.updatePost(post);
+                }).start();
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
     }
 
     public void updatePost(String userId, Post post) {
-        webServicesAPI.updatePost(userId, post.get_id(), post);
-        Post temp = dao.getPost(post.get_id());
-        if (!post.getContent().equals(""))
-            temp.setContent(post.getContent());
-        if (post.getImg() != null)
-            temp.setImg(post.getImg());
-        dao.update(temp);
-        postListData.postValue(dao.getAll(userId));
+        Call<Void> call = webServicesAPI.updatePost(userId, post.get_id(), post);
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                new Thread(() -> {
+                    Post temp = dao.getPost(post.get_id());
+                    if (temp == null)
+                        return;
+                    if (!post.getContent().equals(""))
+                        temp.setContent(post.getContent());
+                    if (!post.getImg().equals(""))
+                        temp.setImg(post.getImg());
+                    dao.update(temp);
+                    postListData.updatePost(temp);
+                }).start();
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
+
     }
 
-    public void deletePost(String userId, String postId) {
-        webServicesAPI.deletePost(userId, postId);
-        dao.deletePostById(postId);
-        postListData.postValue(dao.getAll(userId));
+    public void deletePost(String userId, Post post) {
+        Call<Void> call = webServicesAPI.deletePost(userId, post.get_id());
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                new Thread(() -> {
+                    dao.deletePostById(post.get_id());
+                    infoDao.delete(userId, post.get_id());
+                    postListData.removePost(post);
+                }).start();
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
     }
 
     public void addLike(String userId, String postId) {
