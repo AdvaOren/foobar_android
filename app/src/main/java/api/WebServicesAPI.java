@@ -50,7 +50,7 @@ public interface WebServicesAPI {
     Call<List<Triple<Post, Member, PostInfo>>> getLastPosts(@Query("id") String id, @Query("page") int page);
 
     @POST("users/{id}/posts")
-    Call<String> createPost(@Path("id") String id,@Body Post post);
+    Call<Post> createPost(@Path("id") String id,@Body Post post);
 
     @PUT("users/{id}/posts/{pid}")
     Call<Void> updatePostAll(@Path("id") String id,@Path("pid") String pid,@Body Post post);
@@ -76,9 +76,9 @@ public interface WebServicesAPI {
     @GET("users/{id}/posts/{pid}/likes")
     Call<List<PostInfo>> getLikes(@Path("id") String id, @Path("pid") String pid);
 
-    @POST("users/{id}/posts/{pid}/likes")
+    @POST("users/{id}/posts/{pid}/like")
     Call<Void> addLike(@Path("id") String id, @Path("pid") String pid);
 
-    @DELETE("users/{id}/posts/{pid}/likes")
+    @POST("users/{id}/posts/{pid}/like")
     Call<Void> removeLike(@Path("id") String id, @Path("pid") String pid);
 }

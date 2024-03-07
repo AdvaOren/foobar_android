@@ -42,9 +42,7 @@ public class PostsViewModel extends ViewModel {
         postRepo.update(userId, post);
     }
 
-    public boolean isLiked(String userId, String postId) {
-        return postRepo.isLiked(userId, postId);
-    }
+
 
     public void addLike(String userId, String postId) {
         postRepo.addLike(userId, postId);

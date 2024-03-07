@@ -36,7 +36,7 @@ public class Post {
         this.userId = userId;
         //commentList = new ArrayList<>();
         likes = 0;
-        setImg(img);
+        setImgBitmap(img);
         liked = false;
         shareClicked = false;
         owner = "";
@@ -125,9 +125,6 @@ public class Post {
         this.date = date;
     }
 
-    public void setImg(Bitmap picBit) {
-        setImg(picBit);
-    }
 
     public String getImg() {
         return img;

@@ -35,12 +35,12 @@ public class PostRepo {
         postDao = db.postDao();
         postInfoDao = db.likeDao();
         posts = new PostListData();
-        postAPI = new PostAPI(posts, postDao, jwtToken);
+        postAPI = new PostAPI(posts, postDao,postInfoDao, jwtToken);
         this.memberVm = memberVM;
     }
 
 
-    class PostListData extends MutableLiveData<List<Post>> {
+    public class PostListData extends MutableLiveData<List<Post>> {
         public PostListData() {
             super();
             setValue(new LinkedList<>());
@@ -56,10 +56,20 @@ public class PostRepo {
                     posts.postValue(postDao.getAll(member.get_id()));
             });
         }
+
+        //לתקן את זה שלא רואים תמונה
+        //לסדר את התאריך
+        //לסדר את זה שלא מופיעים כפתור עריכה ומחיקה
+        //לבדוק למה זה קרס
+        public void addPost(Post newPost) {
+            List<Post> posts1 = getValue();
+            posts1.add(0,newPost);
+            posts.postValue(posts1);
+        }
     }
 
     public LiveData<List<Post>> getAll(String userId) {
-        postAPI.getLastPosts(userId, postInfoDao,memberVm);
+        postAPI.getLastPosts(userId, memberVm);
         return posts;
     }
 
@@ -68,7 +78,7 @@ public class PostRepo {
     }
 
     public void reload(String userId) {
-        postAPI.getLastPosts(userId, postInfoDao,memberVm);
+        postAPI.getLastPosts(userId, memberVm);
     }
 
     public void delete(String userId, String postId) {
@@ -82,24 +92,26 @@ public class PostRepo {
             postAPI.updateAllThePost(userId, post);
     }
 
-    public boolean isLiked(String userId, String postId) {
-        return postInfoDao.getIfLike(userId, postId);
-    }
+
 
     public void addLike(String userId, String postId) {
-        PostInfo postInfo = postInfoDao.getPostInfo(userId,postId);
-        postInfo.setLiked(true);
-        postInfo.setLikeAmount(postInfo.getLikeAmount()+1);
-        postInfoDao.update(postInfo);
-        postAPI.addLike(userId, postId);
+        new Thread(() -> {
+            PostInfo postInfo = postInfoDao.getPostInfo(userId, postId);
+            postInfo.setLiked(true);
+            postInfo.setLikeAmount(postInfo.getLikeAmount() + 1);
+            postInfoDao.update(postInfo);
+            postAPI.addLike(userId, postId);
+        }).start();
     }
 
     public void removeLike(String userId, String postId) {
-        PostInfo postInfo = postInfoDao.getPostInfo(userId,postId);
-        postInfo.setLiked(false);
-        postInfo.setLikeAmount(postInfo.getLikeAmount()-1);
-        postInfoDao.update(postInfo);
-        postAPI.removeLike(userId, postId);
+        new Thread(() -> {
+            PostInfo postInfo = postInfoDao.getPostInfo(userId, postId);
+            postInfo.setLiked(false);
+            postInfo.setLikeAmount(postInfo.getLikeAmount() - 1);
+            postInfoDao.update(postInfo);
+            postAPI.removeLike(userId, postId);
+        }).start();
     }
 
 

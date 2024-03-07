@@ -98,7 +98,6 @@ public class FeedScreen extends AppCompatActivity {
                                 byte[] byteArray = extras.getByteArray("picture");
                                 String date = data.getStringExtra("date");
                                 Bitmap bmp = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
-                                //postVM.add(title,content,bmp,userPic,firstName,lastName,date);
                                 postVM.addPost(currentMember.get_id(),new Post(content,bmp,date,currentMember.get_id()));
                                 adapter.notifyDataSetChanged();
                             }

@@ -61,17 +61,17 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9ba0b45a-247e-48d0-8105-f9864560f4b1" name="Changes" comment="add login,sign and present 25 post">
+    <list default="true" id="9ba0b45a-247e-48d0-8105-f9864560f4b1" name="Changes" comment="add post">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/adapters/PostListAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/adapters/PostListAdapter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/api/PostAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/api/PostAPI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/api/WebServicesAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/api/WebServicesAPI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/foobar_dt_ad/AddPostScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/foobar_dt_ad/AddPostScreen.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/foobar_dt_ad/FeedScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/foobar_dt_ad/FeedScreen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/foobar_dt_ad/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/foobar_dt_ad/MainActivity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/entities/Post.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/entities/Post.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/repositories/AppDB.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/repositories/AppDB.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/repositories/PostDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/repositories/PostDao.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/repositories/PostRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/repositories/PostRepo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/viewmodels/PostsViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/viewmodels/PostsViewModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_add_post.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_add_post.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -299,7 +299,15 @@
       <option name="project" value="LOCAL‎" />
       <updated>1709749143859</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL‎-00003" summary="add reload">
+      <option name="closed" value="true" />
+      <created>1709754019118</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL‎-00003" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1709754019119</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -316,16 +324,13 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="add the feed screen" />
     <MESSAGE value="add login,sign and present 25 post" />
-    <option name="LAST_COMMIT_MESSAGE" value="add login,sign and present 25 post" />
+    <MESSAGE value="add reload" />
+    <MESSAGE value="add post" />
+    <option name="LAST_COMMIT_MESSAGE" value="add post" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/foobar_dt_ad/AddPostScreen.java</url>
-          <line>66</line>
-          <option name="timeStamp" value="29" />
-        </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/api/UserAPI.java</url>
           <line>132</line>
@@ -358,12 +363,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/api/PostAPI.java</url>
-          <line>81</line>
+          <line>82</line>
           <option name="timeStamp" value="167" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/api/PostAPI.java</url>
-          <line>58</line>
+          <line>59</line>
           <option name="timeStamp" value="170" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -373,28 +378,28 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/api/PostAPI.java</url>
-          <line>118</line>
+          <line>122</line>
           <option name="timeStamp" value="208" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/api/PostAPI.java</url>
-          <line>55</line>
-          <option name="timeStamp" value="213" />
+          <line>230</line>
+          <option name="timeStamp" value="223" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/api/PostAPI.java</url>
-          <line>100</line>
-          <option name="timeStamp" value="216" />
+          <line>245</line>
+          <option name="timeStamp" value="224" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/api/PostAPI.java</url>
-          <line>129</line>
-          <option name="timeStamp" value="217" />
+          <line>190</line>
+          <option name="timeStamp" value="235" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/foobar_dt_ad/FeedScreen.java</url>
-          <line>70</line>
-          <option name="timeStamp" value="218" />
+          <url>file://$PROJECT_DIR$/app/src/main/java/api/PostAPI.java</url>
+          <line>176</line>
+          <option name="timeStamp" value="253" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

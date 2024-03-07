@@ -1,11 +1,5 @@
 package com.example.foobar_dt_ad;
 
-import androidx.activity.result.ActivityResult;
-import androidx.activity.result.ActivityResultCallback;
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -20,11 +14,16 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.foobar_dt_ad.R;
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.ByteArrayOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Objects;
 
 //This is the activity of the adding of new post. it's also used fro edit post
 public class AddPostScreen extends AppCompatActivity {
@@ -35,7 +34,6 @@ public class AddPostScreen extends AppCompatActivity {
 
     private boolean uploadedImage;
     private ImageView imageGallery;
-    private EditText titleEditor;
     private EditText contentEditor;
     private TextView invalid;
     private int flag = 0;
@@ -48,7 +46,6 @@ public class AddPostScreen extends AppCompatActivity {
         //get the elements of the screen
         uploadedImage = false;
         imageGallery = findViewById(R.id.addImage);
-        titleEditor = findViewById(R.id.addTitle);
         contentEditor = findViewById(R.id.addContent);
         invalid = findViewById(R.id.invalidAddPost);
         imageGallery.setImageResource(android.R.color.transparent);
@@ -106,7 +103,7 @@ public class AddPostScreen extends AppCompatActivity {
                 return;
 
             Intent intent = intentToRetrieve();
-            if (getIntent().getStringExtra("type").equals(String.valueOf(EDIT)))
+            if (Objects.equals(getIntent().getStringExtra("type"), String.valueOf(EDIT)))
                 setResult(EDIT, intent);
             else
                 setResult(ADD,intent);
@@ -120,7 +117,6 @@ public class AddPostScreen extends AppCompatActivity {
      */
     private Intent intentToRetrieve() {
         Intent intent = new Intent();
-        String title = titleEditor.getText().toString();
         String content = contentEditor.getText().toString();
         BitmapDrawable bitmapDrawable = ((BitmapDrawable) imageGallery.getDrawable());
         Bitmap bitmap = bitmapDrawable .getBitmap();
@@ -128,11 +124,9 @@ public class AddPostScreen extends AppCompatActivity {
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
         byte[] imageInByte = stream.toByteArray();
 
-        intent.putExtra("title", title);
         intent.putExtra("content", content);
         intent.putExtra("picture", imageInByte);
         intent.putExtra("date", getTodayDate());
-        intent.putExtra("id", getIntent().getStringExtra("id"));
         return intent;
     }
 
@@ -141,9 +135,8 @@ public class AddPostScreen extends AppCompatActivity {
      * @return if fill all or not
      */
     private boolean fillAll(){
-        String title = titleEditor.getText().toString();
         String content = contentEditor.getText().toString();
-        if (!uploadedImage || title.equals("") || content.equals("")) {
+        if (!uploadedImage || content.equals("")) {
             invalid.setVisibility(View.VISIBLE);
             return false;
         }
@@ -155,7 +148,6 @@ public class AddPostScreen extends AppCompatActivity {
     private void handleGraphicEdit(){
         //get the data of the post we edit and present it on the screen
         Intent i = getIntent();
-        titleEditor.setText(i.getStringExtra("title"));
         contentEditor.setText(i.getStringExtra("content"));
         Bundle extras = i.getExtras();
         byte[] byteArray = extras.getByteArray("picture");
@@ -171,6 +163,6 @@ public class AddPostScreen extends AppCompatActivity {
      * @return the date
      */
     private String getTodayDate() {
-        return new SimpleDateFormat("dd/MM/yyyy").format(new Date());
+        return new SimpleDateFormat("yyyy-MM-dd").format(new Date());
     }
 }

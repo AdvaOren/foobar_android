@@ -223,7 +223,7 @@ public class PostListAdapter extends RecyclerView.Adapter<PostListAdapter.PostVi
 
         //handle the case the user click like
         holder.likes.setOnClickListener(v -> {
-            likePost(current, holder);
+            likePost(current, holder,position);
         });
 
         darkMode(holder);
@@ -261,14 +261,12 @@ public class PostListAdapter extends RecyclerView.Adapter<PostListAdapter.PostVi
 
         Member currentM = memberVM.getMemberQuick(current.getUserId());
         //set the elements that in the screen with the post
-        //holder.title.setText(current.getTitle());
         holder.content.setText(current.getContent());
         holder.date.setText(current.getDate());
         holder.firstName.setText(currentM.getFirstName());
         holder.lastName.setText(currentM.getLastName());
         holder.likes.setText(current.getLikes() + " likes");
         holder.comments.setText(current.getComments() + " comments");
-        //holder.id.setText(Integer.toString(current.getId()));
         holder.userPic.setImageBitmap(currentM.getImgBitmap());
         holder.postPic.setImageBitmap(current.getImgBitmap());
 
@@ -294,6 +292,10 @@ public class PostListAdapter extends RecyclerView.Adapter<PostListAdapter.PostVi
             holder.edit.setVisibility(View.INVISIBLE);
             holder.delete.setVisibility(View.INVISIBLE);
         }
+        else {
+            holder.edit.setVisibility(View.VISIBLE);
+            holder.delete.setVisibility(View.VISIBLE);
+        }
     }
 
     public void setPosts(List<Post> s) {
@@ -310,25 +312,24 @@ public class PostListAdapter extends RecyclerView.Adapter<PostListAdapter.PostVi
         return posts;
     }
 
-    private void likePost(Post current, PostViewHolder holder) {
-        //postVM.setLiked(Integer.parseInt(holder.id.getText().toString()));
+    private void likePost(Post current, PostViewHolder holder,int position) {
         String text = holder.likes.getText().toString();
         String[] arrOfStr = text.split(" ");
+        Drawable top;
         int likeAmount = Integer.parseInt(arrOfStr[0]);
-        if (postVM.isLiked(member.get_id(), current.get_id())) {
+        if (!current.isLiked()) {
             likeAmount++;
-            current.setLikes(likeAmount);
-            Drawable top = mInflater.getContext().getResources().getDrawable(R.drawable.ic_like_clicked);
-            holder.likes.setCompoundDrawablesWithIntrinsicBounds(null, top, null, null);
+            top = mInflater.getContext().getResources().getDrawable(R.drawable.ic_like);
             postVM.addLike(member.get_id(),current.get_id());
         } else {
             likeAmount--;
-            current.setLikes(likeAmount);
-            Drawable top = mInflater.getContext().getResources().getDrawable(R.drawable.ic_like);
-            holder.likes.setCompoundDrawablesWithIntrinsicBounds(null, top, null, null);
+            top = mInflater.getContext().getResources().getDrawable(R.drawable.ic_like_clicked);
             postVM.removeLike(member.get_id(),current.get_id());
         }
-        notifyDataSetChanged();
+        current.setLikes(likeAmount);
+        current.setLiked(!current.isLiked());
+        holder.likes.setCompoundDrawablesWithIntrinsicBounds(null, top, null, null);
+        notifyItemChanged(position);
     }
 
     public void editPost(PostViewHolder holder) {

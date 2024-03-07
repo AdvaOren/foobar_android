@@ -1,7 +1,5 @@
 package api;
 
-import androidx.lifecycle.MutableLiveData;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -14,6 +12,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import repositories.PostDao;
 import repositories.PostInfoDao;
+import repositories.PostRepo;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -22,13 +21,15 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import viewmodels.MemberViewModel;
 
 public class PostAPI {
-    private final MutableLiveData<List<Post>> postListData;
+    private final PostRepo.PostListData postListData;
     private final PostDao dao;
     private final WebServicesAPI webServicesAPI;
+    private final PostInfoDao infoDao;
 
-    public PostAPI(MutableLiveData<List<Post>> postListData, PostDao dao, String token) {
+    public PostAPI(PostRepo.PostListData postListData, PostDao dao, PostInfoDao infoDao, String token) {
         this.postListData = postListData;
         this.dao = dao;
+        this.infoDao = infoDao;
 
         OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
         httpClient.addInterceptor(chain -> {
@@ -52,7 +53,7 @@ public class PostAPI {
         webServicesAPI = retrofit.create(WebServicesAPI.class);
     }
 
-    public void getPosts(String userId, int currentPage, List<Post> posts, MemberViewModel mVM, PostInfoDao postInfoDao) {
+    public void getPosts(String userId, int currentPage, List<Post> posts, MemberViewModel mVM) {
         Call<List<Triple<Post, Member, PostInfo>>> call = webServicesAPI.getLastPosts(userId, currentPage);
         /*try {
             Response<List<Triple<Post, Member, PostInfo>>> response = call.execute();
@@ -96,46 +97,49 @@ public class PostAPI {
 
                             dao.insert(post);
                             mVM.saveMember(triple.getSecond());
-                            postInfoDao.insert(postInfo);
+                            infoDao.insert(postInfo);
                             //set post info
                             setPostByInfo(post, postInfo);
                             posts.add(post);
                         }
                         newData.clear();
+                    } else {
+                        //get less than 20 posts
+                        postListData.postValue(posts);
+                        return;
                     }
                     if (currentPage == 5) {
                         postListData.postValue(posts);
                         return;
                     }
                     // Increment the page number and fetch the next page
-                    getPosts(userId, currentPage + 1, posts, mVM, postInfoDao);
+                    getPosts(userId, currentPage + 1, posts, mVM);
 
                 }).start();
             }
 
             @Override
             public void onFailure(Call<List<Triple<Post, Member, PostInfo>>> call, Throwable t) {
-                //we get less than 20 posts
-                postListData.postValue(posts);
+                t.printStackTrace();
             }
         });
     }
 
-    public void getLastPosts(String userId, PostInfoDao postInfoDao, MemberViewModel mVM) {
+    public void getLastPosts(String userId, MemberViewModel mVM) {
         new Thread(() -> {
             //get posts from local db
-            List<Post> posts = dao.getAll(userId);
+            /*List<Post> posts = dao.getAll(userId);
             for (Post post : posts) {
-                PostInfo postInfo = postInfoDao.getPostInfo(userId, post.get_id());
+                PostInfo postInfo = infoDao.getPostInfo(userId, post.get_id());
                 setPostByInfo(post,postInfo);
             }
-            postListData.postValue(posts);
+            postListData.postValue(posts);*/
 
             //get posts from server
             dao.clear(userId);
-            postInfoDao.clear(userId);
+            infoDao.clear(userId);
             List<Post> posts2 = new ArrayList<>();
-            getPosts(userId, 1, posts2, mVM, postInfoDao);
+            getPosts(userId, 1, posts2, mVM);
         }).start();
     }
 
@@ -164,9 +168,30 @@ public class PostAPI {
     }
 
     public void addPost(String userId, Post post) {
-        webServicesAPI.createPost(userId, post);
-        dao.insert(post);
-        postListData.postValue(dao.getAll(userId));
+        Call<Post> call = webServicesAPI.createPost(userId, post);
+
+        call.enqueue(new Callback<Post>() {
+            @Override
+            public void onResponse(Call<Post> call, Response<Post> response) {
+                new Thread(() -> {
+                    Post newPost = response.body();
+                    if (newPost == null)
+                        return;
+                    PostInfo postInfo = new PostInfo(userId, post.get_id(), 0, false, 0);
+                    newPost.setOwner(userId);
+                    dao.insert(newPost);
+                    infoDao.insert(postInfo);
+                    postListData.addPost(newPost);
+                }).start();
+
+            }
+
+            @Override
+            public void onFailure(Call<Post> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
+
 
     }
 
@@ -182,7 +207,7 @@ public class PostAPI {
         if (!post.getContent().equals(""))
             temp.setContent(post.getContent());
         if (post.getImg() != null)
-            temp.setImg(post.getImgBitmap());
+            temp.setImg(post.getImg());
         dao.update(temp);
         postListData.postValue(dao.getAll(userId));
     }
@@ -194,10 +219,32 @@ public class PostAPI {
     }
 
     public void addLike(String userId, String postId) {
-        webServicesAPI.addLike(userId, postId);
+        Call<Void> call = webServicesAPI.addLike(userId, postId);
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
     }
 
     public void removeLike(String userId, String postId) {
-        webServicesAPI.removeLike(userId, postId);
+        Call<Void> call = webServicesAPI.removeLike(userId, postId);
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
     }
 }
