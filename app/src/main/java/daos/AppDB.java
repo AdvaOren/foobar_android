@@ -1,4 +1,4 @@
-package repositories;
+package daos;
 
 import androidx.room.Database;
 import androidx.room.RoomDatabase;
@@ -14,5 +14,5 @@ public abstract class AppDB extends RoomDatabase {
     public abstract PostDao postDao();
 
     public abstract MemberDao memberDao();
-    public abstract PostInfoDao likeDao();
+    public abstract PostInfoDao postInfoDao();
 }

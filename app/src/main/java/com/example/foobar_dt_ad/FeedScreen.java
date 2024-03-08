@@ -63,7 +63,8 @@ public class FeedScreen extends AppCompatActivity {
         postVM.initializePostViewModel(this, jwt,memberVM,id);
 
         // Initialize RecyclerView
-        final PostListAdapter adapter = new PostListAdapter(this,this, postVM,currentMember,memberVM);
+        final PostListAdapter adapter = new PostListAdapter(this, this, postVM,
+                currentMember, memberVM, jwt);
         lstPosts.setAdapter(adapter);
         lstPosts.setLayoutManager(new LinearLayoutManager(this));
         postVM.getAll().observe(this, posts -> {

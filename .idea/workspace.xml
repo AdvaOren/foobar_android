@@ -61,15 +61,33 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9ba0b45a-247e-48d0-8105-f9864560f4b1" name="Changes" comment="add post">
+    <list default="true" id="9ba0b45a-247e-48d0-8105-f9864560f4b1" name="Changes" comment="update post and delete post">
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/api/CommentAPI.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/edit_text_border.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/adapters/CommentListAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/adapters/CommentListAdapter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/adapters/PostListAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/adapters/PostListAdapter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/api/PostAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/api/PostAPI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/api/UserAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/api/UserAPI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/api/WebServicesAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/api/WebServicesAPI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/foobar_dt_ad/AddPostScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/foobar_dt_ad/AddPostScreen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/foobar_dt_ad/CommentsScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/foobar_dt_ad/CommentsScreen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/foobar_dt_ad/FeedScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/foobar_dt_ad/FeedScreen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/entities/Comment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/entities/Comment.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/entities/Post.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/entities/Post.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/repositories/AppDB.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/daos/AppDB.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/repositories/CommentRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/repositories/CommentRepo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/repositories/Converters.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/daos/Converters.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/repositories/MemberDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/daos/MemberDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/repositories/MemberRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/repositories/MemberRepo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/repositories/PostDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/daos/PostDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/repositories/PostInfoDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/daos/PostInfoDao.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/repositories/PostRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/repositories/PostRepo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/viewmodels/CommentViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/viewmodels/CommentViewModel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/viewmodels/PostsViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/viewmodels/PostsViewModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_comments_screen.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_comments_screen.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/comment_list_item.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/comment_list_item.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/colors.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/colors.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -130,9 +148,9 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Interface" />
+        <option value="layoutResourceFile" />
         <option value="Class" />
         <option value="resourceFile" />
-        <option value="layoutResourceFile" />
       </list>
     </option>
   </component>
@@ -313,7 +331,15 @@
       <option name="project" value="LOCAL‎" />
       <updated>1709819434990</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL‎-00005" summary="update post and delete post">
+      <option name="closed" value="true" />
+      <created>1709838111327</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL‎-00005" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1709838111327</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -332,7 +358,9 @@
     <MESSAGE value="add login,sign and present 25 post" />
     <MESSAGE value="add reload" />
     <MESSAGE value="add post" />
-    <option name="LAST_COMMIT_MESSAGE" value="add post" />
+    <MESSAGE value="update post" />
+    <MESSAGE value="update post and delete post" />
+    <option name="LAST_COMMIT_MESSAGE" value="update post and delete post" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -408,14 +436,29 @@
           <option name="timeStamp" value="262" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/api/PostAPI.java</url>
-          <line>194</line>
-          <option name="timeStamp" value="269" />
+          <url>file://$PROJECT_DIR$/app/src/main/java/api/CommentAPI.java</url>
+          <line>86</line>
+          <option name="timeStamp" value="279" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/api/PostAPI.java</url>
-          <line>176</line>
-          <option name="timeStamp" value="275" />
+          <url>file://$PROJECT_DIR$/app/src/main/java/api/CommentAPI.java</url>
+          <line>110</line>
+          <option name="timeStamp" value="291" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/api/CommentAPI.java</url>
+          <line>127</line>
+          <option name="timeStamp" value="292" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/api/CommentAPI.java</url>
+          <line>148</line>
+          <option name="timeStamp" value="293" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/adapters/CommentListAdapter.java</url>
+          <line>126</line>
+          <option name="timeStamp" value="302" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

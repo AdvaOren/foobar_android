@@ -1,4 +1,4 @@
-package repositories;
+package daos;
 
 import androidx.room.Dao;
 import androidx.room.Delete;

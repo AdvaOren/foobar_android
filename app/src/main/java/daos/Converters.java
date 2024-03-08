@@ -1,4 +1,4 @@
-package repositories;
+package daos;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;

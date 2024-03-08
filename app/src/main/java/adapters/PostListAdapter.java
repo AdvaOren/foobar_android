@@ -11,6 +11,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,10 +33,8 @@ import com.example.foobar_dt_ad.CommentsScreen;
 import com.example.foobar_dt_ad.R;
 
 import java.io.ByteArrayOutputStream;
-import java.util.ArrayList;
 import java.util.List;
 
-import entities.Comment;
 import entities.Member;
 import entities.Post;
 import viewmodels.MemberViewModel;
@@ -100,15 +99,17 @@ public class PostListAdapter extends RecyclerView.Adapter<PostListAdapter.PostVi
     private final FragmentActivity activity;
     private final ActivityResultLauncher<Intent> intentLauncher;
     private Member member;
+    private final String jwtToken;
 
     //This is a constructor for the class
     public PostListAdapter(FragmentActivity activity, Context context, PostsViewModel postVM,
-                           Member member, MemberViewModel memberVM) {
+                           Member member, MemberViewModel memberVM,String jwtToken) {
         mInflater = LayoutInflater.from(context);
         this.postVM = postVM;
         this.memberVM = memberVM;
         this.activity = activity;
         this.member = member;
+        this.jwtToken = jwtToken;
 
         //get result from another activity
         intentLauncher = activity.registerForActivityResult(
@@ -142,10 +143,14 @@ public class PostListAdapter extends RecyclerView.Adapter<PostListAdapter.PostVi
                         else if (result.getResultCode() == BACK_FROM_COMMENT) {
                             Intent data = result.getData();
                             if (data != null) {
-                                ArrayList<Comment> comments = data.getParcelableArrayListExtra("comments");
+                                /*ArrayList<Comment> comments = data.getParcelableArrayListExtra("comments");
                                 int id = data.getIntExtra("id", -1);
                                 //postVM.updateComments(id, comments);
-                                notifyDataSetChanged();
+                                notifyDataSetChanged();*/
+                                int numChanges = data.getIntExtra("numChanges",0);
+                                String userId = data.getStringExtra("userId");
+                                String postId = data.getStringExtra("postId");
+                                postVM.updateNumComments(userId,postId,numChanges);
                             }
                         }
                     }
@@ -195,28 +200,26 @@ public class PostListAdapter extends RecyclerView.Adapter<PostListAdapter.PostVi
         //transfer the user to the comment screen
         holder.comments.setOnClickListener(v -> {
             Intent i = new Intent(mInflater.getContext(), CommentsScreen.class);
-            i.putExtra("numComments", String.valueOf(current.getCommentList().size()));
-            i.putParcelableArrayListExtra("comments", new ArrayList<>(current.getCommentList()));
             i.putExtra("firstName", member.getFirstName());
             i.putExtra("lastName", member.getLastName());
-            i.putExtra("id", current.get_id());
-            ByteArrayOutputStream stream = new ByteArrayOutputStream();
-            member.getImgBitmap().compress(Bitmap.CompressFormat.JPEG, 100, stream);
-            byte[] imageInByte = stream.toByteArray();
-            i.putExtra("picture", imageInByte);
+            i.putExtra("postId",current.get_id());
+            i.putExtra("jwt",jwtToken);
+            i.putExtra("userId",member.get_id());
+            byte [] encodeByte= Base64.decode(member.getImg(),Base64.DEFAULT);
+            i.putExtra("picture",encodeByte);
             intentLauncher.launch(i);
         });
 
         //handle the case the user clicked on the share button
         holder.share.setOnClickListener(v -> {
-            //postVM.setShareClicked(current.getId());
-            if (current.isShareClicked()) {
+            if (!current.isShareClicked()) {
                 holder.link.setVisibility(View.VISIBLE);
                 holder.email.setVisibility(View.VISIBLE);
             } else {
                 holder.link.setVisibility(View.INVISIBLE);
                 holder.email.setVisibility(View.INVISIBLE);
             }
+            current.setShareClicked(!current.isShareClicked());
         });
 
         //handle the case the user click like
@@ -260,7 +263,7 @@ public class PostListAdapter extends RecyclerView.Adapter<PostListAdapter.PostVi
         Member currentM = memberVM.getMemberQuick(current.getUserId());
         //set the elements that in the screen with the post
         holder.content.setText(current.getContent());
-        holder.date.setText(current.getDate());
+        holder.date.setText(current.getDate().substring(0, Math.min(current.getDate().length(), 10)));
         holder.firstName.setText(currentM.getFirstName());
         holder.lastName.setText(currentM.getLastName());
         holder.likes.setText(current.getLikes() + " likes");

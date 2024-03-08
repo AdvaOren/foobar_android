@@ -10,6 +10,9 @@ import java.util.LinkedList;
 import java.util.List;
 
 import api.PostAPI;
+import daos.AppDB;
+import daos.PostDao;
+import daos.PostInfoDao;
 import entities.Member;
 import entities.PostInfo;
 import entities.Post;
@@ -33,10 +36,21 @@ public class PostRepo {
     public PostRepo(Activity context, String jwtToken, MemberViewModel memberVM) {
         AppDB db = Room.databaseBuilder(context, AppDB.class, "Foobar_DAT").build();
         postDao = db.postDao();
-        postInfoDao = db.likeDao();
+        postInfoDao = db.postInfoDao();
         posts = new PostListData();
         postAPI = new PostAPI(posts, postDao,postInfoDao, jwtToken);
         this.memberVm = memberVM;
+    }
+
+    public void updateNumComments(String userId,String postId,int numChanges) {
+        new Thread(() -> {
+            PostInfo postInfo = postInfoDao.getPostInfo(userId, postId);
+            if (postInfo == null)
+                return;
+            postInfo.setCommentsAmount(postInfo.getCommentsAmount()+ numChanges);
+            postInfoDao.update(postInfo);
+            posts.updateNumComments(postInfo);
+        }).start();
     }
 
 
@@ -87,7 +101,19 @@ public class PostRepo {
                     break;
                 }
             }
+        }
 
+        public void updateNumComments(PostInfo postInfo) {
+            List<Post> posts1 = getValue();
+            if (posts1 == null)
+                return;
+            for (Post curr: posts1) {
+                if (curr.get_id().equals(postInfo.getPostId())) {
+                    curr.setComments(postInfo.getCommentsAmount());
+                    posts.postValue(posts1);
+                    break;
+                }
+            }
         }
     }
 

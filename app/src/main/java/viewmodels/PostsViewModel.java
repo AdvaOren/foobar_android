@@ -52,6 +52,10 @@ public class PostsViewModel extends ViewModel {
         postRepo.removeLike(userId, postId);
     }
 
+    public void updateNumComments(String userId,String postId,int numComments) {
+        postRepo.updateNumComments(userId,postId,numComments);
+    }
+
 
 
     /*public void setLiked(int id) {

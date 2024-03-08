@@ -9,6 +9,8 @@ import androidx.room.Room;
 import java.util.List;
 
 import api.UserAPI;
+import daos.AppDB;
+import daos.MemberDao;
 import entities.Member;
 
 public class MemberRepo {

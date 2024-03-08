@@ -6,16 +6,16 @@ import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
-import android.widget.TextView;
+import android.widget.ProgressBar;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
-
-import java.util.ArrayList;
+import androidx.lifecycle.ViewModelProvider;
 
 import adapters.CommentListAdapter;
 import entities.Comment;
@@ -25,11 +25,8 @@ import viewmodels.CommentViewModel;
 public class CommentsScreen extends AppCompatActivity {
 
     private ListView listView;
-    private CommentViewModel commentViewModel;
+    private CommentViewModel commentVM;
     private CommentListAdapter adapter;
-    private String firstName;
-    private String lastName;
-    private Bitmap img;
 
     public final static int BACK_FROM_COMMENT = 3;
 
@@ -37,28 +34,36 @@ public class CommentsScreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_comments_screen);
-        commentViewModel = new CommentViewModel();
 
-        //create comment model
-        Intent intent = getIntent();
-        ArrayList<Comment> comments= intent.getParcelableArrayListExtra("comments");
-        commentViewModel.setComments(comments);
 
         //get user data from intent
-        firstName = intent.getStringExtra("firstName").toString();
-        lastName = intent.getStringExtra("lastName").toString();
-        Bundle extras = intent.getExtras();
-        byte[] byteArray = extras.getByteArray("picture");
-        img = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
+        Intent intent = getIntent();
+        String postId = intent.getStringExtra("postId").toString();
+        String jwt = intent.getStringExtra("jwt").toString();
+        String jwtToken = jwt.substring(1,jwt.length()-1);
+        String userId = intent.getStringExtra("userId").toString();
+        String firstName = intent.getStringExtra("firstName").toString();
+        String lastName = intent.getStringExtra("lastName").toString();
+        byte[] imgString = intent.getByteArrayExtra("picture");
+        Bitmap bitmap= BitmapFactory.decodeByteArray(imgString, 0, imgString.length);
 
+        commentVM = new ViewModelProvider(this).get(CommentViewModel.class);
+        commentVM.initializeCommentViewModel(postId, jwtToken);
         //create list view
         listView = findViewById(R.id.list_view);
-        adapter = new CommentListAdapter(this, commentViewModel,img);
+        adapter = new CommentListAdapter(this, commentVM, userId);
         listView.setAdapter(adapter);
 
-        //add title to the screen
-        TextView title = findViewById(R.id.titleComScreen);
-        title.setText(firstName + " "+ lastName + "'s comment section");
+        ProgressBar progressBar = findViewById(R.id.progressBar);
+        commentVM.get().observe(this, comments -> {
+            if (comments.size() > 0) {
+                adapter.clear();
+                adapter.addAll(comments);
+                adapter.notifyDataSetChanged();
+                progressBar.setVisibility(View.GONE);
+            }
+        });
+        commentVM.getAll();
 
         //handle the case of adding new comment
         ImageButton btnAdd = findViewById(R.id.btnAddCom);
@@ -67,8 +72,10 @@ public class CommentsScreen extends AppCompatActivity {
             String text = newCom.getText().toString();
             if (text.equals(""))
                 return;
-            commentViewModel.add(text,firstName,lastName);
+            Comment comment = new Comment("",text,userId,bitmap,firstName,lastName,postId);
+            commentVM.addComment(comment);
             newCom.setText("");
+            adapter.addOneChange();
             adapter.notifyDataSetChanged();
         });
 
@@ -78,10 +85,9 @@ public class CommentsScreen extends AppCompatActivity {
             @Override
             public void handleOnBackPressed() {
                 Intent intent = new Intent();
-                intent.putParcelableArrayListExtra("comments", commentViewModel.get());
-                intent.putExtra("numComments",String.valueOf(commentViewModel.get().size()));
-                intent.putExtra("id",getIntent().getIntExtra("id",-1));
-                intent.putExtra("key", "value"); // Add your data here
+                intent.putExtra("numChanges",adapter.getNumOfChanges());
+                intent.putExtra("userId",userId);
+                intent.putExtra("postId",postId);
                 setResult(BACK_FROM_COMMENT, intent);
                 finish();
 

@@ -3,8 +3,6 @@ package adapters;
 
 import android.content.Context;
 import android.content.res.Configuration;
-import android.graphics.Bitmap;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,31 +15,36 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 
 import com.example.foobar_dt_ad.R;
+
+import java.util.ArrayList;
 
 import entities.Comment;
 import viewmodels.CommentViewModel;
 
 //This class is adapter to a simple list
 public class CommentListAdapter extends ArrayAdapter<Comment> {
-    private LayoutInflater inflater;
-    private Context context;
-    private CommentViewModel commentViewModel;
-    private Bitmap userImg;
+    private final LayoutInflater inflater;
+    private final Context context;
+    private final CommentViewModel commentVM;
+    private final String userId;
+    private int numOfChanges;
 
     /**
      * This function is a c'tor
      * @param context the context from the activity that create the adapter
      * @param cm comment model to handle data
-     * @param userImg user img
+     * @param userId user id
      */
-    public CommentListAdapter(@NonNull Context context, CommentViewModel cm, Bitmap userImg) {
-        super(context, R.layout.comment_list_item,cm.get());
+    public CommentListAdapter(@NonNull Context context, CommentViewModel cm, String userId) {
+        super(context, R.layout.comment_list_item,new ArrayList<>());
         this.inflater = LayoutInflater.from(context);
         this.context = context;
-        this.commentViewModel = cm;
-        this.userImg = userImg;
+        this.commentVM = cm;
+        this.userId = userId;
+        numOfChanges = 0;
     }
 
     /**
@@ -61,7 +64,9 @@ public class CommentListAdapter extends ArrayAdapter<Comment> {
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         //The current comment
-        Comment comment = getItem(position);
+        Comment curr = getItem(position);
+        if (curr == null)
+            return new View(context);
         //make place to a new comment
         if (convertView == null) {
             convertView = inflater.inflate(R.layout.comment_list_item, parent, false);
@@ -75,42 +80,32 @@ public class CommentListAdapter extends ArrayAdapter<Comment> {
         ImageButton del = convertView.findViewById(R.id.btnComDel);
 
         //set the user of the comment
-        imageView.setImageBitmap(userImg);
-        userName.setText(comment.getName());
-        text.setText(comment.getText());
+        imageView.setImageBitmap(curr.getImg());
+        userName.setText(curr.getFirstName()+ " "+ curr.getLastName());
+        text.setText(curr.getText());
 
         //handle the edit button clicked
         edit.setOnClickListener(v -> {
             //the case that edit pressed on the first time
-            if (edit.getTag().equals("notEdit")) {
-                edit.setTag("editing");
-                edit.setImageResource(R.drawable.ic_send);
-                text.setFocusableInTouchMode(true);
-                text.setBackgroundColor(Color.parseColor("#00ffff"));
-            }
-            //the user end to edit and click again
-            else {
-                //check that there is a content to the comment
-                if (text.getText().toString().equals("")) {
-                    commentViewModel.remove(comment.getId());
-                    notifyDataSetChanged();
-                    return;
-                }
-                //disable the option of edit
-                edit.setTag("notEdit");
-                edit.setImageResource(R.drawable.ic_edit);
-                text.setFocusable(false);
-                text.setBackgroundColor(Color.parseColor("#FFF1DD"));
-                commentViewModel.edit(comment.getId(),text.getText().toString());
-                notifyDataSetChanged();
-            }
+            handleEdit(edit,text,curr);
         });
 
         //handle the delete button clicked
         del.setOnClickListener(v -> {
-            commentViewModel.remove(comment.getId());
+            //commentViewModel.remove(comment.getId());
+            commentVM.deleteComment(curr);
+            numOfChanges--;
             notifyDataSetChanged();
         });
+
+        if (!userId.equals(curr.getUserId())) {
+            edit.setVisibility(View.INVISIBLE);
+            del.setVisibility(View.INVISIBLE);
+        }
+        else {
+            edit.setVisibility(View.VISIBLE);
+            del.setVisibility(View.VISIBLE);
+        }
 
         // Determine the current night mode
         LinearLayout commentLayout = convertView.findViewById(R.id.commentLayout);
@@ -126,5 +121,42 @@ public class CommentListAdapter extends ArrayAdapter<Comment> {
         }
 
         return convertView;
+    }
+
+    private void handleEdit(ImageButton edit,EditText text, Comment curr) {
+        if (edit.getTag().equals("notEdit")) {
+            edit.setTag("editing");
+            edit.setImageResource(R.drawable.ic_send);
+            text.setFocusableInTouchMode(true);
+            edit.setBackgroundTintList(ContextCompat.getColorStateList(context, R.color.buttonLight));
+            text.setBackgroundTintList(ContextCompat.getColorStateList(context, R.color.buttonLight));
+        }
+        //the user end to edit and click again
+        else {
+            //check that there is a content to the comment
+            if (text.getText().toString().equals("")) {
+                commentVM.deleteComment(curr);
+                numOfChanges--;
+                notifyDataSetChanged();
+                return;
+            }
+            //disable the option of edit
+            edit.setTag("notEdit");
+            edit.setImageResource(R.drawable.ic_edit);
+            edit.setBackgroundTintList(ContextCompat.getColorStateList(context,R.color.transparent));
+            text.setFocusable(false);
+            text.setBackgroundTintList(ContextCompat.getColorStateList(context,R.color.transparent));
+            curr.setText(text.getText().toString());
+            commentVM.updateComment(curr);
+            notifyDataSetChanged();
+        }
+    }
+
+    public int getNumOfChanges() {
+        return numOfChanges;
+    }
+
+    public void addOneChange() {
+        numOfChanges++;
     }
 }

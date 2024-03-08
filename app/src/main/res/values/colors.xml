@@ -12,4 +12,5 @@
     <color name="menuLight">#1239FB</color>
     <color name="buttonDark">#1239FB</color>
     <color name="buttonLight">#4DC7FF</color>
+    <color name="transparent">#00FFFFFF</color>
 </resources>

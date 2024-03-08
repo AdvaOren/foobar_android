@@ -9,7 +9,7 @@ import java.util.List;
 import entities.Member;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
-import repositories.MemberDao;
+import daos.MemberDao;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

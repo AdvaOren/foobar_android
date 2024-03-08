@@ -1,13 +1,15 @@
 package api;
 
 
+import android.util.Pair;
+
 import com.google.gson.JsonObject;
 
 import java.util.List;
 
-import entities.PostInfo;
 import entities.Member;
 import entities.Post;
+import entities.PostInfo;
 import kotlin.Triple;
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -81,4 +83,16 @@ public interface WebServicesAPI {
 
     @POST("users/{id}/posts/{pid}/like")
     Call<Void> removeLike(@Path("id") String id, @Path("pid") String pid);
+
+    @GET("posts/{pid}/comments")
+    Call<List<Pair<JsonObject,Member>>> getComments(@Path("pid") String pid, @Query("page") int page);
+
+    @POST("users/{id}/posts/{pid}/comments")
+    Call<JsonObject> addComment(@Path("id") String id,@Path("pid") String pid ,@Body JsonObject text);
+
+    @DELETE("users/{id}/posts/{pid}/comments")
+    Call<Void> deleteComment(@Path("id") String id,@Path("pid") String pid, @Query("cid") String cid);
+
+    @PUT("users/{id}/posts/{pid}/comments")
+    Call<Void> updateComment(@Path("id") String id,@Path("pid") String pid, @Body JsonObject cid);
 }

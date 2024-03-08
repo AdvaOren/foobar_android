@@ -32,7 +32,7 @@ public class Post {
     public Post(String content, Bitmap img, String date, String userId) {
         _id = "";
         this.content = content;
-        this.date = date.substring(0, Math.min(date.length(), 10));
+        this.date = date;
         this.userId = userId;
         //commentList = new ArrayList<>();
         likes = 0;
@@ -49,7 +49,7 @@ public class Post {
         this.userId = userId;
         this.content = content;
 
-        this.date = date.substring(0, Math.min(date.length(), 10));
+        this.date = date;
         this.img = img;
         this.owner = owner;
         shareClicked = false;
@@ -123,7 +123,7 @@ public class Post {
     }
 
     public void setDate(String date) {
-        this.date = date.substring(0, Math.min(date.length(), 10));
+        this.date = date;
     }
 
 
