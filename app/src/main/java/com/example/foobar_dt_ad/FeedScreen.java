@@ -34,10 +34,6 @@ public class FeedScreen extends AppCompatActivity {
 
     private PostsViewModel postVM;
     private MemberViewModel memberVM;
-
-    /*private Bitmap userPic;
-    private String lastName;
-    private String firstName;*/
     private Member currentMember;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,14 +56,14 @@ public class FeedScreen extends AppCompatActivity {
 
 
         postVM = new ViewModelProvider(this).get(PostsViewModel.class);
-        postVM.initializePostViewModel(this, jwt,memberVM,id);
+        postVM.initializePostViewModel(this, jwt,memberVM);
 
         // Initialize RecyclerView
         final PostListAdapter adapter = new PostListAdapter(this, this, postVM,
                 currentMember, memberVM, jwt);
         lstPosts.setAdapter(adapter);
         lstPosts.setLayoutManager(new LinearLayoutManager(this));
-        postVM.getAll().observe(this, posts -> {
+        postVM.getAll(id).observe(this, posts -> {
             adapter.setPosts(posts);
             if (posts.size() > 0)
                 refreshLayout.setRefreshing(false);
@@ -124,6 +120,14 @@ public class FeedScreen extends AppCompatActivity {
             finish();
         });
 
+        avatar.setOnClickListener(v -> {
+            Intent intent = new Intent(this, UserScreen.class);
+            intent.putExtra("loginUserId",currentMember.get_id());
+            intent.putExtra("id",currentMember.get_id());
+            intent.putExtra("jwt",jwt);
+            activityResultLauncher.launch(intent);
+        });
+
         darkMode();
     }
 
@@ -153,5 +157,6 @@ public class FeedScreen extends AppCompatActivity {
             }
             recreate(); // Recreate the activity to apply the new theme
         });
+
     }
 }

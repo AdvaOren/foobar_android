@@ -17,31 +17,31 @@
             android:id="@+id/titleAddPost"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
             android:fontFamily="serif"
             android:text="@string/add_new_post"
             android:textAlignment="center"
             android:textColor="#0023D4"
-            android:textSize="40sp"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp"/>
+            android:textSize="40sp" />
 
         <TextView
             android:id="@+id/invalidAddPost"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
             android:text="@string/all_the_fields_require"
             android:textAlignment="center"
             android:textColor="#FF0000"
             android:textSize="25sp"
-            android:layout_marginBottom="20dp"
-            android:visibility="invisible"/>
+            android:visibility="invisible" />
 
         <LinearLayout
             android:id="@+id/linearLayout3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginBottom="20dp">
+            android:layout_marginBottom="20dp"
+            android:orientation="vertical">
 
             <ScrollView
                 android:layout_width="match_parent"

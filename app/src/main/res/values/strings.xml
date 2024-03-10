@@ -29,4 +29,7 @@
     <string name="enter_email">Enter email</string>
     <string name="email_should_not_be_empty">Email should not be empty</string>
     <string name="what_you_think">what you think?</string>
+    <string name="friendship_requests">Friendship requests</string>
+    <string name="my_friends">My friends</string>
+    <string name="edit_configuration">Edit configuration</string>
 </resources>

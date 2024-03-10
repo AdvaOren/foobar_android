@@ -38,11 +38,6 @@ public class MemberRepo {
 
     public void getMember(String id) {
         userAPI.getMember(id,currentMember);
-        /*final Member[] member = {dao.getById(id)};
-        new Thread(() -> {
-            member[0] = userAPI.getMember(id);
-        }).start();
-        return member[0];*/
     }
 
     public void getJWT(Member member) {

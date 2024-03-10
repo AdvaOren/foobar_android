@@ -31,6 +31,8 @@ public class MainActivity extends AppCompatActivity {
     //private List<Member> members = new ArrayList<>();
     private MemberViewModel memberVM;
     private Member current;
+    private String jwtToken;
+    private String loginEmail;
 
 
     //private  Bitmap bmp;
@@ -46,6 +48,8 @@ public class MainActivity extends AppCompatActivity {
         TextView invalidEmail = findViewById(R.id.invalidEmail);
         TextView wrongPassword = findViewById(R.id.wrongPassword);
         Activity activity = this;
+        jwtToken = "";
+
 
         memberVM = new ViewModelProvider(this).get(MemberViewModel.class);
         memberVM.initializeMemberViewModel(this);
@@ -101,55 +105,24 @@ public class MainActivity extends AppCompatActivity {
         });
 
         memberVM.getJwt().observe(this, jwt -> {
-            if (!jwt.equals("")) {
-                Intent i = new Intent(activity, FeedScreen.class);
-                i.putExtra("jwt", jwt);
-                i.putExtra("id", current.get_id());
+            if (jwt == null) {
+                password.setText("");
+                wrongPassword.setVisibility(View.VISIBLE);
                 progressBar.setVisibility(View.GONE);
-                startActivity(i);
+            }
+            if (!jwt.equals("")) {
+                jwtToken = jwt;
+                loginEmail = current.getEmail();
+                moveToFeed(progressBar);
             }
         });
 
         logIn.setOnClickListener(v -> {
-            /*Member member = null;
-            for (Member m : members) {
-                if (m.equals(new Member(email.getText().toString(), ",", "", ""))) {
-                    member = m;
-                }
-            }*/
             memberVM.getMemberByEmail(email.getText().toString());
             progressBar.setVisibility(View.VISIBLE);
-                /*//check if the member exists
-            //if (current != null) {
-                //check if the the password is wrong
-                if (!current.getPassword().equals(password.getText().toString())) {
-                    password.setText("");
-                    progressBar.setVisibility(View.GONE);
-                    wrongPassword.setVisibility(View.VISIBLE);
-
-                //move to feed screen
-                //} else {
-                wrongPassword.setVisibility(View.INVISIBLE);
-                invalidEmail.setVisibility(View.INVISIBLE);
-                Intent i = new Intent(this, FeedScreen.class);
-                i.putExtra("jwt", memberVM.getJWT(current.get_id()));
-                i.putExtra("id", current.get_id());
-                    /*i.putExtra("firstName", member.getFirstName());
-                    i.putExtra("lastName", member.getLastName());
-                    ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                    bmp.compress(Bitmap.CompressFormat.JPEG, 100, stream);
-                    byte[] imageInByte = stream.toByteArray();
-                    i.putExtra("picture", imageInByte);
-                progressBar.setVisibility(View.GONE);
-                checked = false;
-                startActivity(i);
-                //}
-                //case that email is not exists
-            } else {
-                email.setText("");
-                invalidEmail.setVisibility(View.VISIBLE);
-                progressBar.setVisibility(View.GONE);
-            }*/
+            if (!jwtToken.equals("") && loginEmail.equals(email.getText().toString())) {
+                moveToFeed(progressBar);
+            }
         });
 
 
@@ -158,8 +131,14 @@ public class MainActivity extends AppCompatActivity {
                     someActivityResultLauncher.launch(i);
                 }
         );
+    }
 
-
+    private void moveToFeed(ProgressBar progressBar) {
+        Intent i = new Intent(this, FeedScreen.class);
+        i.putExtra("jwt", jwtToken);
+        i.putExtra("id", current.get_id());
+        progressBar.setVisibility(View.GONE);
+        startActivity(i);
     }
 
     private void darkMode() {

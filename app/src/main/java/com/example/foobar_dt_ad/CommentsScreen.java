@@ -40,7 +40,11 @@ public class CommentsScreen extends AppCompatActivity {
         Intent intent = getIntent();
         String postId = intent.getStringExtra("postId").toString();
         String jwt = intent.getStringExtra("jwt").toString();
-        String jwtToken = jwt.substring(1,jwt.length()-1);
+        String jwtToken;
+        if (jwt.charAt(0) == '"')
+             jwtToken = jwt.substring(1,jwt.length()-1);
+        else
+            jwtToken = jwt;
         String userId = intent.getStringExtra("userId").toString();
         String firstName = intent.getStringExtra("firstName").toString();
         String lastName = intent.getStringExtra("lastName").toString();

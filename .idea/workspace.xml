@@ -2,7 +2,11 @@
 <project version="4">
   <component name="AndroidLayouts">
     <shared>
-      <config />
+      <config>
+        <device id="_android_virtual_device_id_Copy_of_Pixel_2_API_30" />
+        <device id="_device_class_foldable" />
+        <device id="_device_class_phone" />
+      </config>
     </shared>
     <layouts>
       <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_add_post.xml">
@@ -16,6 +20,11 @@
         </config>
       </layout>
       <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_feed_screen.xml">
+        <config>
+          <theme>@style/Theme.Foobar_DT_ad</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_friends_screen.xml">
         <config>
           <theme>@style/Theme.Foobar_DT_ad</theme>
         </config>
@@ -40,12 +49,27 @@
           <theme>@style/Theme.Foobar_DT_ad</theme>
         </config>
       </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_user_screen.xml">
+        <config>
+          <theme>@style/Theme.Foobar_DT_ad</theme>
+        </config>
+      </layout>
       <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/comment_list_item.xml">
         <config>
           <theme>@style/Theme.Foobar_DT_ad</theme>
         </config>
       </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/friend_ask.xml">
+        <config>
+          <theme>@style/Theme.Foobar_DT_ad</theme>
+        </config>
+      </layout>
       <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/post_layout.xml">
+        <config>
+          <theme>@style/Theme.Foobar_DT_ad</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/menu/menu_file.xml">
         <config>
           <theme>@style/Theme.Foobar_DT_ad</theme>
         </config>
@@ -61,32 +85,51 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9ba0b45a-247e-48d0-8105-f9864560f4b1" name="Changes" comment="update post and delete post">
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/api/CommentAPI.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/edit_text_border.xml" afterDir="false" />
+    <list default="true" id="9ba0b45a-247e-48d0-8105-f9864560f4b1" name="Changes" comment="add comments">
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/adapters/FriendListAdapter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/api/FriendAPI.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/foobar_dt_ad/Constants.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/foobar_dt_ad/FriendsScreen.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/foobar_dt_ad/UserScreen.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/entities/Friend.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/repositories/FriendRepo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/viewmodels/FriendViewModel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable-anydpi/ic_menu.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable-anydpi/ic_ok.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/ic_menu.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/ic_ok.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable-mdpi/ic_menu.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable-mdpi/ic_ok.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/ic_menu.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/ic_ok.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/ic_menu.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/ic_ok.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_friends_screen.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_user_screen.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/friend_ask.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/friend_list_item.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/menu/menu_file.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/adapters/CommentListAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/adapters/CommentListAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/adapters/PostListAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/adapters/PostListAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/api/CommentAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/api/CommentAPI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/api/PostAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/api/PostAPI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/api/UserAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/api/UserAPI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/api/WebServicesAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/api/WebServicesAPI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/foobar_dt_ad/CommentsScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/foobar_dt_ad/CommentsScreen.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/foobar_dt_ad/FeedScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/foobar_dt_ad/FeedScreen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/entities/Comment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/entities/Comment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/foobar_dt_ad/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/foobar_dt_ad/MainActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/daos/MemberDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/daos/MemberDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/daos/PostDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/daos/PostDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/daos/PostInfoDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/daos/PostInfoDao.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/entities/Post.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/entities/Post.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/repositories/AppDB.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/daos/AppDB.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/repositories/CommentRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/repositories/CommentRepo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/repositories/Converters.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/daos/Converters.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/repositories/MemberDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/daos/MemberDao.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/repositories/MemberRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/repositories/MemberRepo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/repositories/PostDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/daos/PostDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/repositories/PostInfoDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/daos/PostInfoDao.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/repositories/PostRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/repositories/PostRepo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/viewmodels/CommentViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/viewmodels/CommentViewModel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/viewmodels/PostsViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/viewmodels/PostsViewModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/edit_text_border.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_add_post.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_add_post.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_comments_screen.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_comments_screen.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/comment_list_item.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/comment_list_item.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/colors.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/colors.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -148,9 +191,9 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Interface" />
-        <option value="layoutResourceFile" />
         <option value="Class" />
         <option value="resourceFile" />
+        <option value="layoutResourceFile" />
       </list>
     </option>
   </component>
@@ -183,6 +226,7 @@
     &quot;android-custom-viewC:/Users/eluzz/.gradle/caches/modules-2/files-2.1/androidx.appcompat/appcompat/1.6.1/ace9a78b961165396147e8691faa18c1b0e48e20/appcompat-1.6.1-sources.jar!/androidx/appcompat/widget/AppCompatEditText.java_SELECTED&quot;: &quot;AppCompatEditText&quot;,
     &quot;android-custom-viewC:/Users/eluzz/.gradle/caches/modules-2/files-2.1/androidx.appcompat/appcompat/1.6.1/ace9a78b961165396147e8691faa18c1b0e48e20/appcompat-1.6.1-sources.jar!/androidx/appcompat/widget/AppCompatTextView.java_SELECTED&quot;: &quot;AppCompatTextView&quot;,
     &quot;android-custom-viewC:/Users/eluzz/.gradle/caches/modules-2/files-2.1/androidx.recyclerview/recyclerview/1.1.0/f2bdf79e1977939817f54a9d3e2f6bc52b63bdd0/recyclerview-1.1.0-sources.jar!/androidx/recyclerview/widget/RecyclerView.java_SELECTED&quot;: &quot;RecyclerView&quot;,
+    &quot;android-custom-viewC:/Users/eluzz/AppData/Local/Android/Sdk/sources/android-34/android/widget/ListView.java_SELECTED&quot;: &quot;ListView&quot;,
     &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
     &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;db&quot;,
@@ -203,12 +247,19 @@
     <key name="android.template.-1471645170">
       <recent name="feed_content.add_post" />
     </key>
+    <key name="android.template.1555793865">
+      <recent name="com.example.foobar_dt_ad" />
+    </key>
     <key name="android.template.1868221988">
       <recent name="com.example.foobar_dt_ad" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\eluzz\Documents\tzuriel\CS\advanced\foobar_DT_android\app\src\main\java\feed_content\jsonFiles" />
+      <recent name="C:\Users\eluzz\Documents\tzuriel\CS\advanced\foobar_DT_android\app\src\main\assets" />
       <recent name="C:\Users\eluzz\Documents\tzuriel\CS\advanced\foobar_DT_android\app\src\main\res\drawable" />
+      <recent name="C:\Users\eluzz\Documents\tzuriel\CS\advanced\foobar_DT_android\app\src\main\java\feed_content\jsonFiles" />
+    </key>
+    <key name="android.template.666989988">
+      <recent name="com.example.foobar_dt_ad" />
     </key>
     <key name="android.template.1486577214">
       <recent name="feed_content.comment" />
@@ -339,7 +390,15 @@
       <option name="project" value="LOCAL‎" />
       <updated>1709838111327</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL‎-00006" summary="add comments">
+      <option name="closed" value="true" />
+      <created>1709905803375</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL‎-00006" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1709905803375</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -360,24 +419,25 @@
     <MESSAGE value="add post" />
     <MESSAGE value="update post" />
     <MESSAGE value="update post and delete post" />
-    <option name="LAST_COMMIT_MESSAGE" value="update post and delete post" />
+    <MESSAGE value="add comments" />
+    <option name="LAST_COMMIT_MESSAGE" value="add comments" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/api/UserAPI.java</url>
-          <line>132</line>
+          <line>135</line>
           <option name="timeStamp" value="89" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/api/UserAPI.java</url>
-          <line>101</line>
+          <line>104</line>
           <option name="timeStamp" value="126" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/api/UserAPI.java</url>
-          <line>79</line>
+          <line>82</line>
           <option name="timeStamp" value="134" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -387,78 +447,98 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/api/UserAPI.java</url>
-          <line>96</line>
+          <line>99</line>
           <option name="timeStamp" value="148" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/api/UserAPI.java</url>
-          <line>88</line>
+          <line>91</line>
           <option name="timeStamp" value="160" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/example/foobar_dt_ad/MainActivity.java</url>
-          <line>68</line>
+          <line>72</line>
           <option name="timeStamp" value="199" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/api/PostAPI.java</url>
-          <line>95</line>
-          <option name="timeStamp" value="208" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/api/PostAPI.java</url>
-          <line>243</line>
+          <line>265</line>
           <option name="timeStamp" value="223" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/api/PostAPI.java</url>
-          <line>258</line>
+          <line>280</line>
           <option name="timeStamp" value="224" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/api/PostAPI.java</url>
-          <line>163</line>
+          <line>185</line>
           <option name="timeStamp" value="235" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/api/PostAPI.java</url>
-          <line>228</line>
+          <line>250</line>
           <option name="timeStamp" value="255" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/api/PostAPI.java</url>
-          <line>208</line>
+          <line>230</line>
           <option name="timeStamp" value="261" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/api/PostAPI.java</url>
-          <line>183</line>
+          <line>205</line>
           <option name="timeStamp" value="262" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/api/CommentAPI.java</url>
-          <line>86</line>
+          <line>82</line>
           <option name="timeStamp" value="279" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/api/CommentAPI.java</url>
-          <line>110</line>
+          <line>106</line>
           <option name="timeStamp" value="291" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/api/CommentAPI.java</url>
-          <line>127</line>
+          <line>123</line>
           <option name="timeStamp" value="292" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/api/CommentAPI.java</url>
-          <line>148</line>
+          <line>144</line>
           <option name="timeStamp" value="293" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/adapters/CommentListAdapter.java</url>
-          <line>126</line>
-          <option name="timeStamp" value="302" />
+          <url>file://$PROJECT_DIR$/app/src/main/java/api/FriendAPI.java</url>
+          <line>60</line>
+          <option name="timeStamp" value="294" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/api/FriendAPI.java</url>
+          <line>75</line>
+          <option name="timeStamp" value="295" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/api/FriendAPI.java</url>
+          <line>90</line>
+          <option name="timeStamp" value="296" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/api/FriendAPI.java</url>
+          <line>124</line>
+          <option name="timeStamp" value="297" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/api/FriendAPI.java</url>
+          <line>139</line>
+          <option name="timeStamp" value="299" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/api/PostAPI.java</url>
+          <line>90</line>
+          <option name="timeStamp" value="318" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

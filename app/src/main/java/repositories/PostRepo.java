@@ -23,6 +23,7 @@ public class PostRepo {
     private final PostDao postDao;
     private final PostInfoDao postInfoDao;
     private final PostListData posts;
+    private final PostListData postsByUser;
     private final PostAPI postAPI;
     private final MemberViewModel memberVm;
 
@@ -38,6 +39,7 @@ public class PostRepo {
         postDao = db.postDao();
         postInfoDao = db.postInfoDao();
         posts = new PostListData();
+        postsByUser = new PostListData();
         postAPI = new PostAPI(posts, postDao,postInfoDao, jwtToken);
         this.memberVm = memberVM;
     }
@@ -71,7 +73,6 @@ public class PostRepo {
             });
         }
 
-        //לסדר את התאריך
         public void addPost(Post newPost) {
             List<Post> posts1 = getValue();
             if (posts1 == null)
@@ -165,172 +166,12 @@ public class PostRepo {
         }).start();
     }
 
+    public LiveData<List<Post>> getPostsByUser(String userId,String requester) {
+        postAPI.getUserPosts(postsByUser,userId,requester);
+        return postsByUser;
+    }
 
-    /*
-     * This function return image by path
-     * @param context the context screen
-     * @param path path to image
-     * @return the image
-     */
-    /*private Bitmap getImageByPath(Activity context ,String path) throws IOException {
-        InputStream inputStream = context.getAssets().open(path);
-        Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
-        inputStream.close();
-        return bitmap;
-    }*/
-
-    /*
-     * Load JSON data from the assets folder.
-     * @param context The activity context.
-     * @param filename The name of the JSON file.
-     * @return The JSON data as a string.
-     */
-    /*public String loadJSONFromAsset(Activity context, String filename) {
-        String json = null;
-        try {
-            InputStream is = context.getAssets().open("posts.json");
-            int size = is.available();
-            byte[] buffer = new byte[size];
-            is.read(buffer);
-            is.close();
-            json = new String(buffer, "UTF-8");
-        } catch (IOException ex) {
-            ex.printStackTrace();
-            return null;
-        }
-        return json;
-    }*/
-
-    /*
-     * Adds a new post to the postList.
-     *
-     * @param title   The title of the post.
-     * @param content The content of the post.
-     * @param firstN  The first name of the user.
-     * @param lastN   The last name of the user.
-     * @param posPic  The picture associated with the post.
-     * @param userPic The user's profile picture.
-     * @param date    The date of the post.
-     */
-    /*public void add(String title, String content, String firstN, String lastN, Bitmap posPic, Bitmap userPic, String date) {
-        Post post = new Post(nextId, title, firstN, lastN, content, posPic, userPic, date);
-        postList.add(0, post); // Add the post at the beginning of the list
-        nextId++; // Increment the id for the next post
-    }*/
-
-    /*
-     * Deletes a post from the postList by its id.
-     *
-     * @param id The id of the post to be deleted.
-     */
-    /*public void delete(int id) {
-        for (int i = 0; i < postList.size(); i++) {
-            if (postList.get(i).getId() == id) {
-                postList.remove(postList.get(i)); // Remove the post at index i
-                break; // Exit the loop after removing the post
-            }
-        }
-    }*/
-
-    /*
-     * Edits an existing post with the given id by updating its title, content, date, and image.
-     *
-     * @param id         The id of the post to be edited.
-     * @param newTitle   The new title for the post.
-     * @param newContent The new content for the post.
-     * @param newDate    The new date for the post.
-     * @param newImg     The new image for the post.
-     */
-    /*public void edit(int id, String newTitle, String newContent, String newDate, Bitmap newImg) {
-        for (int i = 0; i < postList.size(); i++) {
-            if (postList.get(i).getId() == id) {
-                postList.get(i).setTitle(newTitle);
-                postList.get(i).setContent(newContent);
-                postList.get(i).setDate(newDate);
-                postList.get(i).setPostPic(newImg);
-                return;
-            }
-        }
-    }*/
-
-    /*
-     * Updates the number of likes for a post with the given id.
-     *
-     * @param id            The id of the post.
-     * @param newLikeAmount The new number of likes for the post.
-     */
-    /*public void updateLike(int id, int newLikeAmount) {
-        for (int i = 0; i < postList.size(); i++) {
-            if (postList.get(i).getId() == id) {
-                postList.get(i).setLikes(newLikeAmount);
-                return;
-            }
-        }
-    }*/
-
-    /*
-     * Checks if a post with the given id has been liked.
-     *
-     * @param id The id of the post.
-     * @return True if the post has been liked, false otherwise.
-     */
-    /*public boolean isLiked(int id) {
-        for (int i = 0; i < postList.size(); i++) {
-            if (postList.get(i).getId() == id) {
-                return postList.get(i).isLiked();
-            }
-        }
-        return false;
-    }*/
-
-    /*
-     * Sets the liked status of a post with the given id.
-     *
-     * @param id The id of the post.
-     */
-    /*public void setLiked(int id) {
-        for (int i = 0; i < postList.size(); i++) {
-            if (postList.get(i).getId() == id) {
-                postList.get(i).setLiked(!postList.get(i).isLiked());
-            }
-        }
-    }*/
-
-    /*
-     * Updates the comments for a post with the given id.
-     *
-     * @param id       The id of the post.
-     * @param comments The new list of comments for the post.
-     */
-    /*public void updateComments(int id, ArrayList<Comment> comments) {
-        for (int i = 0; i < postList.size(); i++) {
-            if (postList.get(i).getId() == id) {
-                postList.get(i).setCommentList(comments);
-                return;
-            }
-        }
-    }*/
-
-    /*
-     * Sets the share clicked status of a post with the given id.
-     *
-     * @param id The id of the post.
-     */
-    /*public void setShareClicked(int id) {
-        for (int i = 0; i < postList.size(); i++) {
-            if (postList.get(i).getId() == id) {
-                postList.get(i).setShareClicked(!postList.get(i).isShareClicked());
-                return;
-            }
-        }
-    }*/
-
-    /**
-     * Gets the list of posts.
-     *
-     * @return The list of posts.
-     */
-    /*public List<Post> getPostList() {
-        return postList;
-    }*/
+    public void reloadByUser(String requested,String requester) {
+        postAPI.getUserPosts(postsByUser,requested,requester);
+    }
 }

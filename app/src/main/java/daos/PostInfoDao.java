@@ -3,6 +3,7 @@ package daos;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
+import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Update;
 
@@ -22,10 +23,10 @@ public interface PostInfoDao {
     @Query("SELECT * FROM postInfo WHERE postId = :postId AND userId = :userId")
     PostInfo getPostInfo(String userId, String postId);
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(PostInfo... postInfos);
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(List<PostInfo> postInfos);
 
     @Delete

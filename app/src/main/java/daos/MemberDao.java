@@ -23,10 +23,10 @@ public interface MemberDao {
     @Query("SELECT * FROM members WHERE _id = :id")
     Member getById(String id);
 
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(Member... members);
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(List<Member> members);
 
     @Update

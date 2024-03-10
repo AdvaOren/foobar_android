@@ -101,7 +101,10 @@ public class Post {
     }
 
     public void setImgBitmap(Bitmap img) {
-
+        if (img == null) {
+            this.img = "";
+            return;
+        }
         ByteArrayOutputStream baos=new  ByteArrayOutputStream();
         img.compress(Bitmap.CompressFormat.PNG,100, baos);
         byte [] b=baos.toByteArray();

@@ -17,7 +17,9 @@
         android:background="#018BFA"
         android:src="@drawable/ic_dark_mode"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/dayC"
+        app:backgroundTint="#214EF3"/>
 
     <ProgressBar
         android:id="@+id/progressBar"
@@ -85,7 +87,9 @@
             android:layout_marginEnd="5dp"
             android:layout_weight="1"
             android:backgroundTint="#4DC7FF"
-            android:src="@drawable/ic_send" />
+            android:src="@drawable/ic_send"
+            app:tint="@color/dayC"
+            app:backgroundTint="#214EF3"/>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -64,14 +64,17 @@ public class UserAPI {
 
     public void getJWT(Member member, MutableLiveData<String> jwt) {
         JsonObject json = new JsonObject();
-        json.addProperty("email",member.getEmail());
-        json.addProperty("password",member.getPassword());
-        json.addProperty("username",member.getEmail());
+        json.addProperty("id",member.get_id());
         Call<JsonObject> call = webServicesAPI.getJWT(json);
         call.enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
                 JsonObject re= response.body();
+                if (re == null) {
+                    jwt.setValue(null);
+                    dao.clear();
+                    return;
+                }
                 jwt.setValue(re.get("token").toString());
             }
 

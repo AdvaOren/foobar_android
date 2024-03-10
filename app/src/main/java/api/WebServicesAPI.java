@@ -7,6 +7,7 @@ import com.google.gson.JsonObject;
 
 import java.util.List;
 
+import entities.Friend;
 import entities.Member;
 import entities.Post;
 import entities.PostInfo;
@@ -46,10 +47,10 @@ public interface WebServicesAPI {
     @DELETE("users/{id}")
     Call<Void> deleteUser(@Path("id") String id);
     @GET("users/{id}/posts")
-    Call<List<Post>> getPostsOfUser(@Path("id") String id);
+    Call<List<Pair<Post, PostInfo>>> getPostsOfUser(@Path("id") String id);
 
     @GET("posts")
-    Call<List<Triple<Post, Member, PostInfo>>> getLastPosts(@Query("id") String id, @Query("page") int page);
+    Call<List<Triple<Post, Member, PostInfo>>> getLastPosts();
 
     @POST("users/{id}/posts")
     Call<Post> createPost(@Path("id") String id,@Body Post post);
@@ -64,16 +65,21 @@ public interface WebServicesAPI {
     Call<Void> deletePost(@Path("id") String id,@Path("pid") String pid);
 
     @GET("users/{id}/friends")
-    Call<List<Member>> getFriends(@Path("id") String id);
+    Call<List<Friend>> getFriends(@Path("id") String id);
+    @GET("users/{id}/friendsAsk")
+    Call<List<Friend>> getFriendsAsk(@Path("id") String id);
 
     @POST("users/{id}/friends")
-    Call<Void> askFriends(@Path("id") String id, @Body String newFriend);
+    Call<Friend> askToBeFriend(@Path("id") String id);
 
     @PATCH("users/{id}/friends/{fid}")
     Call<Void> acceptFriend(@Path("id") String id,@Path("fid") String fid);
 
     @DELETE("users/{id}/friends/{fid}")
     Call<Void> deleteFriend(@Path("id") String id,@Path("fid") String fid);
+
+    @GET("users/{id}/friends/{fid}")
+    Call<JsonObject> checkIfFriend(@Path("id") String id, @Path("fid") String fid);
 
     @GET("users/{id}/posts/{pid}/likes")
     Call<List<PostInfo>> getLikes(@Path("id") String id, @Path("pid") String pid);
@@ -85,7 +91,7 @@ public interface WebServicesAPI {
     Call<Void> removeLike(@Path("id") String id, @Path("pid") String pid);
 
     @GET("posts/{pid}/comments")
-    Call<List<Pair<JsonObject,Member>>> getComments(@Path("pid") String pid, @Query("page") int page);
+    Call<List<Pair<JsonObject,Member>>> getComments(@Path("pid") String pid);
 
     @POST("users/{id}/posts/{pid}/comments")
     Call<JsonObject> addComment(@Path("id") String id,@Path("pid") String pid ,@Body JsonObject text);
@@ -95,4 +101,6 @@ public interface WebServicesAPI {
 
     @PUT("users/{id}/posts/{pid}/comments")
     Call<Void> updateComment(@Path("id") String id,@Path("pid") String pid, @Body JsonObject cid);
+
+
 }

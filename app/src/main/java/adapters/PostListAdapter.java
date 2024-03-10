@@ -2,6 +2,7 @@ package adapters;
 
 import static com.example.foobar_dt_ad.AddPostScreen.EDIT;
 import static com.example.foobar_dt_ad.CommentsScreen.BACK_FROM_COMMENT;
+import static com.example.foobar_dt_ad.UserScreen.BACK_FROM_USER;
 
 import android.content.Context;
 import android.content.Intent;
@@ -31,6 +32,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.foobar_dt_ad.AddPostScreen;
 import com.example.foobar_dt_ad.CommentsScreen;
 import com.example.foobar_dt_ad.R;
+import com.example.foobar_dt_ad.UserScreen;
 
 import java.io.ByteArrayOutputStream;
 import java.util.List;
@@ -143,14 +145,16 @@ public class PostListAdapter extends RecyclerView.Adapter<PostListAdapter.PostVi
                         else if (result.getResultCode() == BACK_FROM_COMMENT) {
                             Intent data = result.getData();
                             if (data != null) {
-                                /*ArrayList<Comment> comments = data.getParcelableArrayListExtra("comments");
-                                int id = data.getIntExtra("id", -1);
-                                //postVM.updateComments(id, comments);
-                                notifyDataSetChanged();*/
                                 int numChanges = data.getIntExtra("numChanges",0);
                                 String userId = data.getStringExtra("userId");
                                 String postId = data.getStringExtra("postId");
                                 postVM.updateNumComments(userId,postId,numChanges);
+                            }
+                        } else if (result.getResultCode() == BACK_FROM_USER) {
+                            Intent data = result.getData();
+                            if (data != null) {
+                                String userId = data.getStringExtra("userId");
+                                postVM.reload(userId);
                             }
                         }
                     }
@@ -184,6 +188,8 @@ public class PostListAdapter extends RecyclerView.Adapter<PostListAdapter.PostVi
         if (posts == null)
             return;
         Post current = posts.get(position);
+        if (current == null)
+            return;
         initHolder(holder, current);
 
         //handle the case the user delete post
@@ -227,8 +233,28 @@ public class PostListAdapter extends RecyclerView.Adapter<PostListAdapter.PostVi
             likePost(current, holder,position);
         });
 
+        holder.firstName.setOnClickListener(v -> {
+            moveToUserScreen(member.get_id(), current.getUserId(),jwtToken);
+        });
+
+        holder.lastName.setOnClickListener(v -> {
+            moveToUserScreen(member.get_id(), current.getUserId(),jwtToken);
+        });
+
+        holder.userPic.setOnClickListener(v -> {
+            moveToUserScreen(member.get_id(), current.getUserId(),jwtToken);
+        });
+
         darkMode(holder);
 
+    }
+
+    private void moveToUserScreen(String currId, String toUserId, String jwt) {
+        Intent intent = new Intent(mInflater.getContext(), UserScreen.class);
+        intent.putExtra("loginUserId",currId);
+        intent.putExtra("id",toUserId);
+        intent.putExtra("jwt",jwt);
+        intentLauncher.launch(intent);
     }
 
     private void darkMode(PostViewHolder holder) {
@@ -264,11 +290,13 @@ public class PostListAdapter extends RecyclerView.Adapter<PostListAdapter.PostVi
         //set the elements that in the screen with the post
         holder.content.setText(current.getContent());
         holder.date.setText(current.getDate().substring(0, Math.min(current.getDate().length(), 10)));
-        holder.firstName.setText(currentM.getFirstName());
-        holder.lastName.setText(currentM.getLastName());
+        if (currentM != null) {
+            holder.firstName.setText(currentM.getFirstName());
+            holder.lastName.setText(currentM.getLastName());
+            holder.userPic.setImageBitmap(currentM.getImgBitmap());
+        }
         holder.likes.setText(current.getLikes() + " likes");
         holder.comments.setText(current.getComments() + " comments");
-        holder.userPic.setImageBitmap(currentM.getImgBitmap());
         holder.postPic.setImageBitmap(current.getImgBitmap());
 
         //check if like press to change icon or not

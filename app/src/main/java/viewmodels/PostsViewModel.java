@@ -13,17 +13,23 @@ import repositories.PostRepo;
 public class PostsViewModel extends ViewModel {
     private PostRepo postRepo;
     private LiveData<List<Post>> posts;
+    private LiveData<List<Post>> postsByUser;
 
     public PostsViewModel() {
     }
 
-    public void initializePostViewModel(Activity context, String jwtToken, MemberViewModel memberVM, String userId) {
+    public void initializePostViewModel(Activity context, String jwtToken, MemberViewModel memberVM) {
         postRepo = new PostRepo(context, jwtToken, memberVM);
-        posts = postRepo.getAll(userId);
     }
 
-    public LiveData<List<Post>> getAll() {
+    public LiveData<List<Post>> getAll(String userId) {
+        posts = postRepo.getAll(userId);
         return posts;
+    }
+
+    public LiveData<List<Post>> getPostsByUser(String userId,String requester) {
+        postsByUser = postRepo.getPostsByUser(userId,requester);
+        return postsByUser;
     }
 
     public void addPost(String userId, Post post) {
@@ -54,6 +60,10 @@ public class PostsViewModel extends ViewModel {
 
     public void updateNumComments(String userId,String postId,int numComments) {
         postRepo.updateNumComments(userId,postId,numComments);
+    }
+
+    public void reloadByUser(String requested,String requester) {
+        postRepo.reloadByUser(requested,requester);
     }
 
 

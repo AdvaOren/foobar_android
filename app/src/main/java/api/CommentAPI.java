@@ -50,34 +50,30 @@ public class CommentAPI {
         webServicesAPI = retrofit.create(WebServicesAPI.class);
     }
 
-    public void getAll(String postId) {
-        new Thread(() -> {
-            getComments(postId, 1);
-        }).start();
-    }
 
-    private void getComments(String postId, int page) {
-        Call<List<Pair<JsonObject, Member>>> call = webServicesAPI.getComments(postId, page);
+    public void getAll(String postId) {
+        Call<List<Pair<JsonObject, Member>>> call = webServicesAPI.getComments(postId);
+        List<Comment> comments = new ArrayList<>();
         call.enqueue(new Callback<List<Pair<JsonObject, Member>>>() {
             @Override
             public void onResponse(Call<List<Pair<JsonObject, Member>>> call, Response<List<Pair<JsonObject, Member>>> response) {
                 new Thread(() -> {
                     List<Pair<JsonObject, Member>> newData = response.body();
                     if (newData != null) {
-                        List<Comment> comments = new ArrayList<>();
                         for (Pair<JsonObject, Member> pair : newData) {
                             JsonObject json = pair.first;
-                            //TempComment tempComment = pair.first;
                             Member member = pair.second;
-                            String _id = /*tempComment.get_id();*/json.get("_id").getAsString();
-                            String text = /*tempComment.getText();*/json.get("text").getAsString();
+                            String _id = json.get("_id").getAsString();
+                            String text = json.get("text").getAsString();
                             comments.add(new Comment(_id, text, member.get_id(), member.getImgBitmap(), member.getFirstName(),
                                     member.getLastName(), postId));
                         }
-                        commentListData.addComments(comments);
-                        if (page == 10)
-                            return;
-                        getComments(postId, page + 1);
+                        commentListData.postValue(comments);
+                    }
+                    else {
+                        Comment noComments = new Comment("noComment", "BE THE FIRST TO COMMENT", "", null, "", "", "");
+                        comments.add(noComments);
+                        commentListData.postValue(comments);
                     }
                 }).start();
             }
