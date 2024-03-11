@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.google.gson.JsonObject;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -21,7 +22,7 @@ public class FriendAPI {
     private MutableLiveData<List<Friend>> friends;
     private MutableLiveData<String> btnText;
 
-    public FriendAPI(String token,MutableLiveData<List<Friend>> friends,MutableLiveData<String> btnText) {
+    public FriendAPI(String token, MutableLiveData<List<Friend>> friends, MutableLiveData<String> btnText) {
         this.friends = friends;
         this.btnText = btnText;
 
@@ -64,7 +65,7 @@ public class FriendAPI {
     }
 
     public void acceptFriend(Friend friend) {
-        Call<Void> call = webServicesAPI.acceptFriend(friend.getRequested(),friend.getRequester());
+        Call<Void> call = webServicesAPI.acceptFriend(friend.getRequested(), friend.getRequester());
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
@@ -79,7 +80,7 @@ public class FriendAPI {
     }
 
     public void rejectFriend(Friend friend) {
-        Call<Void> call = webServicesAPI.deleteFriend(friend.getRequested(),friend.getRequester());
+        Call<Void> call = webServicesAPI.deleteFriend(friend.getRequested(), friend.getRequester());
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
@@ -94,12 +95,12 @@ public class FriendAPI {
     }
 
     public void btnText(String requested, String requester) {
-        Call<JsonObject> call = webServicesAPI.checkIfFriend(requester,requested);
+        Call<JsonObject> call = webServicesAPI.checkIfFriend(requester, requested);
         call.enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
                 JsonObject json = response.body();
-                if (json == null || json.get("status") == null){
+                if (json == null || json.get("status") == null) {
                     btnText.setValue(Friend.NOT_FRIENDS);
                     return;
                 }
@@ -137,6 +138,39 @@ public class FriendAPI {
 
             @Override
             public void onFailure(Call<Friend> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
+    }
+
+    public void getFriends(String userId, MutableLiveData<List<Friend>> myFriends,String currUserId) {
+        Call<List<Friend>> call = webServicesAPI.getFriends(userId);
+
+        call.enqueue(new Callback<List<Friend>>() {
+            @Override
+            public void onResponse(Call<List<Friend>> call, Response<List<Friend>> response) {
+                new Thread(() -> {
+                    List<Friend> data = response.body();
+                    if (data == null || data.size() == 0 && userId.equals(currUserId)) {
+                        Friend friend = new Friend("", "", "", "YOU DONT HAVE FRIENDS YET", "");
+                        List<Friend> temp = new ArrayList<>();
+                        temp.add(friend);
+                        myFriends.postValue(temp);
+                        return;
+                    }
+                    if (data.size() == 0) {
+                        Friend friend = new Friend("", "", "", "ONLY MY FRIENDS CAN SEE MY FRIENDS\n BE MY FRIEND", "");
+                        List<Friend> temp = new ArrayList<>();
+                        temp.add(friend);
+                        myFriends.postValue(temp);
+                        return;
+                    }
+                    myFriends.postValue(data);
+                }).start();
+            }
+
+            @Override
+            public void onFailure(Call<List<Friend>> call, Throwable t) {
                 t.printStackTrace();
             }
         });

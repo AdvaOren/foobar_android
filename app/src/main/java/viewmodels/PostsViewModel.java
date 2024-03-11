@@ -66,6 +66,10 @@ public class PostsViewModel extends ViewModel {
         postRepo.reloadByUser(requested,requester);
     }
 
+    public void deleteUser(String userId) {
+        postRepo.deleteUser(userId);
+    }
+
 
 
     /*public void setLiked(int id) {

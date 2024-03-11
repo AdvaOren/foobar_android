@@ -19,6 +19,26 @@
           <theme>@style/Theme.Foobar_DT_ad</theme>
         </config>
       </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_delete_account.xml">
+        <config>
+          <theme>@style/Theme.Foobar_DT_ad</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_edit_names.xml">
+        <config>
+          <theme>@style/Theme.Foobar_DT_ad</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_edit_password.xml">
+        <config>
+          <theme>@style/Theme.Foobar_DT_ad</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_edit_photo.xml">
+        <config>
+          <theme>@style/Theme.Foobar_DT_ad</theme>
+        </config>
+      </layout>
       <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_feed_screen.xml">
         <config>
           <theme>@style/Theme.Foobar_DT_ad</theme>
@@ -64,6 +84,11 @@
           <theme>@style/Theme.Foobar_DT_ad</theme>
         </config>
       </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/friend_list_item.xml">
+        <config>
+          <theme>@style/Theme.Foobar_DT_ad</theme>
+        </config>
+      </layout>
       <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/post_layout.xml">
         <config>
           <theme>@style/Theme.Foobar_DT_ad</theme>
@@ -85,51 +110,39 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9ba0b45a-247e-48d0-8105-f9864560f4b1" name="Changes" comment="add comments">
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/adapters/FriendListAdapter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/api/FriendAPI.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/foobar_dt_ad/Constants.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/foobar_dt_ad/FriendsScreen.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/foobar_dt_ad/UserScreen.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/entities/Friend.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/repositories/FriendRepo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/viewmodels/FriendViewModel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable-anydpi/ic_menu.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable-anydpi/ic_ok.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/ic_menu.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/ic_ok.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable-mdpi/ic_menu.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable-mdpi/ic_ok.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/ic_menu.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/ic_ok.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/ic_menu.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/ic_ok.png" afterDir="false" />
+    <list default="true" id="9ba0b45a-247e-48d0-8105-f9864560f4b1" name="Changes" comment="handle friends">
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/adapters/MyFriendsListAdapter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/foobar_dt_ad/DeleteAccount.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/foobar_dt_ad/editScreens/EditNames.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/foobar_dt_ad/editScreens/EditPassword.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/foobar_dt_ad/editScreens/EditPhoto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_delete_account.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_edit_names.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_edit_password.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_edit_photo.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_friends_screen.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_user_screen.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/friend_ask.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/friend_list_item.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/menu/menu_file.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/adapters/PostListAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/adapters/PostListAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/baby_tiger.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/baby_tiger.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/api/CommentAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/api/CommentAPI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/api/FriendAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/api/FriendAPI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/api/PostAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/api/PostAPI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/api/UserAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/api/UserAPI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/api/WebServicesAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/api/WebServicesAPI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/foobar_dt_ad/CommentsScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/foobar_dt_ad/CommentsScreen.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/foobar_dt_ad/FeedScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/foobar_dt_ad/FeedScreen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/foobar_dt_ad/FriendsScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/foobar_dt_ad/FriendsScreen.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/foobar_dt_ad/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/foobar_dt_ad/MainActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/daos/MemberDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/daos/MemberDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/daos/PostDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/daos/PostDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/daos/PostInfoDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/daos/PostInfoDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/entities/Post.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/entities/Post.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/foobar_dt_ad/UserScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/foobar_dt_ad/UserScreen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/entities/Friend.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/entities/Friend.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/entities/Member.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/entities/Member.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/repositories/FriendRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/repositories/FriendRepo.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/repositories/MemberRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/repositories/MemberRepo.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/repositories/PostRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/repositories/PostRepo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/viewmodels/FriendViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/viewmodels/FriendViewModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/viewmodels/MemberViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/viewmodels/MemberViewModel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/viewmodels/PostsViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/viewmodels/PostsViewModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/edit_text_border.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_add_post.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_add_post.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_comments_screen.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_comments_screen.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/menu/menu_file.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/menu/menu_file.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -191,9 +204,9 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Interface" />
-        <option value="Class" />
         <option value="resourceFile" />
         <option value="layoutResourceFile" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -217,32 +230,33 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;PROJECT_TRUSTED_KEY&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;android-custom-viewC:/Users/eluzz/.gradle/caches/modules-2/files-2.1/androidx.appcompat/appcompat/1.6.1/ace9a78b961165396147e8691faa18c1b0e48e20/appcompat-1.6.1-sources.jar!/androidx/appcompat/widget/AppCompatEditText.java_SELECTED&quot;: &quot;AppCompatEditText&quot;,
-    &quot;android-custom-viewC:/Users/eluzz/.gradle/caches/modules-2/files-2.1/androidx.appcompat/appcompat/1.6.1/ace9a78b961165396147e8691faa18c1b0e48e20/appcompat-1.6.1-sources.jar!/androidx/appcompat/widget/AppCompatTextView.java_SELECTED&quot;: &quot;AppCompatTextView&quot;,
-    &quot;android-custom-viewC:/Users/eluzz/.gradle/caches/modules-2/files-2.1/androidx.recyclerview/recyclerview/1.1.0/f2bdf79e1977939817f54a9d3e2f6bc52b63bdd0/recyclerview-1.1.0-sources.jar!/androidx/recyclerview/widget/RecyclerView.java_SELECTED&quot;: &quot;RecyclerView&quot;,
-    &quot;android-custom-viewC:/Users/eluzz/AppData/Local/Android/Sdk/sources/android-34/android/widget/ListView.java_SELECTED&quot;: &quot;ListView&quot;,
-    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
-    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;db&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_directory_selection&quot;: &quot;C:/Users/eluzz/Documents/tzuriel/CS/advanced/foobar_DT_android/app/src/main/java&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/eluzz/Documents/tzuriel/CS/advanced/foobar_DT_android&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;editor.preferences.import&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "PROJECT_TRUSTED_KEY": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.cidr.known.project.marker": "true",
+    "android-custom-viewC:/Users/eluzz/.gradle/caches/modules-2/files-2.1/androidx.appcompat/appcompat/1.6.1/ace9a78b961165396147e8691faa18c1b0e48e20/appcompat-1.6.1-sources.jar!/androidx/appcompat/widget/AppCompatEditText.java_SELECTED": "AppCompatEditText",
+    "android-custom-viewC:/Users/eluzz/.gradle/caches/modules-2/files-2.1/androidx.appcompat/appcompat/1.6.1/ace9a78b961165396147e8691faa18c1b0e48e20/appcompat-1.6.1-sources.jar!/androidx/appcompat/widget/AppCompatTextView.java_SELECTED": "AppCompatTextView",
+    "android-custom-viewC:/Users/eluzz/.gradle/caches/modules-2/files-2.1/androidx.recyclerview/recyclerview/1.1.0/f2bdf79e1977939817f54a9d3e2f6bc52b63bdd0/recyclerview-1.1.0-sources.jar!/androidx/recyclerview/widget/RecyclerView.java_SELECTED": "RecyclerView",
+    "android-custom-viewC:/Users/eluzz/AppData/Local/Android/Sdk/sources/android-34/android/widget/ListView.java_SELECTED": "ListView",
+    "cf.first.check.clang-format": "false",
+    "cidr.known.project.marker": "true",
+    "git-widget-placeholder": "db",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_directory_selection": "C:/Users/eluzz/Documents/tzuriel/CS/advanced/foobar_DT_android/app/src/main/java",
+    "last_opened_file_path": "C:/Users/eluzz/Documents/tzuriel/CS/advanced/foobar_DT_android",
+    "settings.editor.selected.configurable": "editor.preferences.import"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;com.android.tools.idea.sqlite.queryhistory&quot;: [
-      &quot;DELETE FROM members  where email = \&quot;a\&quot; or email = \&quot;as\&quot;&quot;,
-      &quot;DELETE FROM members&quot;,
-      &quot;SELECT * FROM members WHERE email = 'zzz'&quot;
+  "keyToStringList": {
+    "com.android.tools.idea.sqlite.queryhistory": [
+      "delete from members where email = 'a'",
+      "DELETE FROM members  where email = \"a\" or email = \"as\"",
+      "DELETE FROM members",
+      "SELECT * FROM members WHERE email = 'zzz'"
     ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="android.template.-1471645170">
       <recent name="feed_content.add_post" />
@@ -254,8 +268,8 @@
       <recent name="com.example.foobar_dt_ad" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\eluzz\Documents\tzuriel\CS\advanced\foobar_DT_android\app\src\main\assets" />
       <recent name="C:\Users\eluzz\Documents\tzuriel\CS\advanced\foobar_DT_android\app\src\main\res\drawable" />
+      <recent name="C:\Users\eluzz\Documents\tzuriel\CS\advanced\foobar_DT_android\app\src\main\assets" />
       <recent name="C:\Users\eluzz\Documents\tzuriel\CS\advanced\foobar_DT_android\app\src\main\java\feed_content\jsonFiles" />
     </key>
     <key name="android.template.666989988">
@@ -266,6 +280,9 @@
     </key>
     <key name="android.template.311769115">
       <recent name="com.example.foobar_dt_ad.signupScreens" />
+      <recent name="com.example.foobar_dt_ad" />
+    </key>
+    <key name="android.template.-1438755688">
       <recent name="com.example.foobar_dt_ad" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
@@ -398,7 +415,15 @@
       <option name="project" value="LOCAL‎" />
       <updated>1709905803375</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL‎-00007" summary="handle friends">
+      <option name="closed" value="true" />
+      <created>1710096435198</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL‎-00007" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1710096435199</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -420,16 +445,12 @@
     <MESSAGE value="update post" />
     <MESSAGE value="update post and delete post" />
     <MESSAGE value="add comments" />
-    <option name="LAST_COMMIT_MESSAGE" value="add comments" />
+    <MESSAGE value="handle friends" />
+    <option name="LAST_COMMIT_MESSAGE" value="handle friends" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/api/UserAPI.java</url>
-          <line>135</line>
-          <option name="timeStamp" value="89" />
-        </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/api/UserAPI.java</url>
           <line>104</line>
@@ -507,38 +528,73 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/api/CommentAPI.java</url>
-          <line>144</line>
+          <line>143</line>
           <option name="timeStamp" value="293" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/api/FriendAPI.java</url>
-          <line>60</line>
+          <line>61</line>
           <option name="timeStamp" value="294" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/api/FriendAPI.java</url>
-          <line>75</line>
+          <line>76</line>
           <option name="timeStamp" value="295" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/api/FriendAPI.java</url>
-          <line>90</line>
+          <line>91</line>
           <option name="timeStamp" value="296" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/api/FriendAPI.java</url>
-          <line>124</line>
+          <line>125</line>
           <option name="timeStamp" value="297" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/api/FriendAPI.java</url>
-          <line>139</line>
+          <line>140</line>
           <option name="timeStamp" value="299" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/api/FriendAPI.java</url>
+          <line>173</line>
+          <option name="timeStamp" value="319" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/api/PostAPI.java</url>
-          <line>90</line>
-          <option name="timeStamp" value="318" />
+          <line>92</line>
+          <option name="timeStamp" value="322" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/api/UserAPI.java</url>
+          <line>153</line>
+          <option name="timeStamp" value="323" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/api/UserAPI.java</url>
+          <line>168</line>
+          <option name="timeStamp" value="325" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/foobar_dt_ad/editScreens/EditPhoto.java</url>
+          <line>33</line>
+          <option name="timeStamp" value="331" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/api/UserAPI.java</url>
+          <line>135</line>
+          <option name="timeStamp" value="336" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/foobar_dt_ad/MainActivity.java</url>
+          <line>107</line>
+          <option name="timeStamp" value="337" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/foobar_dt_ad/MainActivity.java</url>
+          <line>120</line>
+          <option name="timeStamp" value="338" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

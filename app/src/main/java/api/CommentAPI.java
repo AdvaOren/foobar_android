@@ -128,10 +128,9 @@ public class CommentAPI {
 
     public void updateComment(Comment comment) {
         JsonObject toSend = new JsonObject();
-        toSend.addProperty("cid",comment.get_id());
         toSend.addProperty("text",comment.getText());
         Call<Void> call = webServicesAPI.updateComment(comment.getUserId(), comment.getPostId(),
-                toSend);
+                comment.get_id(), toSend);
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {

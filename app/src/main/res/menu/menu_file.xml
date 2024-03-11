@@ -8,9 +8,14 @@
         android:title="@string/my_friends" />
     <item
         android:id="@+id/editItem"
-
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:icon="@drawable/ic_edit"
         android:title="@string/edit_configuration" />
+    <item
+        android:id="@+id/deleteItem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:icon="@drawable/ic_edit"
+        android:title="@string/delete_account" />
 </menu>

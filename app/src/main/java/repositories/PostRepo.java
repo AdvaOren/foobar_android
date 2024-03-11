@@ -18,6 +18,9 @@ import entities.PostInfo;
 import entities.Post;
 import viewmodels.MemberViewModel;
 
+/**
+ * Repository class for handling post data.
+ */
 public class PostRepo {
 
     private final PostDao postDao;
@@ -30,9 +33,10 @@ public class PostRepo {
 
     /**
      * Constructor for the PostRepo class.
-     * Loads posts from a JSON file and initializes the postList.
      *
-     * @param context The activity context.
+     * @param context   The activity context.
+     * @param jwtToken  The JWT token for authorization.
+     * @param memberVM  The MemberViewModel instance.
      */
     public PostRepo(Activity context, String jwtToken, MemberViewModel memberVM) {
         AppDB db = Room.databaseBuilder(context, AppDB.class, "Foobar_DAT").build();
@@ -44,24 +48,24 @@ public class PostRepo {
         this.memberVm = memberVM;
     }
 
-    public void updateNumComments(String userId,String postId,int numChanges) {
-        new Thread(() -> {
-            PostInfo postInfo = postInfoDao.getPostInfo(userId, postId);
-            if (postInfo == null)
-                return;
-            postInfo.setCommentsAmount(postInfo.getCommentsAmount()+ numChanges);
-            postInfoDao.update(postInfo);
-            posts.updateNumComments(postInfo);
-        }).start();
-    }
-
-
+    /**
+     * Custom subclass of MutableLiveData to hold a list of posts.
+     * Provides methods to modify and update the list of posts.
+     */
     public class PostListData extends MutableLiveData<List<Post>> {
+        /**
+         * Constructor for initializing the PostListData.
+         * Initializes the list of posts as an empty LinkedList.
+         */
         public PostListData() {
             super();
             setValue(new LinkedList<>());
         }
 
+        /**
+         * Called when the LiveData becomes active.
+         * Fetches the list of posts for the current member and updates the LiveData.
+         */
         @Override
         protected void onActive() {
             super.onActive();
@@ -73,6 +77,10 @@ public class PostRepo {
             });
         }
 
+        /**
+         * Adds a new post to the list of posts and updates the LiveData.
+         * @param newPost The post to add.
+         */
         public void addPost(Post newPost) {
             List<Post> posts1 = getValue();
             if (posts1 == null)
@@ -145,6 +153,23 @@ public class PostRepo {
     }
 
 
+    /**
+     * Updates the number of comments for a post.
+     *
+     * @param userId     The user ID.
+     * @param postId     The post ID.
+     * @param numChanges The number of changes.
+     */
+    public void updateNumComments(String userId,String postId,int numChanges) {
+        new Thread(() -> {
+            PostInfo postInfo = postInfoDao.getPostInfo(userId, postId);
+            if (postInfo == null)
+                return;
+            postInfo.setCommentsAmount(postInfo.getCommentsAmount()+ numChanges);
+            postInfoDao.update(postInfo);
+            posts.updateNumComments(postInfo);
+        }).start();
+    }
 
     public void addLike(String userId, String postId) {
         new Thread(() -> {
@@ -174,4 +199,13 @@ public class PostRepo {
     public void reloadByUser(String requested,String requester) {
         postAPI.getUserPosts(postsByUser,requested,requester);
     }
+
+    public void deleteUser(String userId) {
+        new Thread(() -> {
+            postDao.clear(userId);
+            postDao.deleteUserPosts(userId);
+            postInfoDao.clear(userId);
+        }).start();
+    }
+
 }

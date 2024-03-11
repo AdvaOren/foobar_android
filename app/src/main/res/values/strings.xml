@@ -32,4 +32,13 @@
     <string name="friendship_requests">Friendship requests</string>
     <string name="my_friends">My friends</string>
     <string name="edit_configuration">Edit configuration</string>
+    <string name="delete_account">Delete account</string>
+    <string name="change_your_name">Change your name</string>
+    <string name="tell_us_your_name">Tell us your name</string>
+    <string name="enter_first_name">Enter first name</string>
+    <string name="enter_last_name">Enter last name</string>
+    <string name="continueing">continue</string>
+    <string name="are_you_sure">Are You Sure?</string>
+    <string name="regret">Regret</string>
+    <string name="delete">Delete</string>
 </resources>

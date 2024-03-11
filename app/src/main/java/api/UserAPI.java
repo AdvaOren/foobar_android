@@ -139,16 +139,36 @@ public class UserAPI {
 
     }
 
-    public void updateMemberAll(Member member) {
-        webServicesAPI.updateUserAll(member.get_id(), member);
-    }
-
     public void updateMember(Member member) {
-        webServicesAPI.updateUser(member.get_id(), member);
+        Call<Void> call =  webServicesAPI.updateUser(member.get_id(), member);
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                new Thread(() -> {
+                    dao.update(member);
+                }).start();
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
     }
 
-    public void deleteMember(String id) {
-        webServicesAPI.deleteUser(id);
+    public void deleteMember(Member toDelete) {
+        Call<Void> call =  webServicesAPI.deleteUser(toDelete.get_id());
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                new Thread(() -> dao.delete(toDelete)).start();
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
     }
 
     public void getMembers(List<String> ids) {

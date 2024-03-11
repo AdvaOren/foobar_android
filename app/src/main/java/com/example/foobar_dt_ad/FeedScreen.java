@@ -1,6 +1,8 @@
 package com.example.foobar_dt_ad;
 
 import static com.example.foobar_dt_ad.AddPostScreen.ADD;
+import static com.example.foobar_dt_ad.DeleteAccount.DEAD;
+import static com.example.foobar_dt_ad.UserScreen.BACK_FROM_USER;
 
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -98,6 +100,11 @@ public class FeedScreen extends AppCompatActivity {
                                 postVM.addPost(currentMember.get_id(),new Post(content,bmp,date,currentMember.get_id()));
                                 adapter.notifyDataSetChanged();
                             }
+                        } else if (result.getResultCode() == BACK_FROM_USER) {
+                            currentMember = memberVM.getMemberQuick(currentMember.get_id());
+                            avatar.setImageBitmap(currentMember.getImgBitmap());
+                        } else if(result.getResultCode() == DEAD) {
+                            finish();
                         }
                     }
                 });

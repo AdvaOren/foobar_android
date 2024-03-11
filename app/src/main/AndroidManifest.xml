@@ -18,6 +18,18 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".DeleteAccount"
+            android:exported="false" />
+        <activity
+            android:name=".editScreens.EditPassword"
+            android:exported="false" />
+        <activity
+            android:name=".editScreens.EditNames"
+            android:exported="false" />
+        <activity
+            android:name=".editScreens.EditPhoto"
+            android:exported="false" />
+        <activity
             android:name=".FriendsScreen"
             android:exported="false" />
         <activity

@@ -15,10 +15,10 @@ public class Member {
     @PrimaryKey
     @NonNull
     private String _id;
-    private final String email;
-    private final String firstName;
-    private final String lastName;
-    private final String password;
+    private String email;
+    private String firstName;
+    private String lastName;
+    private String password;
     private String img;
     public Member(String Email,String firstName, String lastName, String password,Bitmap image) {
         this.email = Email;
@@ -38,6 +38,21 @@ public class Member {
         this.img = img;
     }
 
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
     public void set_id(@NonNull String _id) {
         this._id = _id;

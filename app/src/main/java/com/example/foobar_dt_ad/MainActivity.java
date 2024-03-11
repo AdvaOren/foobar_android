@@ -138,6 +138,8 @@ public class MainActivity extends AppCompatActivity {
         i.putExtra("jwt", jwtToken);
         i.putExtra("id", current.get_id());
         progressBar.setVisibility(View.GONE);
+        jwtToken = "";
+        current = null;
         startActivity(i);
     }
 

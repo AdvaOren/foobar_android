@@ -64,6 +64,8 @@ public class PostAPI {
             @Override
             public void onResponse(Call<List<Triple<Post, Member, PostInfo>>> call, Response<List<Triple<Post, Member, PostInfo>>> response) {
                 new Thread(() -> {
+                    dao.clear(userId);
+                    infoDao.clear(userId);
                     List<Triple<Post, Member, PostInfo>> newData = response.body();
                     if (newData == null) {
                         return;
@@ -104,8 +106,6 @@ public class PostAPI {
             postListData.postValue(posts);*/
 
             //get posts from server
-            dao.clear(userId);
-            infoDao.clear(userId);
             getPosts(userId, mVM);
         }).start();
     }

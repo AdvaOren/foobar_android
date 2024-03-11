@@ -5,8 +5,6 @@ import android.content.Context;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
 
-import java.util.List;
-
 import entities.Member;
 import repositories.MemberRepo;
 
@@ -52,12 +50,16 @@ public class MemberViewModel extends ViewModel {
         memberRepo.addMember(member);
     }
 
-    public void updateUsers(List<String> ids) {
-        memberRepo.updateMembers(ids);
+    public void updateUser(Member member) {
+        memberRepo.updateMember(member);
     }
 
 
     public void saveMember(Member member) {
         memberRepo.saveMember(member);
+    }
+
+    public void delete(Member toDelete) {
+        memberRepo.delete(toDelete);
     }
 }

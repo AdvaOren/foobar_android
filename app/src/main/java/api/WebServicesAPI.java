@@ -20,7 +20,6 @@ import retrofit2.http.PATCH;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
-import retrofit2.http.Query;
 
 public interface WebServicesAPI {
 
@@ -96,11 +95,11 @@ public interface WebServicesAPI {
     @POST("users/{id}/posts/{pid}/comments")
     Call<JsonObject> addComment(@Path("id") String id,@Path("pid") String pid ,@Body JsonObject text);
 
-    @DELETE("users/{id}/posts/{pid}/comments")
-    Call<Void> deleteComment(@Path("id") String id,@Path("pid") String pid, @Query("cid") String cid);
+    @DELETE("users/{id}/posts/{pid}/comments/{cid}")
+    Call<Void> deleteComment(@Path("id") String id,@Path("pid") String pid, @Path("cid") String cid);
 
-    @PUT("users/{id}/posts/{pid}/comments")
-    Call<Void> updateComment(@Path("id") String id,@Path("pid") String pid, @Body JsonObject cid);
+    @PUT("users/{id}/posts/{pid}/comments/{cid}")
+    Call<Void> updateComment(@Path("id") String id,@Path("pid") String pid, @Path("cid") String cid, @Body JsonObject text);
 
 
 }

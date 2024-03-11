@@ -66,4 +66,12 @@ public class MemberRepo {
     public Member getMemberQuick(String id) {
         return dao.getById(id);
     }
+
+    public void updateMember(Member member) {
+        userAPI.updateMember(member);
+    }
+
+    public void delete(Member toDelete) {
+        userAPI.deleteMember(toDelete);
+    }
 }

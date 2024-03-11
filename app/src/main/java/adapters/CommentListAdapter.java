@@ -24,7 +24,7 @@ import java.util.ArrayList;
 import entities.Comment;
 import viewmodels.CommentViewModel;
 
-//This class is adapter to a simple list
+//This class is adapter to a the comment list
 public class CommentListAdapter extends ArrayAdapter<Comment> {
     private final LayoutInflater inflater;
     private final Context context;
@@ -98,6 +98,7 @@ public class CommentListAdapter extends ArrayAdapter<Comment> {
             notifyDataSetChanged();
         });
 
+        //allow to edit and delete only if this comment is belong to the current user
         if (!userId.equals(curr.getUserId())) {
             edit.setVisibility(View.INVISIBLE);
             del.setVisibility(View.INVISIBLE);
@@ -123,6 +124,13 @@ public class CommentListAdapter extends ArrayAdapter<Comment> {
         return convertView;
     }
 
+    /**
+     * handle the  edit of comment
+     *
+     * @param edit edit button
+     * @param text text of comment
+     * @param curr current comment
+     */
     private void handleEdit(ImageButton edit,EditText text, Comment curr) {
         if (edit.getTag().equals("notEdit")) {
             edit.setTag("editing");
