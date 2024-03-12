@@ -18,86 +18,127 @@ public class PostsViewModel extends ViewModel {
     public PostsViewModel() {
     }
 
+    /**
+     * Initializes the PostViewModel with the provided context, JWT token, and MemberViewModel.
+     *
+     * @param context   The activity context.
+     * @param jwtToken  The JWT token.
+     * @param memberVM  The MemberViewModel.
+     */
     public void initializePostViewModel(Activity context, String jwtToken, MemberViewModel memberVM) {
         postRepo = new PostRepo(context, jwtToken, memberVM);
     }
 
+    /**
+     * Retrieves all posts for the specified user.
+     *
+     * @param userId The user ID.
+     * @return LiveData containing the list of posts.
+     */
     public LiveData<List<Post>> getAll(String userId) {
         posts = postRepo.getAll(userId);
         return posts;
     }
 
+    /**
+     * Retrieves posts by the specified user.
+     *
+     * @param userId    The user ID.
+     * @param requester The requester ID.
+     * @return LiveData containing the list of posts.
+     */
     public LiveData<List<Post>> getPostsByUser(String userId,String requester) {
         postsByUser = postRepo.getPostsByUser(userId,requester);
         return postsByUser;
     }
 
+    /**
+     * Adds a new post for the specified user.
+     *
+     * @param userId The user ID.
+     * @param post   The post to add.
+     */
     public void addPost(String userId, Post post) {
         postRepo.add(userId, post);
     }
 
+    /**
+     * Reloads the posts for the specified user.
+     *
+     * @param userId The user ID.
+     */
     public void reload(String userId) {
         postRepo.reload(userId);
     }
 
+    /**
+     * Deletes the specified post for the user.
+     *
+     * @param userId The user ID.
+     * @param post   The post to delete.
+     */
     public void delete(String userId, Post post) {
         postRepo.delete(userId, post);
     }
 
+
+    /**
+     * Updates the specified post for the user.
+     *
+     * @param userId The user ID.
+     * @param post   The post to update.
+     */
     public void update(String userId, Post post) {
         postRepo.update(userId, post);
     }
 
-
-
+    /**
+     * Adds a like to the specified post for the user.
+     *
+     * @param userId The user ID.
+     * @param postId The post ID.
+     */
     public void addLike(String userId, String postId) {
         postRepo.addLike(userId, postId);
     }
 
+    /**
+     * Removes a like from the specified post for the user.
+     *
+     * @param userId The user ID.
+     * @param postId The post ID.
+     */
     public void removeLike(String userId, String postId) {
         postRepo.removeLike(userId, postId);
     }
 
+    /**
+     * Updates the number of comments for the specified post.
+     *
+     * @param userId      The user ID.
+     * @param postId      The post ID.
+     * @param numComments The number of comments.
+     */
     public void updateNumComments(String userId,String postId,int numComments) {
         postRepo.updateNumComments(userId,postId,numComments);
     }
 
+    /**
+     * Reloads the posts by the specified user.
+     *
+     * @param requested The requested user ID.
+     * @param requester The requester user ID.
+     */
     public void reloadByUser(String requested,String requester) {
         postRepo.reloadByUser(requested,requester);
     }
 
+    /**
+     * Deletes all posts for the specified user.
+     *
+     * @param userId The user ID.
+     */
     public void deleteUser(String userId) {
         postRepo.deleteUser(userId);
     }
-
-
-
-    /*public void setLiked(int id) {
-        postRepo.setLiked(id);
-    }
-
-    public void setShareClicked(int id) {
-        postRepo.setShareClicked(id);
-    }*/
-
-    /*public void add(String title, String content, Bitmap posPic,Bitmap userPic,String firstN,String lastN, String date) {
-        postRepo.add(title,content,firstN,lastN,posPic,userPic,date);
-    }
-
-    public void delete(int id) {
-        postRepo.delete(id);
-    }
-
-    public void edit(int id, String newTitle, String newContent,String date,Bitmap img) {
-        postRepo.edit(id,newTitle,newContent,date,img);
-    }
-
-    public void updateLike(int id, int newLikeAmount) {
-        postRepo.updateLike(id,newLikeAmount);
-    }
-
-    public void updateComments(int id, ArrayList<Comment> comments) {
-        postRepo.updateComments(id,comments);
-    }*/
-
 }

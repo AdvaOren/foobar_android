@@ -8,7 +8,9 @@ import java.util.List;
 import entities.Comment;
 import repositories.CommentRepo;
 
-//This class is the model layer it's get data from the comment repo
+/**
+ * ViewModel class responsible for managing comments data and interactions.
+ */
 public class CommentViewModel extends ViewModel {
     private CommentRepo commentRepo;
     private LiveData<List<Comment>> comments;
@@ -20,71 +22,57 @@ public class CommentViewModel extends ViewModel {
 
     }
 
+    /**
+     * Initializes the CommentViewModel with the specified post ID and JWT token.
+     *
+     * @param postId The ID of the post.
+     * @param jwt    The JWT token.
+     */
     public void initializeCommentViewModel (String postId,String jwt) {
         commentRepo = new CommentRepo(postId,jwt);
         comments = commentRepo.get();
     }
 
+    /**
+     * Retrieves all comments.
+     */
     public void getAll() {
         commentRepo.getAll();
     }
 
+    /**
+     * Retrieves the LiveData object containing the list of comments.
+     *
+     * @return A LiveData object containing a list of comments.
+     */
     public LiveData<List<Comment>> get(){
         return comments;
     }
 
+    /**
+     * Adds a new comment.
+     *
+     * @param c The comment to add.
+     */
     public void addComment(Comment c) {
         commentRepo.addComment(c);
     }
 
+    /**
+     * Deletes a comment.
+     *
+     * @param c The comment to delete.
+     */
     public void deleteComment(Comment c) {
         commentRepo.deleteComment(c.getUserId(), c.getPostId(), c.get_id());
     }
 
+    /**
+     * Updates a comment.
+     *
+     * @param c The updated comment.
+     */
     public void updateComment(Comment c) {
         commentRepo.updateComment(c);
     }
-    /**
-     * This function edit comment
-     * @param id the comment id
-     * @param newText the new text for the comment
-     */
-    /*public void edit(int id, String newText) {
-        commentRepo.edit(id,newText);
-    }*/
-
-    /**
-     * This function delete comment
-     * @param id the comment id
-     */
-    /*public void remove(int id) {
-        commentRepo.remove(id);
-    }*/
-
-    /**
-     * This function add a new comment
-     * @param text the comment text
-     * @param firstN the user first name
-     * @param lastN the user last name
-     */
-    /*public void add(String text, String firstN, String lastN) {
-        commentRepo.add(text,firstN,lastN);
-    }*/
-
-    /**
-     * This function return array list of all the comments
-     * @return the comments
-     */
-    /*public ArrayList<Comment> get() {
-        return commentRepo.getCommentsList();
-    }*/
-
-    /**
-     * This function set the comment in the comment repo
-     * @param comments all the comments
-     */
-    /*public void setComments(ArrayList<Comment> comments) {
-        commentRepo.setCommentsList(comments);
-    }*/
-
 }

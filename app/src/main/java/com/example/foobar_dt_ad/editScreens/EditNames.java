@@ -17,19 +17,27 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
 import com.example.foobar_dt_ad.R;
-
+/**
+ * Activity for editing user names.
+ */
 public class EditNames extends AppCompatActivity {
     public static final int FROM_EDIT_NAMES = 3;
 
+    /**
+     * Called when the activity is first created.
+     * @param savedInstanceState The saved instance state.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_names);
+
+        // Initialize views
         Button cont = findViewById(R.id.continueNames);
         EditText firstNameField = findViewById(R.id.firstNameField);
         EditText lastNameField = findViewById(R.id.lastNameField);
-        //TextView emptyNamesMSG = findViewById(R.id.emptyNamesMSG);
 
+        // Register for activity result
         ActivityResultLauncher<Intent> someActivityResultLauncher = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
                 new ActivityResultCallback<ActivityResult>() {
@@ -39,40 +47,43 @@ public class EditNames extends AppCompatActivity {
                             Intent data = result.getData();
                             if (data != null) {
                                 Intent back = new Intent();
-                                back.putExtra("firstName",firstNameField.getText().toString());
-                                back.putExtra("lastName",lastNameField.getText().toString());
-                                back.putExtra("password",data.getStringExtra("password"));
-                                setResult(FROM_EDIT_NAMES,back);
+                                back.putExtra("firstName", firstNameField.getText().toString());
+                                back.putExtra("lastName", lastNameField.getText().toString());
+                                back.putExtra("password", data.getStringExtra("password"));
+                                setResult(FROM_EDIT_NAMES, back);
                                 finish();
                             }
                         }
                     }
                 });
 
+        // Retrieve intent data
         Intent data = getIntent();
         String firstName = data.getStringExtra("firstName");
         String lastName = data.getStringExtra("lastName");
+
+        // Set text fields with received data
         firstNameField.setText(firstName);
         lastNameField.setText(lastName);
 
+        // Handle continue button click
         cont.setOnClickListener(v -> {
             Intent i = new Intent(this, EditPassword.class);
-            if (!firstNameField.getText().toString().equals("") && !lastNameField.getText().toString().equals("")) {
-                //emptyNamesMSG.setVisibility(View.INVISIBLE);
-                i.putExtra("password",data.getStringExtra("password"));
+            if (!firstNameField.getText().toString().isEmpty() && !lastNameField.getText().toString().isEmpty()) {
+                i.putExtra("password", data.getStringExtra("password"));
                 someActivityResultLauncher.launch(i);
-            }
-            else {
-                Toast.makeText(this, "All fields requires!", Toast.LENGTH_LONG).show();
-
-                //emptyNamesMSG.setVisibility(View.VISIBLE);
+            } else {
+                Toast.makeText(this, "All fields are required!", Toast.LENGTH_LONG).show();
             }
         });
 
+        // Enable dark mode
         darkMode();
-
     }
 
+    /**
+     * Enable dark mode for the activity.
+     */
     private void darkMode() {
         ImageButton btnDark = findViewById(R.id.btnDark);
         int currentNightMode = getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
@@ -84,6 +95,7 @@ public class EditNames extends AppCompatActivity {
             btnDark.setImageResource(R.drawable.ic_light_mode);
         }
 
+        // Toggle dark mode when button is clicked
         btnDark.setOnClickListener(v -> {
             if (currentNightMode == Configuration.UI_MODE_NIGHT_NO) {
                 // Switch to dark mode

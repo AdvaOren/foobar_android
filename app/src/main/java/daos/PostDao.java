@@ -11,6 +11,10 @@ import java.util.List;
 
 import entities.Post;
 
+/**
+ * Data Access Object (DAO) interface for the Post entity.
+ * Defines methods to interact with the Member entity in the database.
+ */
 @Dao
 public interface PostDao {
     @Query("SELECT * FROM post WHERE owner = :owner")

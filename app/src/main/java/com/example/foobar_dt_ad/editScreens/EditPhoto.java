@@ -22,27 +22,38 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.foobar_dt_ad.R;
 
 import java.io.ByteArrayOutputStream;
-
+/**
+ * Activity for editing user photo.
+ */
 public class EditPhoto extends AppCompatActivity {
 
     private static final int GALLERY = 14;
     private static final int CAMERA = 15;
     private int flag = 0;
 
+    /**
+     * Called when the activity is first created.
+     * @param savedInstanceState The saved instance state.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_photo);
+
+        // Initialize views
         Button createNewUser = findViewById(R.id.EmailScreenContinue);
         ImageButton cameraBtn = findViewById(R.id.cameraBtn);
         ImageButton galleryBtn = findViewById(R.id.galleryBtn);
         ImageView profileImage = findViewById(R.id.profileImage);
+
+        // Register for activity result
         ActivityResultLauncher<Intent> someActivityResultLauncher = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
                 new ActivityResultCallback<ActivityResult>() {
                     @Override
                     public void onActivityResult(ActivityResult result) {
                         if (result.getResultCode() == FROM_EDIT_NAMES) {
+                            // Handle result from EditNames activity
                             Intent data = result.getData();
                             if (data != null) {
                                 Intent back = new Intent();
@@ -59,6 +70,7 @@ public class EditPhoto extends AppCompatActivity {
                                 finish();
                             }
                         } else if (result.getResultCode() == Activity.RESULT_OK) {
+                            // Handle result from camera or gallery
                             Intent data = result.getData();
                             if (data != null) {
                                 if (flag == GALLERY)
@@ -72,31 +84,32 @@ public class EditPhoto extends AppCompatActivity {
                     }
                 });
 
-
+        // Retrieve user photo from intent
         Intent data = getIntent();
         Bundle extras = data.getExtras();
         byte[] byteArray = extras.getByteArray("picture");
         Bitmap img = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
         profileImage.setImageBitmap(img);
 
+        // Set click listeners for buttons
         createNewUser.setOnClickListener(v -> {
-                    Intent i = new Intent(this, EditNames.class);
-                    i.putExtra("firstName",data.getStringExtra("firstName"));
-                    i.putExtra("lastName",data.getStringExtra("lastName"));
-                    i.putExtra("password",data.getStringExtra("password"));
-                    someActivityResultLauncher.launch(i);
+            Intent i = new Intent(this, EditNames.class);
+            i.putExtra("firstName", data.getStringExtra("firstName"));
+            i.putExtra("lastName", data.getStringExtra("lastName"));
+            i.putExtra("password", data.getStringExtra("password"));
+            someActivityResultLauncher.launch(i);
         });
 
-        galleryBtn.setOnClickListener(v ->
-        {
+        galleryBtn.setOnClickListener(v -> {
+            // Launch gallery to select image
             Intent iGallery = new Intent(Intent.ACTION_PICK);
             iGallery.setData(MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
             flag = GALLERY;
             someActivityResultLauncher.launch(iGallery);
         });
 
-        cameraBtn.setOnClickListener(v ->
-        {
+        cameraBtn.setOnClickListener(v -> {
+            // Launch camera to take a photo
             Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
             flag = CAMERA;
             someActivityResultLauncher.launch(cameraIntent);

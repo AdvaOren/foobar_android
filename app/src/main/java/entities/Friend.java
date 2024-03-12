@@ -6,18 +6,30 @@ import android.util.Base64;
 
 import java.io.ByteArrayOutputStream;
 
+/**
+ * Entity class representing a Friend in the application.
+ */
 public class Friend {
     private String requester;
     private String requested;
     private String requesterName;
     private String status;
     private String img;
+    // Constants for different friend status
     public static final String NOT_FRIENDS = "Add Friend";
     public static final String REQUEST_SENT = "Request Sent";
     public static final String FRIENDS = "We are friends :)";
     public static final String REQUEST_SENT_HIS_SIDE = "Request is sent to you";
 
 
+    /**
+     * Constructor to create a Friend object with specified parameters.
+     * @param requester The ID of the user who sent the friend request.
+     * @param requested The ID of the user to whom the friend request is sent.
+     * @param status The status of the friend request.
+     * @param requesterName The name of the user who sent the friend request.
+     * @param img The image of the user who sent the friend request.
+     */
     public Friend(String requester, String requested, String status, String requesterName,String img) {
         this.requester = requester;
         this.requested = requested;
@@ -26,6 +38,11 @@ public class Friend {
         this.img = img;
     }
 
+    /**
+     * Constructor to create a Friend object with only requester and requested parameters.
+     * @param requester The ID of the user who sent the friend request.
+     * @param requested The ID of the user to whom the friend request is sent.
+     */
     public Friend(String requester, String requested) {
         this.requester = requester;
         this.requested = requested;
@@ -34,6 +51,10 @@ public class Friend {
         this.img = "";
     }
 
+    /**
+     * Sets the image of the Friend object as a Bitmap.
+     * @param img The image Bitmap to set.
+     */
     public void setImgBitmap(Bitmap img) {
 
         ByteArrayOutputStream baos=new  ByteArrayOutputStream();
@@ -43,6 +64,10 @@ public class Friend {
         this.img = temp;
     }
 
+    /**
+     * Gets the image of the Friend object as a Bitmap.
+     * @return The image Bitmap.
+     */
     public Bitmap getImgBitmap() {
         try {
             byte [] encodeByte= Base64.decode(img,Base64.DEFAULT);
@@ -53,6 +78,8 @@ public class Friend {
             return null;
         }
     }
+
+    //Getters and Setters
     public String getImg() {
         return img;
     }

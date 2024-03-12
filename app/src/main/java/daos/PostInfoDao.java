@@ -11,6 +11,10 @@ import java.util.List;
 
 import entities.PostInfo;
 
+/**
+ * Data Access Object (DAO) interface for the PostInfo entity.
+ * Defines methods to interact with the Member entity in the database.
+ */
 @Dao
 public interface PostInfoDao {
 

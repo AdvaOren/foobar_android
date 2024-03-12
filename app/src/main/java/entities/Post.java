@@ -11,6 +11,9 @@ import androidx.room.PrimaryKey;
 import java.io.ByteArrayOutputStream;
 import java.util.List;
 
+/**
+ * Entity class representing a post.
+ */
 @Entity
 public class Post {
 
@@ -22,40 +25,83 @@ public class Post {
     private String date;
     private int likes;
     private String img;
-    //private List<Comment> commentList;
     private int comments;
     private boolean liked;
     private boolean shareClicked;
     private String owner;
 
-    // Constructor
+    /**
+     * Constructor for creating a Post object with content, image, date, and user ID.
+     *
+     * @param content The content of the post.
+     * @param img The image associated with the post.
+     * @param date The date when the post was created.
+     * @param userId The ID of the user who created the post.
+     */
     public Post(String content, Bitmap img, String date, String userId) {
         _id = "";
         this.content = content;
         this.date = date;
         this.userId = userId;
-        //commentList = new ArrayList<>();
         likes = 0;
         setImgBitmap(img);
         liked = false;
         shareClicked = false;
         owner = "";
-        //ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        //img.compress(Bitmap.CompressFormat.PNG, 100, stream);
     }
 
+    /**
+     * Constructor for creating a Post object.
+     *
+     * @param _id The ID of the post.
+     * @param userId The ID of the user who created the post.
+     * @param content The content of the post.
+     * @param date The date when the post was created.
+     * @param img The image associated with the post.
+     * @param owner The owner of the post.
+     */
     public Post(@NonNull String _id, String userId, String content, String date, String img, String owner) {
         this._id = _id;
         this.userId = userId;
         this.content = content;
-
         this.date = date;
         this.img = img;
         this.owner = owner;
         shareClicked = false;
     }
-// Getters and setters for various fields
 
+    /**
+     * Setter for the profile image of the member.
+     *
+     * @param img The profile image to set as a Bitmap.
+     */
+    public void setImgBitmap(Bitmap img) {
+        if (img == null) {
+            this.img = "";
+            return;
+        }
+        ByteArrayOutputStream baos=new  ByteArrayOutputStream();
+        img.compress(Bitmap.CompressFormat.PNG,100, baos);
+        byte [] b=baos.toByteArray();
+        this.img = Base64.encodeToString(b, Base64.DEFAULT);
+    }
+
+    /**
+     * Getter for the profile image of the member as a Bitmap.
+     *
+     * @return The profile image of the member as a Bitmap.
+     */
+    public Bitmap getImgBitmap() {
+        try {
+            byte [] encodeByte=Base64.decode(img,Base64.DEFAULT);
+            return BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
+        } catch(Exception e) {
+            e.getMessage();
+            return null;
+        }
+    }
+
+    // Getters and setters for various fields
     public String getOwner() {
         return owner;
     }
@@ -100,26 +146,7 @@ public class Post {
         this.liked = liked;
     }
 
-    public void setImgBitmap(Bitmap img) {
-        if (img == null) {
-            this.img = "";
-            return;
-        }
-        ByteArrayOutputStream baos=new  ByteArrayOutputStream();
-        img.compress(Bitmap.CompressFormat.PNG,100, baos);
-        byte [] b=baos.toByteArray();
-        this.img = Base64.encodeToString(b, Base64.DEFAULT);
-    }
 
-    public Bitmap getImgBitmap() {
-        try {
-            byte [] encodeByte=Base64.decode(img,Base64.DEFAULT);
-            return BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
-        } catch(Exception e) {
-            e.getMessage();
-            return null;
-        }
-    }
 
     public String getDate() {
         return date;

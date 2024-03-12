@@ -37,6 +37,11 @@ public class FeedScreen extends AppCompatActivity {
     private PostsViewModel postVM;
     private MemberViewModel memberVM;
     private Member currentMember;
+
+    /**
+     * Called when the activity is first created.
+     * @param savedInstanceState The saved instance state.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,18 +50,19 @@ public class FeedScreen extends AppCompatActivity {
         RecyclerView lstPosts = findViewById(R.id.lstPosts);
         SwipeRefreshLayout refreshLayout = findViewById(R.id.refreshLayout);
 
+        //get info from the login screen
         Intent fromLoginI = getIntent();
         String id = fromLoginI.getStringExtra("id");
         String jwt = fromLoginI.getStringExtra("jwt");
 
         refreshLayout.setRefreshing(true);
 
-
+        //create member view model
         memberVM = new ViewModelProvider(this).get(MemberViewModel.class);
         memberVM.initializeMemberViewModel(this);
         memberVM.updateToken(this, jwt);
 
-
+        //create post view model
         postVM = new ViewModelProvider(this).get(PostsViewModel.class);
         postVM.initializePostViewModel(this, jwt,memberVM);
 
@@ -80,8 +86,6 @@ public class FeedScreen extends AppCompatActivity {
         }
 
 
-
-
         // Register activity result launcher for AddPost activity use for get image
         ActivityResultLauncher<Intent> activityResultLauncher = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
@@ -100,9 +104,11 @@ public class FeedScreen extends AppCompatActivity {
                                 postVM.addPost(currentMember.get_id(),new Post(content,bmp,date,currentMember.get_id()));
                                 adapter.notifyDataSetChanged();
                             }
+                          //get data from user screen
                         } else if (result.getResultCode() == BACK_FROM_USER) {
                             currentMember = memberVM.getMemberQuick(currentMember.get_id());
                             avatar.setImageBitmap(currentMember.getImgBitmap());
+                          //the case the user delete himself
                         } else if(result.getResultCode() == DEAD) {
                             finish();
                         }
@@ -122,11 +128,13 @@ public class FeedScreen extends AppCompatActivity {
             postVM.reload(currentMember.get_id());
         });
 
+        //logout the app
         ImageButton btnLogout = findViewById(R.id.btnLogout);
         btnLogout.setOnClickListener(v -> {
             finish();
         });
 
+        //enter user screen
         avatar.setOnClickListener(v -> {
             Intent intent = new Intent(this, UserScreen.class);
             intent.putExtra("loginUserId",currentMember.get_id());
@@ -138,6 +146,9 @@ public class FeedScreen extends AppCompatActivity {
         darkMode();
     }
 
+    /**
+     * Enable dark mode for the activity.
+     */
     private void darkMode() {
         ImageButton btnDark = findViewById(R.id.btnDark);
         LinearLayout menu = findViewById(R.id.menu);

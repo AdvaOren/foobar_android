@@ -19,12 +19,21 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+/**
+ * Represents an API for managing comments operations.
+ */
 public class CommentAPI {
 
     private CommentRepo.CommentListData commentListData;
 
     private final WebServicesAPI webServicesAPI;
 
+    /**
+     * Constructor for CommentAPI class.
+     *
+     * @param commentListData The LiveData object to hold the list of comments.
+     * @param token           The JWT token for authorization.
+     */
     public CommentAPI(CommentRepo.CommentListData commentListData, String token) {
         this.commentListData = commentListData;
 
@@ -50,7 +59,11 @@ public class CommentAPI {
         webServicesAPI = retrofit.create(WebServicesAPI.class);
     }
 
-
+    /**
+     * Get all comments for a given post.
+     *
+     * @param postId The ID of the post for which comments are requested.
+     */
     public void getAll(String postId) {
         Call<List<Pair<JsonObject, Member>>> call = webServicesAPI.getComments(postId);
         List<Comment> comments = new ArrayList<>();
@@ -85,6 +98,11 @@ public class CommentAPI {
         });
     }
 
+    /**
+     * Add a new comment.
+     *
+     * @param comment The comment to add.
+     */
     public void addComment(Comment comment) {
         JsonObject toSend = new JsonObject();
         toSend.addProperty("text",comment.getText());
@@ -109,6 +127,13 @@ public class CommentAPI {
         });
     }
 
+    /**
+     * Delete a comment.
+     *
+     * @param userId The ID of the user who posted the comment.
+     * @param postId The ID of the post containing the comment.
+     * @param id     The ID of the comment to delete.
+     */
     public void deleteComment(String userId, String postId, String id) {
         Call<Void> call = webServicesAPI.deleteComment(userId, postId, id);
         call.enqueue(new Callback<Void>() {
@@ -126,6 +151,11 @@ public class CommentAPI {
         });
     }
 
+    /**
+     * Update an existing comment.
+     *
+     * @param comment The updated comment.
+     */
     public void updateComment(Comment comment) {
         JsonObject toSend = new JsonObject();
         toSend.addProperty("text",comment.getText());
@@ -144,31 +174,5 @@ public class CommentAPI {
                 t.printStackTrace();
             }
         });
-    }
-
-    public class TempComment {
-        private String _id;
-        private String text;
-
-        public TempComment(String _id, String text) {
-            this._id = _id;
-            this.text = text;
-        }
-
-        public String get_id() {
-            return _id;
-        }
-
-        public void set_id(String _id) {
-            this._id = _id;
-        }
-
-        public String getText() {
-            return text;
-        }
-
-        public void setText(String text) {
-            this.text = text;
-        }
     }
 }

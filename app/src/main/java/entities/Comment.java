@@ -1,10 +1,12 @@
 package entities;
 
 
-// This class is present a comment of post
 
 import android.graphics.Bitmap;
 
+/**
+ * Model class representing a comment on a post.
+ */
 public class Comment {
 
     private String _id;
@@ -16,6 +18,18 @@ public class Comment {
     private String postId;
 
 
+
+    /**
+     * Constructor to create a new Comment object.
+     *
+     * @param _id       Unique identifier for the comment
+     * @param text      Text content of the comment
+     * @param userId    ID of the user who posted the comment
+     * @param img       Image attached to the comment
+     * @param firstName First name of the user who posted the comment
+     * @param lastName  Last name of the user who posted the comment
+     * @param postId    ID of the post to which the comment belongs
+     */
     public Comment(String _id, String text, String userId, Bitmap img, String firstName, String lastName, String postId) {
         this._id = _id;
         this.text = text;
@@ -26,6 +40,7 @@ public class Comment {
         this.postId = postId;
     }
 
+    //Getters and Setters
     public Bitmap getImg() {
         return img;
     }
@@ -81,64 +96,4 @@ public class Comment {
     public void setPostId(String postId) {
         this.postId = postId;
     }
-
-    // Parcelable implementation
-
-    /*
-     * This constructor create Comment object from Parcel
-     * @param in the parcel
-     */
-    /*protected Comment(Parcel in) {
-        text = in.readString();
-        name = in.readString();
-        id = in.readInt();
-    }
-
-    public static final Creator<Comment> CREATOR = new Creator<Comment>() {
-        @Override
-        public Comment createFromParcel(Parcel in) {
-            return new Comment(in);
-        }
-
-        @Override
-        public Comment[] newArray(int size) {
-            return new Comment[size];
-        }
-    };
-
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-*/
-    /*
-     * This function convert the object to the parcel
-     * @param dest The Parcel in which the object should be written.
-     * @param flags Additional flags about how the object should be written.
-     * May be 0 or {@link #PARCELABLE_WRITE_RETURN_VALUE}.
-     */
-    /*@Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(text);
-        dest.writeString(name);
-        dest.writeInt(id);
-    }
-
-    //Getters and Setters
-    public int getId() {
-        return id;
-    }
-
-    public String getText() {
-        return text;
-    }
-
-    public void setText(String text) {
-        this.text = text;
-    }
-
-    public String getName() {
-        return name;
-    }*/
 }

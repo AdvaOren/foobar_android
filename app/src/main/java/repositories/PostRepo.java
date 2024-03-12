@@ -89,6 +89,11 @@ public class PostRepo {
             posts.postValue(posts1);
         }
 
+        /**
+         * Removes a post from the list of posts.
+         *
+         * @param post The post to remove.
+         */
         public void removePost(Post post) {
             List<Post> posts1 = getValue();
             if (posts1 == null)
@@ -97,6 +102,11 @@ public class PostRepo {
             posts.postValue(posts1);
         }
 
+        /**
+         * Updates the content and image of a post.
+         *
+         * @param post The updated post.
+         */
         public void updatePost(Post post) {
             List<Post> posts1 = getValue();
             if (posts1 == null)
@@ -112,6 +122,11 @@ public class PostRepo {
             }
         }
 
+        /**
+         * Updates the number of comments for a post.
+         *
+         * @param postInfo The post information containing the number of comments.
+         */
         public void updateNumComments(PostInfo postInfo) {
             List<Post> posts1 = getValue();
             if (posts1 == null)
@@ -126,23 +141,52 @@ public class PostRepo {
         }
     }
 
+    /**
+     * Retrieves all posts associated with a specific user.
+     *
+     * @param userId The ID of the user.
+     * @return A LiveData object containing a list of posts.
+     */
     public LiveData<List<Post>> getAll(String userId) {
         postAPI.getLastPosts(userId, memberVm);
         return posts;
     }
 
+    /**
+     * Adds a new post for a user.
+     *
+     * @param userId The ID of the user.
+     * @param post   The post to add.
+     */
     public void add(String userId, Post post) {
         postAPI.addPost(userId, post);
     }
 
+    /**
+     * Reloads all posts associated with a specific user.
+     *
+     * @param userId The ID of the user.
+     */
     public void reload(String userId) {
         postAPI.getLastPosts(userId, memberVm);
     }
 
+    /**
+     * Deletes a post for a user.
+     *
+     * @param userId The ID of the user.
+     * @param post   The post to delete.
+     */
     public void delete(String userId, Post post) {
         postAPI.deletePost(userId, post);
     }
 
+    /**
+     * Updates a post for a user.
+     *
+     * @param userId The ID of the user.
+     * @param post   The updated post.
+     */
     public void update(String userId, Post post) {
         if (post.getContent().equals("") && post.getImg().equals(""))
             return;
@@ -171,6 +215,12 @@ public class PostRepo {
         }).start();
     }
 
+    /**
+     * Adds a like to a post.
+     *
+     * @param userId The user ID.
+     * @param postId The post ID.
+     */
     public void addLike(String userId, String postId) {
         new Thread(() -> {
             PostInfo postInfo = postInfoDao.getPostInfo(userId, postId);
@@ -181,6 +231,12 @@ public class PostRepo {
         }).start();
     }
 
+    /**
+     * Removes a like from a post.
+     *
+     * @param userId The user ID.
+     * @param postId The post ID.
+     */
     public void removeLike(String userId, String postId) {
         new Thread(() -> {
             PostInfo postInfo = postInfoDao.getPostInfo(userId, postId);
@@ -191,15 +247,34 @@ public class PostRepo {
         }).start();
     }
 
+    /**
+     * Retrieves all posts by a specific user.
+     *
+     * @param userId    The ID of the user.
+     * @param requester The ID of the requester.
+     * @return A LiveData object containing a list of posts.
+     */
     public LiveData<List<Post>> getPostsByUser(String userId,String requester) {
         postAPI.getUserPosts(postsByUser,userId,requester);
         return postsByUser;
     }
 
+    /**
+     * Reloads all posts by a specific user.
+     *
+     * @param requested The ID of the user.
+     * @param requester The ID of the requester.
+     */
     public void reloadByUser(String requested,String requester) {
         postAPI.getUserPosts(postsByUser,requested,requester);
     }
 
+
+    /**
+     * Deletes all posts and post information associated with a user.
+     *
+     * @param userId The ID of the user.
+     */
     public void deleteUser(String userId) {
         new Thread(() -> {
             postDao.clear(userId);

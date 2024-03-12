@@ -150,7 +150,9 @@ public class PostListAdapter extends RecyclerView.Adapter<PostListAdapter.PostVi
                                 String postId = data.getStringExtra("postId");
                                 postVM.updateNumComments(userId,postId,numChanges);
                             }
-                        } else if (result.getResultCode() == BACK_FROM_USER) {
+                        }
+                        //get the data from the user screen
+                        else if (result.getResultCode() == BACK_FROM_USER) {
                             Intent data = result.getData();
                             if (data != null) {
                                 String userId = data.getStringExtra("userId");
@@ -249,6 +251,13 @@ public class PostListAdapter extends RecyclerView.Adapter<PostListAdapter.PostVi
 
     }
 
+    /**
+     * Move to the UserScreen activity with the provided user ID, login user ID, and JWT token.
+     *
+     * @param currId    The ID of the current user.
+     * @param toUserId  The ID of the user to navigate to.
+     * @param jwt       The JWT token for authentication.
+     */
     private void moveToUserScreen(String currId, String toUserId, String jwt) {
         Intent intent = new Intent(mInflater.getContext(), UserScreen.class);
         intent.putExtra("loginUserId",currId);
@@ -257,6 +266,11 @@ public class PostListAdapter extends RecyclerView.Adapter<PostListAdapter.PostVi
         intentLauncher.launch(intent);
     }
 
+    /**
+     * Apply dark mode or light mode to the PostViewHolder based on the current system night mode.
+     *
+     * @param holder The ViewHolder for a post item.
+     */
     private void darkMode(PostViewHolder holder) {
         int currentNightMode = mInflater.getContext().getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
         if (currentNightMode == Configuration.UI_MODE_NIGHT_NO) {
@@ -284,6 +298,12 @@ public class PostListAdapter extends RecyclerView.Adapter<PostListAdapter.PostVi
         }
     }
 
+    /**
+     * Initialize the PostViewHolder with data from the given Post object.
+     *
+     * @param holder  The ViewHolder for a post item.
+     * @param current The Post object containing data to be displayed.
+     */
     public void initHolder(PostViewHolder holder, Post current) {
 
         Member currentM = memberVM.getMemberQuick(current.getUserId());
@@ -327,20 +347,43 @@ public class PostListAdapter extends RecyclerView.Adapter<PostListAdapter.PostVi
         }
     }
 
+    /**
+     * Set the list of posts to be displayed.
+     *
+     * @param s The list of posts.
+     */
     public void setPosts(List<Post> s) {
         posts = s;
     }
 
+
+    /**
+     * Get the number of items in the list of posts.
+     *
+     * @return The number of posts in the list.
+     */
     public int getItemCount() {
         if (posts != null)
             return posts.size();
         else return 0;
     }
 
+    /**
+     * Get the list of posts.
+     *
+     * @return The list of posts.
+     */
     public List<Post> getPosts() {
         return posts;
     }
 
+    /**
+     * Like or unlike a post and update the UI accordingly.
+     *
+     * @param current  The post to be liked/unliked.
+     * @param holder   The ViewHolder for the post item.
+     * @param position The position of the post item in the list.
+     */
     private void likePost(Post current, PostViewHolder holder,int position) {
         String text = holder.likes.getText().toString();
         String[] arrOfStr = text.split(" ");
@@ -361,6 +404,12 @@ public class PostListAdapter extends RecyclerView.Adapter<PostListAdapter.PostVi
         notifyItemChanged(position);
     }
 
+    /**
+     * Edit a post and launch the AddPostScreen activity for editing.
+     *
+     * @param holder  The ViewHolder for the post item.
+     * @param current The post to be edited.
+     */
     public void editPost(PostViewHolder holder, Post current) {
         Intent intent = new Intent(activity, AddPostScreen.class);
         BitmapDrawable bitmapDrawable = ((BitmapDrawable) holder.postPic.getDrawable());
@@ -377,6 +426,11 @@ public class PostListAdapter extends RecyclerView.Adapter<PostListAdapter.PostVi
         intentLauncher.launch(intent);
     }
 
+    /**
+     * Set the current member.
+     *
+     * @param member The current member.
+     */
     public void setMember(Member member) {
         this.member = member;
     }

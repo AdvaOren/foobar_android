@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
@@ -85,6 +86,9 @@ public class MainActivity extends AppCompatActivity {
                 password.setText("");
                 wrongPassword.setVisibility(View.VISIBLE);
                 progressBar.setVisibility(View.GONE);
+            }
+            else if ( member.get_id().equals("exists")) {
+                Toast.makeText(this, "Email already exists", Toast.LENGTH_LONG).show();
             }
             //first click or got answer from view model
             else if (current == null || !current.equals(member)) {

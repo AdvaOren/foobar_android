@@ -21,6 +21,9 @@ import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
 
+/**
+ * Interface for defining API endpoints and their corresponding HTTP methods.
+ */
 public interface WebServicesAPI {
 
     @POST("usersList")

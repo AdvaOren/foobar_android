@@ -16,11 +16,20 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+/**
+ * API for interacting with user-related data on the server.
+ */
 public class UserAPI {
     private Retrofit retrofit;
     private WebServicesAPI webServicesAPI;
     private MemberDao dao;
 
+    /**
+     * Constructor for the UserAPI class.
+     *
+     * @param token JWT token used for authentication
+     * @param dao   Data Access Object for accessing local database
+     */
     public UserAPI(String token, MemberDao dao) {
         this.dao = dao;
         OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
@@ -45,13 +54,24 @@ public class UserAPI {
         webServicesAPI = retrofit.create(WebServicesAPI.class);
     }
 
-    public void addUser(Member member) {
+    /**
+     * Adds a new user to the server and local database.
+     *
+     * @param member The member object representing the user to be added
+     */
+    public void addUser(Member member, MutableLiveData<Member> curr) {
         Call<String> call = webServicesAPI.createUser(member);
         call.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
-                member.set_id(response.body());
-                dao.insert(member);
+                String id = response.body();
+                if (id == null) {
+                    member.set_id("exists");
+                    curr.setValue(member);
+                } else {
+                    member.set_id(id);
+                    dao.insert(member);
+                }
             }
 
             @Override
@@ -62,14 +82,20 @@ public class UserAPI {
 
     }
 
+    /**
+     * Retrieves the JWT token for the given member from the server.
+     *
+     * @param member The member object for which to retrieve the JWT token
+     * @param jwt    MutableLiveData to hold the JWT token value
+     */
     public void getJWT(Member member, MutableLiveData<String> jwt) {
         JsonObject json = new JsonObject();
-        json.addProperty("id",member.get_id());
+        json.addProperty("id", member.get_id());
         Call<JsonObject> call = webServicesAPI.getJWT(json);
         call.enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
-                JsonObject re= response.body();
+                JsonObject re = response.body();
                 if (re == null) {
                     jwt.setValue(null);
                     dao.clear();
@@ -80,11 +106,17 @@ public class UserAPI {
 
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
-            t.printStackTrace();
+                t.printStackTrace();
             }
         });
     }
 
+    /**
+     * Retrieves the member information for the given user ID from the server.
+     *
+     * @param id      The ID of the user for which to retrieve member information
+     * @param current MutableLiveData to hold the current member object
+     */
     public void getMember(String id, MutableLiveData<Member> current) {
         Call<Member> call = webServicesAPI.getUser(id);
         new Thread(() -> {
@@ -102,11 +134,18 @@ public class UserAPI {
 
             @Override
             public void onFailure(Call<Member> call, Throwable t) {
-            t.printStackTrace();
+                t.printStackTrace();
             }
         });
     }
 
+
+    /**
+     * Retrieves the member information by email from the server or local database if available.
+     *
+     * @param email   The email of the member to retrieve
+     * @param current MutableLiveData to hold the current member object
+     */
     public void getMemberByEmail(String email, MutableLiveData<Member> current) {
         Call<Member> call = webServicesAPI.getUserByEmail(email);
         new Thread(() -> {
@@ -139,8 +178,13 @@ public class UserAPI {
 
     }
 
+    /**
+     * Updates the member information on the server and local database.
+     *
+     * @param member The member object to be updated
+     */
     public void updateMember(Member member) {
-        Call<Void> call =  webServicesAPI.updateUser(member.get_id(), member);
+        Call<Void> call = webServicesAPI.updateUser(member.get_id(), member);
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
@@ -156,8 +200,13 @@ public class UserAPI {
         });
     }
 
+    /**
+     * Deletes the member from the server and local database.
+     *
+     * @param toDelete The member object to be deleted
+     */
     public void deleteMember(Member toDelete) {
-        Call<Void> call =  webServicesAPI.deleteUser(toDelete.get_id());
+        Call<Void> call = webServicesAPI.deleteUser(toDelete.get_id());
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
@@ -171,6 +220,11 @@ public class UserAPI {
         });
     }
 
+    /**
+     * Retrieves a list of members by their IDs from the server.
+     *
+     * @param ids List of member IDs to retrieve
+     */
     public void getMembers(List<String> ids) {
         Call<List<Member>> call = webServicesAPI.getUsersList(ids);
         call.enqueue(new Callback<List<Member>>() {
@@ -184,4 +238,5 @@ public class UserAPI {
             }
         });
     }
+
 }

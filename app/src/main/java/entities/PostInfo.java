@@ -4,6 +4,10 @@ import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.Ignore;
 
+/**
+ * Entity class representing the information related to a post.
+ * Each post has its own unique post info.
+ */
 @Entity(primaryKeys = {"userId","postId"},tableName = "postInfo")
 public class PostInfo {
 
@@ -16,6 +20,16 @@ public class PostInfo {
     private boolean isLiked;
     private int commentsAmount;
 
+    /**
+     * Constructor for creating a PostInfo object with user ID, post ID, like amount,
+     * like status, and comments amount.
+     *
+     * @param userId The ID of the user associated with the post info.
+     * @param postId The ID of the post associated with the post info.
+     * @param likeAmount The number of likes on the post.
+     * @param isLiked Indicates whether the post is liked by the user.
+     * @param commentsAmount The number of comments on the post.
+     */
     public PostInfo(@NonNull String userId, @NonNull String postId, int likeAmount, boolean isLiked, int commentsAmount) {
         this.userId = userId;
         this.postId = postId;
@@ -24,6 +38,15 @@ public class PostInfo {
         this.commentsAmount = commentsAmount;
     }
 
+    /**
+     * Constructor for creating a PostInfo object with post ID, like amount, like status,
+     * and comments amount.
+     *
+     * @param postId The ID of the post associated with the post info.
+     * @param likeAmount The number of likes on the post.
+     * @param isLiked Indicates whether the post is liked by the user.
+     * @param commentsAmount The number of comments on the post.
+     */
     @Ignore
     public PostInfo(@NonNull String postId, int likeAmount, boolean isLiked,int commentsAmount) {
         this.postId = postId;
@@ -33,6 +56,7 @@ public class PostInfo {
         this.commentsAmount = commentsAmount;
     }
 
+    //Getters and Setters
     @NonNull
     public String getUserId() {
         return userId;

@@ -22,6 +22,9 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import viewmodels.MemberViewModel;
 
+/**
+ * Manages the API calls related to posts.
+ */
 public class PostAPI {
     private final PostRepo.PostListData postListData;
     private final PostDao dao;
@@ -29,6 +32,14 @@ public class PostAPI {
     private final PostInfoDao infoDao;
     private final Post internetFailed;
 
+    /**
+     * Constructor for initializing PostAPI.
+     *
+     * @param postListData MutableLiveData object to hold the list of posts
+     * @param dao           Data access object for post database operations
+     * @param infoDao       Data access object for post information database operations
+     * @param token         JWT token for authorization
+     */
     public PostAPI(PostRepo.PostListData postListData, PostDao dao, PostInfoDao infoDao, String token) {
         this.postListData = postListData;
         this.dao = dao;
@@ -57,6 +68,12 @@ public class PostAPI {
         webServicesAPI = retrofit.create(WebServicesAPI.class);
     }
 
+    /**
+     * Retrieves posts from the server and updates the database and MutableLiveData object.
+     *
+     * @param userId The ID of the user whose posts are being retrieved
+     * @param mVM    The MemberViewModel instance to save members associated with posts
+     */
     private void getPosts(String userId, MemberViewModel mVM) {
         Call<List<Triple<Post, Member, PostInfo>>> call = webServicesAPI.getLastPosts();
         List<Post> posts = new ArrayList<>();
@@ -95,21 +112,33 @@ public class PostAPI {
         });
     }
 
+    /**
+     * Retrieves the last posts for a given user from the local database and the server.
+     *
+     * @param userId The ID of the user whose last posts are being retrieved
+     * @param mVM    The MemberViewModel instance to save members associated with posts
+     */
     public void getLastPosts(String userId, MemberViewModel mVM) {
         new Thread(() -> {
             //get posts from local db
-            /*List<Post> posts = dao.getAll(userId);
+            List<Post> posts = dao.getAll(userId);
             for (Post post : posts) {
                 PostInfo postInfo = infoDao.getPostInfo(userId, post.get_id());
                 setPostByInfo(post,postInfo);
             }
-            postListData.postValue(posts);*/
+            postListData.postValue(posts);
 
             //get posts from server
             getPosts(userId, mVM);
         }).start();
     }
 
+    /**
+     * Sets the likes, liked status, and comments of a post based on its associated PostInfo object.
+     *
+     * @param post     The post to be updated
+     * @param postInfo The PostInfo object containing the relevant information
+     */
     private void setPostByInfo(Post post, PostInfo postInfo) {
         post.setLikes(postInfo.getLikeAmount());
         post.setLiked(postInfo.isLiked());
@@ -117,6 +146,13 @@ public class PostAPI {
     }
 
 
+    /**
+     * Retrieves the posts of a specific user from the server.
+     *
+     * @param postsUser The MutableLiveData object to hold the list of user posts
+     * @param userId    The ID of the user whose posts are being retrieved
+     * @param requester The ID of the user making the request
+     */
     public void getUserPosts(PostRepo.PostListData postsUser,String userId, String requester) {
         Call<List<Pair<Post, PostInfo>>> call = webServicesAPI.getPostsOfUser(userId);
         List<Post> posts = new ArrayList<>();
@@ -163,6 +199,12 @@ public class PostAPI {
         });
     }
 
+    /**
+     * Adds a new post to the server and local database.
+     *
+     * @param userId The ID of the user creating the post
+     * @param post   The post to be added
+     */
     public void addPost(String userId, Post post) {
         Call<Post> call = webServicesAPI.createPost(userId, post);
 
@@ -186,10 +228,14 @@ public class PostAPI {
                 t.printStackTrace();
             }
         });
-
-
     }
 
+    /**
+     * Updates a post on the server and local database.
+     *
+     * @param userId The ID of the user updating the post
+     * @param post   The updated post
+     */
     public void updateAllThePost(String userId, Post post) {
         Call<Void> call = webServicesAPI.updatePostAll(userId, post.get_id(), post);
         call.enqueue(new Callback<Void>() {
@@ -208,6 +254,12 @@ public class PostAPI {
         });
     }
 
+    /**
+     * Partially updates a post on the server and local database.
+     *
+     * @param userId The ID of the user updating the post
+     * @param post   The updated post with only the fields to be modified
+     */
     public void updatePost(String userId, Post post) {
         Call<Void> call = webServicesAPI.updatePost(userId, post.get_id(), post);
         call.enqueue(new Callback<Void>() {
@@ -234,6 +286,12 @@ public class PostAPI {
 
     }
 
+    /**
+     * Deletes a post from the server and local database.
+     *
+     * @param userId The ID of the user deleting the post
+     * @param post   The post to be deleted
+     */
     public void deletePost(String userId, Post post) {
         Call<Void> call = webServicesAPI.deletePost(userId, post.get_id());
         call.enqueue(new Callback<Void>() {
@@ -253,6 +311,12 @@ public class PostAPI {
         });
     }
 
+    /**
+     * Adds a like to a post on the server.
+     *
+     * @param userId The ID of the user adding the like
+     * @param postId The ID of the post to like
+     */
     public void addLike(String userId, String postId) {
         Call<Void> call = webServicesAPI.addLike(userId, postId);
         call.enqueue(new Callback<Void>() {
@@ -268,6 +332,12 @@ public class PostAPI {
         });
     }
 
+    /**
+     * Removes a like from a post on the server.
+     *
+     * @param userId The ID of the user removing the like
+     * @param postId The ID of the post to unlike
+     */
     public void removeLike(String userId, String postId) {
         Call<Void> call = webServicesAPI.removeLike(userId, postId);
         call.enqueue(new Callback<Void>() {

@@ -9,40 +9,55 @@ import java.util.List;
 import api.CommentAPI;
 import entities.Comment;
 
-// This class is the database of the comments
+/**
+ * Repository class for managing comments.
+ */
 public class CommentRepo {
     private CommentListData comments;
     private String postId;
     private CommentAPI commentAPI;
 
+    /**
+     * Constructor for initializing CommentRepo.
+     *
+     * @param postId The ID of the post associated with the comments.
+     * @param jwtToken The JWT token for authorization.
+     */
     public CommentRepo(String postId,String jwtToken) {
         comments = new CommentListData();
         this.postId = postId;
         commentAPI = new CommentAPI(comments,jwtToken);
     }
 
+    /**
+     * Inner class extending MutableLiveData to hold a list of comments.
+     */
     public class CommentListData extends MutableLiveData<List<Comment>> {
 
+        /**
+         * Constructor for initializing CommentListData.
+         */
         public CommentListData() {
             super();
             setValue(new LinkedList<>());
 
         }
 
+
+        /**
+         * Called when the LiveData becomes active.
+         */
         @Override
         protected void onActive() {
             super.onActive();
 
         }
 
-        public void addComments(List<Comment> newComments) {
-            List<Comment> temp = comments.getValue();
-            if (temp == null)
-                return;
-            temp.addAll(newComments);
-            comments.postValue(temp);
-        }
-
+        /**
+         * Adds a new comment to the list of comments.
+         *
+         * @param newComment The comment to add.
+         */
         public void addComment(Comment newComment) {
             List<Comment> comments1 = getValue();
             if (comments1 == null)
@@ -51,6 +66,11 @@ public class CommentRepo {
             comments.postValue(comments1);
         }
 
+        /**
+         * Removes a comment from the list of comments.
+         *
+         * @param id The ID of the comment to remove.
+         */
         public void removeComment(String id) {
             List<Comment> comments1 = getValue();
             if (comments1 == null)
@@ -65,6 +85,11 @@ public class CommentRepo {
         }
 
 
+        /**
+         * Updates a comment in the list of comments.
+         *
+         * @param comment The updated comment.
+         */
         public void updatePost(Comment comment) {
             List<Comment> comments1 = getValue();
             if (comments1 == null)
@@ -80,90 +105,49 @@ public class CommentRepo {
         }
     }
 
+    /**
+     * Returns LiveData containing the list of comments.
+     *
+     * @return LiveData holding the list of comments.
+     */
     public LiveData<List<Comment>> get() {
         return comments;
     }
 
+    /**
+     * Retrieves all comments associated with the post.
+     */
     public void getAll() {
         commentAPI.getAll(postId);
     }
 
+    /**
+     * Adds a new comment.
+     *
+     * @param c The comment to add.
+     */
     public void addComment(Comment c) {
         commentAPI.addComment(c);
     }
 
+
+    /**
+     * Deletes a comment.
+     *
+     * @param userId The ID of the user who owns the comment.
+     * @param postId The ID of the post associated with the comment.
+     * @param id The ID of the comment to delete.
+     */
     public void deleteComment(String userId, String postId, String id) {
         commentAPI.deleteComment(userId, postId, id);
     }
 
+    /**
+     * Updates a comment.
+     *
+     * @param c The updated comment.
+     */
     public void updateComment(Comment c) {
         commentAPI.updateComment(c);
     }
-
-
-    /*//private ArrayList<Comment> commentsList;
-    //private static int nextId;
-
-
-     *Constructor for the CommentRepo class.
-     * @param commentsList Initial comment list.
-     */
-    /*public CommentRepo(ArrayList<Comment> commentsList) {
-        this.commentsList = commentsList;
-    }*/
-
-    /*
-     * Adds a new comment to the list.
-     * @param text The comment's text.
-     * @param firstN The user's first name.
-     * @param lastN The user's last name.
-     */
-    /*public void add(String text, String firstN, String lastN) {
-        Comment comment = new Comment(nextId, text, firstN + " " + lastN);
-        commentsList.add(0, comment); // Add the comment at the beginning of the list
-        nextId++; // Increment the id for the next comment
-    }*/
-
-    /*
-     * Removes a comment from the list by its id.
-     * @param id The id of the comment to be removed.
-     */
-    /*public void remove(int id) {
-        for (int i = 0; i < commentsList.size(); i++) {
-            if (commentsList.get(i).getId() == id) {
-                commentsList.remove(commentsList.get(i)); // Remove the comment at index i
-                break; // Exit the loop after removing the comment
-            }
-        }
-    }*/
-
-    /*
-     * Edits the text of a comment with the specified id.
-     * @param id The id of the comment to be edited.
-     * @param newText The new text of the comment.
-     */
-    /*public void edit(int id, String newText) {
-        for (int i = 0; i < commentsList.size(); i++) {
-            if (commentsList.get(i).getId() == id) {
-                commentsList.get(i).setText(newText); // Set the new text for the comment
-                break; // Exit the loop after updating the comment
-            }
-        }
-    }*/
-
-    /*
-     * Gets the list of comments.
-     * @return The list of comments.
-     */
-    /*public ArrayList<Comment> getCommentsList() {
-        return commentsList;
-    }*/
-
-    /*
-     * Sets the list of comments.
-     * @param commentsList The list of comments to be set.
-     */
-    /*public void setCommentsList(ArrayList<Comment> commentsList) {
-        this.commentsList = commentsList;
-    }*/
 }
