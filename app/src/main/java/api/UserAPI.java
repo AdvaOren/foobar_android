@@ -158,7 +158,7 @@ public class UserAPI {
             public void onResponse(Call<Member> call, Response<Member> response) {
                 new Thread(() -> {
                     Member temp = response.body();
-                    if (temp == null) {
+                    if (temp == null || temp.get_id() == null) {
                         current.postValue(null);
                         return;
                     }

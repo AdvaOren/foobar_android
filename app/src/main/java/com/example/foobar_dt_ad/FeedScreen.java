@@ -37,6 +37,7 @@ public class FeedScreen extends AppCompatActivity {
     private PostsViewModel postVM;
     private MemberViewModel memberVM;
     private Member currentMember;
+    public static final int FEED = 1;
 
     /**
      * Called when the activity is first created.
@@ -68,7 +69,7 @@ public class FeedScreen extends AppCompatActivity {
 
         // Initialize RecyclerView
         final PostListAdapter adapter = new PostListAdapter(this, this, postVM,
-                currentMember, memberVM, jwt);
+                currentMember, memberVM, jwt,FEED);
         lstPosts.setAdapter(adapter);
         lstPosts.setLayoutManager(new LinearLayoutManager(this));
         postVM.getAll(id).observe(this, posts -> {
@@ -108,6 +109,7 @@ public class FeedScreen extends AppCompatActivity {
                         } else if (result.getResultCode() == BACK_FROM_USER) {
                             currentMember = memberVM.getMemberQuick(currentMember.get_id());
                             avatar.setImageBitmap(currentMember.getImgBitmap());
+                            postVM.reload(currentMember.get_id());
                           //the case the user delete himself
                         } else if(result.getResultCode() == DEAD) {
                             finish();

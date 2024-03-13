@@ -1,5 +1,8 @@
 package repositories;
 
+import static com.example.foobar_dt_ad.FeedScreen.FEED;
+import static com.example.foobar_dt_ad.UserScreen.USER_SCREEN;
+
 import android.app.Activity;
 
 import androidx.lifecycle.LiveData;
@@ -44,7 +47,7 @@ public class PostRepo {
         postInfoDao = db.postInfoDao();
         posts = new PostListData();
         postsByUser = new PostListData();
-        postAPI = new PostAPI(posts, postDao,postInfoDao, jwtToken);
+        postAPI = new PostAPI(posts, postDao,postInfoDao, jwtToken,postsByUser);
         this.memberVm = memberVM;
     }
 
@@ -73,7 +76,7 @@ public class PostRepo {
             new Thread(() -> {
                 Member member = memberVm.getCurrentMember().getValue();
                 if (member != null)
-                    posts.postValue(postDao.getAll(member.get_id()));
+                    postValue(postDao.getAll(member.get_id()));
             });
         }
 
@@ -86,7 +89,7 @@ public class PostRepo {
             if (posts1 == null)
                 return;
             posts1.add(0,newPost);
-            posts.postValue(posts1);
+            postValue(posts1);
         }
 
         /**
@@ -99,7 +102,7 @@ public class PostRepo {
             if (posts1 == null)
                 return;
             posts1.remove(post);
-            posts.postValue(posts1);
+            postValue(posts1);
         }
 
         /**
@@ -116,7 +119,7 @@ public class PostRepo {
                 if (curr.get_id().equals(postId)) {
                     curr.setImg(post.getImg());
                     curr.setContent(post.getContent());
-                    posts.postValue(posts1);
+                    postValue(posts1);
                     break;
                 }
             }
@@ -134,7 +137,7 @@ public class PostRepo {
             for (Post curr: posts1) {
                 if (curr.get_id().equals(postInfo.getPostId())) {
                     curr.setComments(postInfo.getCommentsAmount());
-                    posts.postValue(posts1);
+                    postValue(posts1);
                     break;
                 }
             }
@@ -177,8 +180,8 @@ public class PostRepo {
      * @param userId The ID of the user.
      * @param post   The post to delete.
      */
-    public void delete(String userId, Post post) {
-        postAPI.deletePost(userId, post);
+    public void delete(String userId, Post post, int whereAmI) {
+        postAPI.deletePost(userId, post,whereAmI);
     }
 
     /**
@@ -187,13 +190,13 @@ public class PostRepo {
      * @param userId The ID of the user.
      * @param post   The updated post.
      */
-    public void update(String userId, Post post) {
+    public void update(String userId, Post post, int whereAmI) {
         if (post.getContent().equals("") && post.getImg().equals(""))
             return;
         if (post.getContent().equals("") || post.getImg().equals(""))
-            postAPI.updatePost(userId, post);
+            postAPI.updatePost(userId, post,whereAmI);
         else
-            postAPI.updateAllThePost(userId, post);
+            postAPI.updateAllThePost(userId, post,whereAmI);
     }
 
 
@@ -204,14 +207,17 @@ public class PostRepo {
      * @param postId     The post ID.
      * @param numChanges The number of changes.
      */
-    public void updateNumComments(String userId,String postId,int numChanges) {
+    public void updateNumComments(String userId,String postId,int numChanges, int whereAmI) {
         new Thread(() -> {
             PostInfo postInfo = postInfoDao.getPostInfo(userId, postId);
             if (postInfo == null)
                 return;
             postInfo.setCommentsAmount(postInfo.getCommentsAmount()+ numChanges);
             postInfoDao.update(postInfo);
-            posts.updateNumComments(postInfo);
+            if (whereAmI == FEED)
+                posts.updateNumComments(postInfo);
+            else if (whereAmI == USER_SCREEN)
+                postsByUser.updateNumComments(postInfo);
         }).start();
     }
 

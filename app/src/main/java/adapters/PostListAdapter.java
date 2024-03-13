@@ -102,16 +102,18 @@ public class PostListAdapter extends RecyclerView.Adapter<PostListAdapter.PostVi
     private final ActivityResultLauncher<Intent> intentLauncher;
     private Member member;
     private final String jwtToken;
+    private int whereAmI;
 
     //This is a constructor for the class
     public PostListAdapter(FragmentActivity activity, Context context, PostsViewModel postVM,
-                           Member member, MemberViewModel memberVM,String jwtToken) {
+                           Member member, MemberViewModel memberVM,String jwtToken,int whereAmI) {
         mInflater = LayoutInflater.from(context);
         this.postVM = postVM;
         this.memberVM = memberVM;
         this.activity = activity;
         this.member = member;
         this.jwtToken = jwtToken;
+        this.whereAmI = whereAmI;
 
         //get result from another activity
         intentLauncher = activity.registerForActivityResult(
@@ -129,15 +131,19 @@ public class PostListAdapter extends RecyclerView.Adapter<PostListAdapter.PostVi
                                 String date = data.getStringExtra("date");
                                 String userId = data.getStringExtra("userId");
                                 String postId = data.getStringExtra("postId");
+                                Post temp;
+                                Bitmap bmp = null;
                                 if (byteArray != null) {
-                                    Bitmap bmp = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
-                                    Post temp =  new Post(content, bmp, date,userId);
+                                    bmp = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
+                                    temp = new Post(content, bmp, date,userId);
                                     temp.set_id(postId);
-                                    postVM.update(userId,temp);
+                                    postVM.update(userId,temp,whereAmI);
                                 }
                                 else {
-                                    postVM.update(userId, new Post(postId,userId,content, date,"","" ));
+                                    temp = new Post(postId,userId,content, date,"","" );
+                                    postVM.update(userId, temp,whereAmI);
                                 }
+                                //postVM.updateAdapter(posts,temp,bmp);
                                 notifyDataSetChanged();
                             }
                         }
@@ -148,7 +154,7 @@ public class PostListAdapter extends RecyclerView.Adapter<PostListAdapter.PostVi
                                 int numChanges = data.getIntExtra("numChanges",0);
                                 String userId = data.getStringExtra("userId");
                                 String postId = data.getStringExtra("postId");
-                                postVM.updateNumComments(userId,postId,numChanges);
+                                postVM.updateNumComments(userId,postId,numChanges,whereAmI);
                             }
                         }
                         //get the data from the user screen
@@ -196,7 +202,7 @@ public class PostListAdapter extends RecyclerView.Adapter<PostListAdapter.PostVi
 
         //handle the case the user delete post
         holder.delete.setOnClickListener(v -> {
-            postVM.delete(member.get_id(), current);
+            postVM.delete(member.get_id(), current,whereAmI);
             notifyItemRemoved(position);
         });
 

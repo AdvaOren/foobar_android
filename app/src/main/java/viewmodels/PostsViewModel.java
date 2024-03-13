@@ -1,6 +1,7 @@
 package viewmodels;
 
 import android.app.Activity;
+import android.graphics.Bitmap;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
@@ -77,8 +78,8 @@ public class PostsViewModel extends ViewModel {
      * @param userId The user ID.
      * @param post   The post to delete.
      */
-    public void delete(String userId, Post post) {
-        postRepo.delete(userId, post);
+    public void delete(String userId, Post post, int whereAmI) {
+        postRepo.delete(userId, post,whereAmI);
     }
 
 
@@ -88,8 +89,23 @@ public class PostsViewModel extends ViewModel {
      * @param userId The user ID.
      * @param post   The post to update.
      */
-    public void update(String userId, Post post) {
-        postRepo.update(userId, post);
+    public void update(String userId, Post post,int whereAmI) {
+        postRepo.update(userId, post,whereAmI);
+    }
+
+    public void updateAdapter(List<Post> posts, Post post, Bitmap bmp) {
+        String postId = post.get_id();
+        for (Post curr : posts) {
+            if (curr.get_id().equals(postId)) {
+                if (bmp != null) {
+                    curr.setImgBitmap(bmp);
+                }
+                if (!post.getContent().equals("")) {
+                    curr.setContent(post.getContent());
+                }
+                break;
+            }
+        }
     }
 
     /**
@@ -119,8 +135,8 @@ public class PostsViewModel extends ViewModel {
      * @param postId      The post ID.
      * @param numComments The number of comments.
      */
-    public void updateNumComments(String userId,String postId,int numComments) {
-        postRepo.updateNumComments(userId,postId,numComments);
+    public void updateNumComments(String userId,String postId,int numComments, int whereAmI) {
+        postRepo.updateNumComments(userId,postId,numComments,whereAmI);
     }
 
     /**
@@ -141,4 +157,6 @@ public class PostsViewModel extends ViewModel {
     public void deleteUser(String userId) {
         postRepo.deleteUser(userId);
     }
+
+
 }

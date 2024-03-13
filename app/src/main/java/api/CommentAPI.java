@@ -72,7 +72,7 @@ public class CommentAPI {
             public void onResponse(Call<List<Pair<JsonObject, Member>>> call, Response<List<Pair<JsonObject, Member>>> response) {
                 new Thread(() -> {
                     List<Pair<JsonObject, Member>> newData = response.body();
-                    if (newData != null) {
+                    if (newData != null && newData.size() > 0) {
                         for (Pair<JsonObject, Member> pair : newData) {
                             JsonObject json = pair.first;
                             Member member = pair.second;

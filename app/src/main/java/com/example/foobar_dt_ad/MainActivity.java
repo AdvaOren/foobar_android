@@ -34,9 +34,11 @@ public class MainActivity extends AppCompatActivity {
     private Member current;
     private String jwtToken;
     private String loginEmail;
+    private String loginPassword;
+    private EditText email;
+    private EditText password;
 
 
-    //private  Bitmap bmp;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,8 +46,8 @@ public class MainActivity extends AppCompatActivity {
 
         Button signUp = findViewById(R.id.signUpB);
         Button logIn = findViewById(R.id.logInB);
-        EditText email = findViewById(R.id.usernameField);
-        EditText password = findViewById(R.id.passwordField);
+        email = findViewById(R.id.usernameField);
+        password = findViewById(R.id.passwordField);
         TextView invalidEmail = findViewById(R.id.invalidEmail);
         TextView wrongPassword = findViewById(R.id.wrongPassword);
         Activity activity = this;
@@ -114,9 +116,10 @@ public class MainActivity extends AppCompatActivity {
                 wrongPassword.setVisibility(View.VISIBLE);
                 progressBar.setVisibility(View.GONE);
             }
-            if (!jwt.equals("")) {
+            if (!jwt.equals("") && !jwt.equals(jwtToken)) {
                 jwtToken = jwt;
                 loginEmail = current.getEmail();
+                loginPassword = current.getPassword();
                 moveToFeed(progressBar);
             }
         });
@@ -124,7 +127,8 @@ public class MainActivity extends AppCompatActivity {
         logIn.setOnClickListener(v -> {
             memberVM.getMemberByEmail(email.getText().toString());
             progressBar.setVisibility(View.VISIBLE);
-            if (!jwtToken.equals("") && loginEmail.equals(email.getText().toString())) {
+            if (!jwtToken.equals("") && loginEmail.equals(email.getText().toString())
+                && loginPassword.equals(password.getText().toString())) {
                 moveToFeed(progressBar);
             }
         });
@@ -142,8 +146,8 @@ public class MainActivity extends AppCompatActivity {
         i.putExtra("jwt", jwtToken);
         i.putExtra("id", current.get_id());
         progressBar.setVisibility(View.GONE);
-        jwtToken = "";
-        current = null;
+        password.setText("");
+        email.setText("");
         startActivity(i);
     }
 

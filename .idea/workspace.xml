@@ -110,45 +110,18 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9ba0b45a-247e-48d0-8105-f9864560f4b1" name="Changes" comment="edit and delete user">
+    <list default="true" id="9ba0b45a-247e-48d0-8105-f9864560f4b1" name="Changes" comment="fix some bugs">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/adapters/FriendListAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/adapters/FriendListAdapter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/adapters/MyFriendsListAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/adapters/MyFriendsListAdapter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/adapters/PostListAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/adapters/PostListAdapter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/api/CommentAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/api/CommentAPI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/api/FriendAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/api/FriendAPI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/api/PostAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/api/PostAPI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/api/UserAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/api/UserAPI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/api/WebServicesAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/api/WebServicesAPI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/foobar_dt_ad/Constants.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/foobar_dt_ad/DeleteAccount.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/foobar_dt_ad/DeleteAccount.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/foobar_dt_ad/FeedScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/foobar_dt_ad/FeedScreen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/foobar_dt_ad/FriendsScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/foobar_dt_ad/FriendsScreen.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/foobar_dt_ad/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/foobar_dt_ad/MainActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/foobar_dt_ad/editScreens/EditNames.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/foobar_dt_ad/editScreens/EditNames.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/foobar_dt_ad/editScreens/EditPassword.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/foobar_dt_ad/editScreens/EditPassword.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/foobar_dt_ad/editScreens/EditPhoto.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/foobar_dt_ad/editScreens/EditPhoto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/foobar_dt_ad/signupScreens/SignUpNames.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/foobar_dt_ad/signupScreens/SignUpNames.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/foobar_dt_ad/signupScreens/SignUpPasswords.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/foobar_dt_ad/signupScreens/SignUpPasswords.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/foobar_dt_ad/signupScreens/SignUpScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/foobar_dt_ad/signupScreens/SignUpScreen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/daos/AppDB.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/daos/AppDB.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/daos/Converters.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/daos/Converters.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/daos/MemberDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/daos/MemberDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/daos/PostDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/daos/PostDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/daos/PostInfoDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/daos/PostInfoDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/entities/Comment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/entities/Comment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/entities/Friend.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/entities/Friend.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/entities/Member.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/entities/Member.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/entities/Post.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/entities/Post.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/entities/PostInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/entities/PostInfo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/repositories/CommentRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/repositories/CommentRepo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/repositories/FriendRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/repositories/FriendRepo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/repositories/MemberRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/repositories/MemberRepo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/foobar_dt_ad/UserScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/foobar_dt_ad/UserScreen.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/repositories/PostRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/repositories/PostRepo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/viewmodels/CommentViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/viewmodels/CommentViewModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/viewmodels/FriendViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/viewmodels/FriendViewModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/viewmodels/MemberViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/viewmodels/MemberViewModel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/viewmodels/PostsViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/viewmodels/PostsViewModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -436,7 +409,15 @@
       <option name="project" value="LOCAL‎" />
       <updated>1710194177543</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL‎-00009" summary="add comments to the code">
+      <option name="closed" value="true" />
+      <created>1710278673398</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL‎-00009" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1710278673398</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -460,7 +441,9 @@
     <MESSAGE value="add comments" />
     <MESSAGE value="handle friends" />
     <MESSAGE value="edit and delete user" />
-    <option name="LAST_COMMIT_MESSAGE" value="edit and delete user" />
+    <MESSAGE value="add comments to the code" />
+    <MESSAGE value="fix some bugs" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix some bugs" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -472,32 +455,32 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/api/PostAPI.java</url>
-          <line>329</line>
+          <line>345</line>
           <option name="timeStamp" value="223" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/api/PostAPI.java</url>
-          <line>350</line>
+          <line>366</line>
           <option name="timeStamp" value="224" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/api/PostAPI.java</url>
-          <line>227</line>
+          <line>233</line>
           <option name="timeStamp" value="235" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/api/PostAPI.java</url>
-          <line>308</line>
+          <line>324</line>
           <option name="timeStamp" value="255" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/api/PostAPI.java</url>
-          <line>282</line>
+          <line>295</line>
           <option name="timeStamp" value="261" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/api/PostAPI.java</url>
-          <line>251</line>
+          <line>260</line>
           <option name="timeStamp" value="262" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -552,7 +535,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/api/PostAPI.java</url>
-          <line>109</line>
+          <line>115</line>
           <option name="timeStamp" value="322" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">

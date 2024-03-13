@@ -53,6 +53,7 @@ public class UserScreen extends AppCompatActivity {
     private String requested;
     private String loginUserId;
     public static final int BACK_FROM_USER = 4;
+    public static final int USER_SCREEN = 2;
 
 
     @Override
@@ -89,7 +90,7 @@ public class UserScreen extends AppCompatActivity {
 
         // Initialize RecyclerView
         final PostListAdapter adapter = new PostListAdapter(this, this, postVM,
-                loginUser, memberVM, jwt);
+                loginUser, memberVM, jwt,USER_SCREEN);
         lstPosts.setAdapter(adapter);
         lstPosts.setLayoutManager(new LinearLayoutManager(this));
         postVM.getPostsByUser(requested,loginUserId).observe(this, posts -> {

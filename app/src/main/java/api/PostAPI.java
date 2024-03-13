@@ -1,5 +1,8 @@
 package api;
 
+import static com.example.foobar_dt_ad.FeedScreen.FEED;
+import static com.example.foobar_dt_ad.UserScreen.USER_SCREEN;
+
 import android.util.Pair;
 
 import java.util.ArrayList;
@@ -27,6 +30,7 @@ import viewmodels.MemberViewModel;
  */
 public class PostAPI {
     private final PostRepo.PostListData postListData;
+    private final PostRepo.PostListData postListDataUser;
     private final PostDao dao;
     private final WebServicesAPI webServicesAPI;
     private final PostInfoDao infoDao;
@@ -40,8 +44,10 @@ public class PostAPI {
      * @param infoDao       Data access object for post information database operations
      * @param token         JWT token for authorization
      */
-    public PostAPI(PostRepo.PostListData postListData, PostDao dao, PostInfoDao infoDao, String token) {
+    public PostAPI(PostRepo.PostListData postListData, PostDao dao, PostInfoDao infoDao
+            , String token, PostRepo.PostListData postListDataUser) {
         this.postListData = postListData;
+        this.postListDataUser = postListDataUser;
         this.dao = dao;
         this.infoDao = infoDao;
         internetFailed = new Post("FAILED TO CONNECT TO SERVER\nPLEASE TRY AGAIN", null, "", "no internet");
@@ -236,14 +242,17 @@ public class PostAPI {
      * @param userId The ID of the user updating the post
      * @param post   The updated post
      */
-    public void updateAllThePost(String userId, Post post) {
+    public void updateAllThePost(String userId, Post post,int whereAmI) {
         Call<Void> call = webServicesAPI.updatePostAll(userId, post.get_id(), post);
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 new Thread(() -> {
                     dao.update(post);
-                    postListData.updatePost(post);
+                    if (whereAmI == FEED)
+                        postListData.updatePost(post);
+                    else if (whereAmI == USER_SCREEN)
+                        postListDataUser.updatePost(post);
                 }).start();
             }
 
@@ -260,7 +269,7 @@ public class PostAPI {
      * @param userId The ID of the user updating the post
      * @param post   The updated post with only the fields to be modified
      */
-    public void updatePost(String userId, Post post) {
+    public void updatePost(String userId, Post post, int whereAmI) {
         Call<Void> call = webServicesAPI.updatePost(userId, post.get_id(), post);
         call.enqueue(new Callback<Void>() {
             @Override
@@ -274,7 +283,11 @@ public class PostAPI {
                     if (!post.getImg().equals(""))
                         temp.setImg(post.getImg());
                     dao.update(temp);
-                    postListData.updatePost(temp);
+                    if (whereAmI == FEED)
+                        postListData.updatePost(temp);
+                    else if (whereAmI == USER_SCREEN)
+                        postListDataUser.updatePost(temp);
+
                 }).start();
             }
 
@@ -292,7 +305,7 @@ public class PostAPI {
      * @param userId The ID of the user deleting the post
      * @param post   The post to be deleted
      */
-    public void deletePost(String userId, Post post) {
+    public void deletePost(String userId, Post post, int whereAmI) {
         Call<Void> call = webServicesAPI.deletePost(userId, post.get_id());
         call.enqueue(new Callback<Void>() {
             @Override
@@ -300,7 +313,10 @@ public class PostAPI {
                 new Thread(() -> {
                     dao.deletePostById(post.get_id());
                     infoDao.delete(userId, post.get_id());
-                    postListData.removePost(post);
+                    if (whereAmI == FEED)
+                        postListData.removePost(post);
+                    else if (whereAmI == USER_SCREEN)
+                        postListDataUser.removePost(post);
                 }).start();
             }
 
