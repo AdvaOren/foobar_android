@@ -217,16 +217,18 @@ public class PostAPI {
         call.enqueue(new Callback<Post>() {
             @Override
             public void onResponse(Call<Post> call, Response<Post> response) {
-                new Thread(() -> {
-                    Post newPost = response.body();
-                    if (newPost == null)
-                        return;
-                    PostInfo postInfo = new PostInfo(userId, newPost.get_id(), 0, false, 0);
-                    newPost.setOwner(userId);
-                    dao.insert(newPost);
-                    infoDao.insert(postInfo);
-                    postListData.addPost(newPost);
-                }).start();
+                if (response.isSuccessful()) {
+                    new Thread(() -> {
+                        Post newPost = response.body();
+                        if (newPost == null)
+                            return;
+                        PostInfo postInfo = new PostInfo(userId, newPost.get_id(), 0, false, 0);
+                        newPost.setOwner(userId);
+                        dao.insert(newPost);
+                        infoDao.insert(postInfo);
+                        postListData.addPost(newPost);
+                    }).start();
+                }
             }
 
             @Override
@@ -247,13 +249,15 @@ public class PostAPI {
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
-                new Thread(() -> {
-                    dao.update(post);
-                    if (whereAmI == FEED)
-                        postListData.updatePost(post);
-                    else if (whereAmI == USER_SCREEN)
-                        postListDataUser.updatePost(post);
-                }).start();
+                if (response.isSuccessful()) {
+                    new Thread(() -> {
+                        dao.update(post);
+                        if (whereAmI == FEED)
+                            postListData.updatePost(post);
+                        else if (whereAmI == USER_SCREEN)
+                            postListDataUser.updatePost(post);
+                    }).start();
+                }
             }
 
             @Override
@@ -270,29 +274,31 @@ public class PostAPI {
      * @param post   The updated post with only the fields to be modified
      */
     public void updatePost(String userId, Post post, int whereAmI) {
-        Call<Void> call = webServicesAPI.updatePost(userId, post.get_id(), post);
-        call.enqueue(new Callback<Void>() {
+        Call<Post> call = webServicesAPI.updatePost(userId, post.get_id(), post);
+        call.enqueue(new Callback<Post>() {
             @Override
-            public void onResponse(Call<Void> call, Response<Void> response) {
-                new Thread(() -> {
-                    Post temp = dao.getPost(post.get_id());
-                    if (temp == null)
-                        return;
-                    if (!post.getContent().equals(""))
-                        temp.setContent(post.getContent());
-                    if (!post.getImg().equals(""))
-                        temp.setImg(post.getImg());
-                    dao.update(temp);
-                    if (whereAmI == FEED)
-                        postListData.updatePost(temp);
-                    else if (whereAmI == USER_SCREEN)
-                        postListDataUser.updatePost(temp);
+            public void onResponse(Call<Post> call, Response<Post> response) {
+                if (response.isSuccessful()) {
+                    new Thread(() -> {
+                        Post temp = dao.getPost(post.get_id());
+                        if (temp == null)
+                            return;
+                        if (!post.getContent().equals(""))
+                            temp.setContent(post.getContent());
+                        if (!post.getImg().equals(""))
+                            temp.setImg(post.getImg());
+                        dao.update(temp);
+                        if (whereAmI == FEED)
+                            postListData.updatePost(temp);
+                        else if (whereAmI == USER_SCREEN)
+                            postListDataUser.updatePost(temp);
 
-                }).start();
+                    }).start();
+                }
             }
 
             @Override
-            public void onFailure(Call<Void> call, Throwable t) {
+            public void onFailure(Call<Post> call, Throwable t) {
                 t.printStackTrace();
             }
         });
