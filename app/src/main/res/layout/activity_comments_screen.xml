@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="feed_content.comment.CommentsScreen"
+    tools:context=".CommentsScreen"
     >
 
 
@@ -17,23 +17,36 @@
         android:background="#018BFA"
         android:src="@drawable/ic_dark_mode"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/dayC"
+        app:backgroundTint="#214EF3"/>
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:visibility="visible"
+        app:layout_constraintEnd_toStartOf="@+id/titleComScreen"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-
 
     <TextView
         android:id="@+id/titleComScreen"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
         android:fontFamily="serif"
+        android:text="@string/what_you_think"
         android:textAlignment="center"
         android:textColor="#0023D4"
         android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/list_view"
+        app:layout_constraintEnd_toEndOf="@+id/btnDark"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btnDark"
+        app:layout_constraintTop_toTopOf="parent"
          />
-
 
 
     <ListView
@@ -74,7 +87,9 @@
             android:layout_marginEnd="5dp"
             android:layout_weight="1"
             android:backgroundTint="#4DC7FF"
-            android:src="@drawable/ic_send" />
+            android:src="@drawable/ic_send"
+            app:tint="@color/dayC"
+            app:backgroundTint="#214EF3"/>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

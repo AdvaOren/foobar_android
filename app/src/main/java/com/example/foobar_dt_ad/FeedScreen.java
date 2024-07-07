@@ -1,6 +1,17 @@
 package com.example.foobar_dt_ad;
 
-import static feed_content.add_post.AddPost.ADD;
+import static com.example.foobar_dt_ad.AddPostScreen.ADD;
+import static com.example.foobar_dt_ad.DeleteAccount.DEAD;
+import static com.example.foobar_dt_ad.UserScreen.BACK_FROM_USER;
+
+import android.content.Intent;
+import android.content.res.Configuration;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.Bundle;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
@@ -13,64 +24,68 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import android.content.Intent;
-import android.content.res.Configuration;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.Bundle;
-import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-
-
-import java.io.IOException;
-import java.io.InputStream;
-
-import feed_content.post.PostListAdapter;
-import feed_content.post.PostsViewModel;
-import feed_content.add_post.AddPost;
+import adapters.PostListAdapter;
+import entities.Member;
+import entities.Post;
+import viewmodels.MemberViewModel;
+import viewmodels.PostsViewModel;
 
 
 //This activity is the feed activity that presents all the posts
 public class FeedScreen extends AppCompatActivity {
 
-    private PostsViewModel viewModel;
-    private Bitmap userPic;
-    private String lastName;
-    private String firstName;
+    private PostsViewModel postVM;
+    private MemberViewModel memberVM;
+    private Member currentMember;
+    public static final int FEED = 1;
+
+    /**
+     * Called when the activity is first created.
+     * @param savedInstanceState The saved instance state.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_feed_screen);
-        viewModel = new ViewModelProvider(this).get(PostsViewModel.class);
-        viewModel.initializePostViewModel(this);
-
-        /*Intent fromLoginI = getIntent();
-        firstName = fromLoginI.getStringExtra("firstName");
-        lastName = fromLoginI.getStringExtra("lastName");
-        Bundle extras = fromLoginI.getExtras();
-        byte[] byteArray = extras.getByteArray("picture");
-        userPic = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
-        */firstName = "temp";
-        lastName = "temp2";
-        try {
-            InputStream inputStream = this.getAssets().open("water.jpeg");
-            userPic = BitmapFactory.decodeStream(inputStream);
-            inputStream.close();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
-        //set the user pic
         ImageView avatar = findViewById(R.id.avatarPicMenu);
-        avatar.setImageBitmap(userPic);
+        RecyclerView lstPosts = findViewById(R.id.lstPosts);
+        SwipeRefreshLayout refreshLayout = findViewById(R.id.refreshLayout);
+
+        //get info from the login screen
+        Intent fromLoginI = getIntent();
+        String id = fromLoginI.getStringExtra("id");
+        String jwt = fromLoginI.getStringExtra("jwt");
+
+        refreshLayout.setRefreshing(true);
+
+        //create member view model
+        memberVM = new ViewModelProvider(this).get(MemberViewModel.class);
+        memberVM.initializeMemberViewModel(this);
+        memberVM.updateToken(this, jwt);
+
+        //create post view model
+        postVM = new ViewModelProvider(this).get(PostsViewModel.class);
+        postVM.initializePostViewModel(this, jwt,memberVM);
 
         // Initialize RecyclerView
-        RecyclerView lstPosts = findViewById(R.id.lstPosts);
-        final PostListAdapter adapter = new PostListAdapter(this,this,viewModel,userPic,firstName,lastName);
+        final PostListAdapter adapter = new PostListAdapter(this, this, postVM,
+                currentMember, memberVM, jwt,FEED);
         lstPosts.setAdapter(adapter);
         lstPosts.setLayoutManager(new LinearLayoutManager(this));
-        adapter.setPosts(viewModel.get());
+        postVM.getAll(id).observe(this, posts -> {
+            adapter.setPosts(posts);
+            if (posts.size() > 0)
+                refreshLayout.setRefreshing(false);
+            adapter.notifyDataSetChanged();
+        });
+
+        currentMember = memberVM.getMemberQuick(id);
+        //set the user pic
+        if (currentMember != null) {
+            avatar.setImageBitmap(currentMember.getImgBitmap());
+            adapter.setMember(currentMember);
+        }
+
 
         // Register activity result launcher for AddPost activity use for get image
         ActivityResultLauncher<Intent> activityResultLauncher = registerForActivityResult(
@@ -82,15 +97,22 @@ public class FeedScreen extends AppCompatActivity {
                         if (result.getResultCode() == ADD) {
                             Intent data = result.getData();
                             if (data != null) {
-                                String title = data.getStringExtra("title");
                                 String content = data.getStringExtra("content");
                                 Bundle extras = data.getExtras();
                                 byte[] byteArray = extras.getByteArray("picture");
                                 String date = data.getStringExtra("date");
                                 Bitmap bmp = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
-                                viewModel.add(title,content,bmp,userPic,firstName,lastName,date);
+                                postVM.addPost(currentMember.get_id(),new Post(content,bmp,date,currentMember.get_id()));
                                 adapter.notifyDataSetChanged();
                             }
+                          //get data from user screen
+                        } else if (result.getResultCode() == BACK_FROM_USER) {
+                            currentMember = memberVM.getMemberQuick(currentMember.get_id());
+                            avatar.setImageBitmap(currentMember.getImgBitmap());
+                            postVM.reload(currentMember.get_id());
+                          //the case the user delete himself
+                        } else if(result.getResultCode() == DEAD) {
+                            finish();
                         }
                     }
                 });
@@ -98,19 +120,41 @@ public class FeedScreen extends AppCompatActivity {
         // call to add post screen
         ImageButton btnAdd = findViewById(R.id.btnAdd);
         btnAdd.setOnClickListener(v -> {
-            Intent intent = new Intent(this, AddPost.class);
+            Intent intent = new Intent(this, AddPostScreen.class);
             intent.putExtra("type",String.valueOf(ADD));
             activityResultLauncher.launch(intent);
         });
 
-        // Disable the refreshing animation
-        SwipeRefreshLayout refreshLayout = findViewById(R.id.refreshLayout);
+        // refreshing the posts
         refreshLayout.setOnRefreshListener(() -> {
-            refreshLayout.setRefreshing(false);
+            postVM.reload(currentMember.get_id());
         });
 
+        //logout the app
+        ImageButton btnLogout = findViewById(R.id.btnLogout);
+        btnLogout.setOnClickListener(v -> {
+            finish();
+        });
+
+        //enter user screen
+        avatar.setOnClickListener(v -> {
+            Intent intent = new Intent(this, UserScreen.class);
+            intent.putExtra("loginUserId",currentMember.get_id());
+            intent.putExtra("id",currentMember.get_id());
+            intent.putExtra("jwt",jwt);
+            activityResultLauncher.launch(intent);
+        });
+
+        darkMode();
+    }
+
+    /**
+     * Enable dark mode for the activity.
+     */
+    private void darkMode() {
         ImageButton btnDark = findViewById(R.id.btnDark);
         LinearLayout menu = findViewById(R.id.menu);
+        //set the dark / light on the activity
         int currentNightMode = getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
         if (currentNightMode == Configuration.UI_MODE_NIGHT_NO) {
             // In light mode
@@ -122,6 +166,7 @@ public class FeedScreen extends AppCompatActivity {
             menu.setBackgroundColor(getResources().getColor(R.color.menuDark));
         }
 
+        //handle dark mode button click
         btnDark.setOnClickListener(v -> {
             if (currentNightMode == Configuration.UI_MODE_NIGHT_NO) {
                 // Switch to dark mode
@@ -133,10 +178,5 @@ public class FeedScreen extends AppCompatActivity {
             recreate(); // Recreate the activity to apply the new theme
         });
 
-        ImageButton btnLogout = findViewById(R.id.btnLogout);
-        btnLogout.setOnClickListener(v -> {
-            Intent i = new Intent();
-            finish();
-        });
     }
 }

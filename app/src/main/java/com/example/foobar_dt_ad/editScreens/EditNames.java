@@ -1,15 +1,13 @@
-package com.example.foobar_dt_ad.signupScreens;
-
+package com.example.foobar_dt_ad.editScreens;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
@@ -20,9 +18,10 @@ import androidx.appcompat.app.AppCompatDelegate;
 
 import com.example.foobar_dt_ad.R;
 /**
- * Activity for signing up with user names.
+ * Activity for editing user names.
  */
-public class SignUpNames extends AppCompatActivity {
+public class EditNames extends AppCompatActivity {
+    public static final int FROM_EDIT_NAMES = 3;
 
     /**
      * Called when the activity is first created.
@@ -31,14 +30,12 @@ public class SignUpNames extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sign_up_names);
+        setContentView(R.layout.activity_edit_names);
 
         // Initialize views
         Button cont = findViewById(R.id.continueNames);
         EditText firstNameField = findViewById(R.id.firstNameField);
         EditText lastNameField = findViewById(R.id.lastNameField);
-        TextView emptyNamesMSG = findViewById(R.id.emptyNamesMSG);
-        ImageButton btnDark = findViewById(R.id.btnDark);
 
         // Register for activity result
         ActivityResultLauncher<Intent> someActivityResultLauncher = registerForActivityResult(
@@ -49,31 +46,46 @@ public class SignUpNames extends AppCompatActivity {
                         if (result.getResultCode() == Activity.RESULT_OK) {
                             Intent data = result.getData();
                             if (data != null) {
-                                // Return the entered names and password to the previous activity
                                 Intent back = new Intent();
-                                back.putExtra("firstName",firstNameField.getText().toString());
-                                back.putExtra("lastName",lastNameField.getText().toString());
-                                back.putExtra("password",data.getStringExtra("password"));
-                                setResult(3,back);
+                                back.putExtra("firstName", firstNameField.getText().toString());
+                                back.putExtra("lastName", lastNameField.getText().toString());
+                                back.putExtra("password", data.getStringExtra("password"));
+                                setResult(FROM_EDIT_NAMES, back);
                                 finish();
                             }
                         }
                     }
                 });
 
-        // Continue button click listener
+        // Retrieve intent data
+        Intent data = getIntent();
+        String firstName = data.getStringExtra("firstName");
+        String lastName = data.getStringExtra("lastName");
+
+        // Set text fields with received data
+        firstNameField.setText(firstName);
+        lastNameField.setText(lastName);
+
+        // Handle continue button click
         cont.setOnClickListener(v -> {
-            Intent i = new Intent(this, SignUpPasswords.class);
-            if (!firstNameField.getText().toString().equals("") && !lastNameField.getText().toString().equals("")) {
-                emptyNamesMSG.setVisibility(View.INVISIBLE);
+            Intent i = new Intent(this, EditPassword.class);
+            if (!firstNameField.getText().toString().isEmpty() && !lastNameField.getText().toString().isEmpty()) {
+                i.putExtra("password", data.getStringExtra("password"));
                 someActivityResultLauncher.launch(i);
-            }
-            else {
-                emptyNamesMSG.setVisibility(View.VISIBLE);
+            } else {
+                Toast.makeText(this, "All fields are required!", Toast.LENGTH_LONG).show();
             }
         });
 
-        // Dark mode button click listener
+        // Enable dark mode
+        darkMode();
+    }
+
+    /**
+     * Enable dark mode for the activity.
+     */
+    private void darkMode() {
+        ImageButton btnDark = findViewById(R.id.btnDark);
         int currentNightMode = getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
         if (currentNightMode == Configuration.UI_MODE_NIGHT_NO) {
             // In dark mode
@@ -83,6 +95,7 @@ public class SignUpNames extends AppCompatActivity {
             btnDark.setImageResource(R.drawable.ic_light_mode);
         }
 
+        // Toggle dark mode when button is clicked
         btnDark.setOnClickListener(v -> {
             if (currentNightMode == Configuration.UI_MODE_NIGHT_NO) {
                 // Switch to dark mode

@@ -1,4 +1,4 @@
-package com.example.foobar_dt_ad.signupScreens;
+package com.example.foobar_dt_ad.editScreens;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -18,9 +18,9 @@ import com.example.foobar_dt_ad.R;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 /**
- * Activity for signing up with passwords.
+ * Activity for editing user password.
  */
-public class SignUpPasswords extends AppCompatActivity {
+public class EditPassword extends AppCompatActivity {
 
     /**
      * Called when the activity is first created.
@@ -29,7 +29,7 @@ public class SignUpPasswords extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sign_up_passwords);
+        setContentView(R.layout.activity_edit_password);
 
         // Initialize views
         Button createNewUser = findViewById(R.id.createNewUserB);
@@ -37,31 +37,44 @@ public class SignUpPasswords extends AppCompatActivity {
         EditText verPW = findViewById(R.id.newPWfield2);
         TextView invalidPW = findViewById(R.id.passwordInvalidMSG);
         TextView dontMatch = findViewById(R.id.passwordDosentMatchMSG);
-        ImageButton btnDark = findViewById(R.id.btnDark);
 
-        // Create new user button click listener
+        // Retrieve password from intent
+        Intent data = getIntent();
+        String passwordText = data.getStringExtra("password");
+        password.setText(passwordText);
+        verPW.setText(passwordText);
+
+        // Handle button click
         createNewUser.setOnClickListener(v -> {
             if (isValidPassword(password.getText().toString())) {
                 if (verPW.getText().toString().equals(password.getText().toString())) {
+                    // Passwords match, send result back
                     invalidPW.setVisibility(View.INVISIBLE);
                     dontMatch.setVisibility(View.INVISIBLE);
-                    // Return the password to the previous activity
                     Intent back = new Intent();
-                    back.putExtra("password",password.getText().toString());
-                    setResult(Activity.RESULT_OK,back);
+                    back.putExtra("password", password.getText().toString());
+                    setResult(Activity.RESULT_OK, back);
                     finish();
-                }
-                else {
+                } else {
+                    // Passwords don't match
                     invalidPW.setVisibility(View.INVISIBLE);
                     dontMatch.setVisibility(View.VISIBLE);
                 }
-            }
-            else {
+            } else {
+                // Invalid password format
                 invalidPW.setVisibility(View.VISIBLE);
             }
         });
 
-        // Dark mode button click listener
+        // Enable dark mode
+        darkMode();
+    }
+
+    /**
+     * Enable dark mode for the activity.
+     */
+    private void darkMode() {
+        ImageButton btnDark = findViewById(R.id.btnDark);
         int currentNightMode = getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
         if (currentNightMode == Configuration.UI_MODE_NIGHT_NO) {
             // In dark mode
@@ -71,6 +84,7 @@ public class SignUpPasswords extends AppCompatActivity {
             btnDark.setImageResource(R.drawable.ic_light_mode);
         }
 
+        // Toggle dark mode when button is clicked
         btnDark.setOnClickListener(v -> {
             if (currentNightMode == Configuration.UI_MODE_NIGHT_NO) {
                 // Switch to dark mode
@@ -86,20 +100,16 @@ public class SignUpPasswords extends AppCompatActivity {
     }
 
     /**
-     * Validates the password against the specified pattern.
-     * @param password The password to validate.
-     * @return True if the password matches the pattern, false otherwise.
+     * Check if the password meets the required format.
+     * @param password The password to check.
+     * @return True if the password is valid, false otherwise.
      */
     public boolean isValidPassword(final String password) {
-
         Pattern pattern;
         Matcher matcher;
-
         final String PASSWORD_PATTERN = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$";
-
         pattern = Pattern.compile(PASSWORD_PATTERN);
         matcher = pattern.matcher(password);
-
         return matcher.matches();
     }
 }
