@@ -1,19 +1,10 @@
-# foobar_DT_android
+# Foobar
 
-תהליך העבודה: התחלנו בחלוקה למשימות, כך שאחד עובד על מסך הפיד והשני עובד על התחברות והרשמה.
+In this project, we have developed a Facebook-like application within a client-server environment.
 
-זאת על מנת שלא להפריע אחד לקוד של השני, אבל כן נוכל להסתמך על הידע הנרכש מהעבודה כדי לייעל את התהליך.
+For the client-side implementation, we utilized Android Studio along with Java language.
 
-התחלנו מעיצוב פשוט של המסכים להוספת הלוגיקה. ומעבר בין המסכים השונים. 
+The client environment communicates with a Node.js server, which in turn interacts with another C++ server. This C++ server is responsible for validating the links embedded within the text of a post to determine if they are potentially malicious.<br>
 
-על מנת להריץ את החלק הזה של האפליקציה באנדרויד: יש להוריד את הקבצים ולהריץ על אנדרויד סטודיו,
+The whole process of installing and running the project is in the wiki at https://github.com/AdvaOren/foobar.git. Enjoy!<br>
 
-(לפתוח את האנדרואידסטודיו לבחור בFile->open ולנווט לתייקית הפרייקט).
-
-עבור השלב השלישי:
-
-בעקבות תקלה הקישור של השרת לא נמצא בקובץ הdetails לכן אנחנו מוסיפים אותו פה  <code>https://github.com/tzuriel/foobar_DAT_server</code>
-
-הקוד נמצא בבראנצ' db. גם כאן צריך להוריד את הקבצים ולהריץ על אנדרואיד סטודיו.
-
-כמו כן יש לוודא כי השרת רץ לפני הפעלת האפליקצייה.
